@@ -17,15 +17,9 @@
  */
 package com.threewks.thundr.jpa;
 
-import javax.persistence.EntityManager;
-
-public abstract class VoidAction implements JpaAction<Void> {
-
-	@Override
-	public final Void run(EntityManager em) {
-		vrun(em);
-		return null;
-	}
-
-	public abstract void vrun(EntityManager em);
+public interface Jpa {
+	public void run(Action action);
+	public void run(Propagation propagation, Action action);
+	public <R> R run(ResultAction<R> action);
+	public <R> R run(Propagation propagation, ResultAction<R> action);
 }

@@ -17,7 +17,8 @@
  */
 package com.threewks.thundr.jpa.intercept;
 
-import com.threewks.thundr.jpa.PersistenceManager;
+import com.threewks.thundr.jpa.Propagation;
+import com.threewks.thundr.jpa.jee.PersistenceManager;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -45,4 +46,6 @@ public @interface JpaSession {
 	 * @see java.sql.Connection for isolation level constants
 	 */
 	int transactionIsolation() default -1;
+
+	Propagation propagation() default Propagation.Required;
 }

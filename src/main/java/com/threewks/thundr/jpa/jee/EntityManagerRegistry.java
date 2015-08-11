@@ -15,12 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.jee;
 
-public interface PersistenceManagerRegistry {
-	void register(String persistenceUnit, PersistenceManager persistenceManager);
+import javax.persistence.EntityManager;
 
-	PersistenceManager get(String persistenceUnit);
+public interface EntityManagerRegistry {
+	void register(String persistenceUnit, EntityManager entityManager);
+
+	EntityManager get(String persistenceUnit);
 
 	void clear();
 }

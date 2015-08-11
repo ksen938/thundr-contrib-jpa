@@ -26,6 +26,7 @@ import java.util.Map;
 
 import javax.persistence.EntityExistsException;
 
+import com.threewks.thundr.jpa.jee.JpaTemplate;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;

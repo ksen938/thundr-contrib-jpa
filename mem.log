@@ -1,0 +1,142 @@
+/*C46*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C47*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C48*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C50*/SET SCHEMA PUBLIC
+INSERT INTO BEVERAGE VALUES('fe5451ac-8036-4db7-a6a0-bd7d1b46a115',TRUE,'Beer')
+INSERT INTO BEVERAGE VALUES('77f25179-252e-4c70-8e65-c00d21c736c7',FALSE,'Lemonade')
+COMMIT
+DISCONNECT
+/*C51*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C52*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C53*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C54*/SET SCHEMA PUBLIC
+INSERT INTO BEVERAGE VALUES('e1574a91-053f-4a6d-96d1-914416c30d44',TRUE,'Beer')
+INSERT INTO BEVERAGE VALUES('af723bf3-013f-4910-b268-1552dd7963a6',FALSE,'Lemonade')
+COMMIT
+DISCONNECT
+/*C55*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C56*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C57*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C58*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C59*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C60*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C61*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C62*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C63*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C64*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C66*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C67*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C68*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C69*/SET SCHEMA PUBLIC
+INSERT INTO BEVERAGE VALUES('6356498f-fcd3-4e9e-81ba-a540d3407c81',TRUE,'Beer')
+INSERT INTO BEVERAGE VALUES('412de229-3e7f-46a0-bff5-8bd909f87502',FALSE,'Lemonade')
+COMMIT
+/*C70*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C71*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C72*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C73*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C74*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C75*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C76*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C77*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C79*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C80*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C81*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C83*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C84*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C85*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C87*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C88*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C89*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C90*/SET SCHEMA PUBLIC
+INSERT INTO BEVERAGE VALUES('db88bb7d-f201-493d-b3a3-416fb92365af',TRUE,'Beer')
+INSERT INTO BEVERAGE VALUES('974cff5a-c3b9-43e3-9c08-fd4a6fba766d',FALSE,'Lemonade')
+COMMIT
+/*C91*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C92*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C93*/SET SCHEMA PUBLIC
+drop table beverage if exists
+create table beverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C95*/SET SCHEMA PUBLIC
+DISCONNECT
