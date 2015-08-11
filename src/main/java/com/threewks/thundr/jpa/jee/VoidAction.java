@@ -15,32 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.rule;
+package com.threewks.thundr.jpa.jee;
 
+import javax.persistence.EntityManager;
 
-import com.threewks.thundr.jpa.jee.PersistenceManager;
-import com.threewks.thundr.jpa.jee.PersistenceManagerImpl;
-import org.junit.rules.ExternalResource;
-
-public class SetupPersistenceManager extends ExternalResource {
-	private String persistenceUnit;
-	private PersistenceManager persistenceManager;
-
-	public SetupPersistenceManager(String persistenceUnit) {
-		this.persistenceUnit = persistenceUnit;
-	}
-
-	public PersistenceManager getPersistenceManager() {
-		return this.persistenceManager;
-	}
+public abstract class VoidAction implements JpaAction<Void> {
 
 	@Override
-	protected void before() throws Throwable {
-		this.persistenceManager = new PersistenceManagerImpl(persistenceUnit);
+	public final Void run(EntityManager em) {
+		vrun(em);
+		return null;
 	}
 
-	@Override
-	protected void after() {
-		this.persistenceManager.destroy();
-	}
+	public abstract void vrun(EntityManager em);
 }

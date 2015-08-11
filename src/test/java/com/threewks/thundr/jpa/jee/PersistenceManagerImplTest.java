@@ -15,9 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.jee;
 
 import com.threewks.thundr.jpa.exception.JpaException;
+import com.threewks.thundr.jpa.jee.PersistenceManagerImpl;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

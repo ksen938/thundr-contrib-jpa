@@ -17,7 +17,7 @@
  */
 package com.threewks.thundr.jpa.rule;
 
-import com.threewks.thundr.jpa.PersistenceManager;
+import com.threewks.thundr.jpa.jee.PersistenceManager;
 import org.junit.rules.ExternalResource;
 
 public class SetupTransaction extends ExternalResource {

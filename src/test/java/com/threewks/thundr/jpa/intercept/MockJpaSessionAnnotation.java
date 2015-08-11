@@ -17,6 +17,7 @@
  */
 package com.threewks.thundr.jpa.intercept;
 
+import com.threewks.thundr.jpa.Propagation;
 import com.threewks.thundr.logger.Logger;
 
 import java.lang.annotation.Annotation;
@@ -44,11 +45,16 @@ public class MockJpaSessionAnnotation implements Annotation, JpaSession {
 
 	@Override
 	public int transactionIsolation() {
-		return JpaSessionActionInterceptor.DefaultTransactionIsolation;
+		return JpaSessionInterceptor.DefaultTransactionIsolation;
 	}
 
 	@Override
 	public Class<? extends Annotation> annotationType() {
 		return JpaSession.class;
+	}
+
+	@Override
+	public Propagation propagation() {
+		return Propagation.Required;
 	}
 }

@@ -15,34 +15,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.jee;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.threewks.thundr.jpa.exception.PersistenceManagerDoesNotExistException;
 
-public class PersistenceManagerRegistryImpl implements PersistenceManagerRegistry {
-	private ConcurrentMap<String, PersistenceManager> instances = new ConcurrentHashMap<String, PersistenceManager>();
+import javax.persistence.EntityManager;
+
+public class EntityManagerRegistryImpl implements EntityManagerRegistry {
+	private ConcurrentMap<String, EntityManager> instances = new ConcurrentHashMap<String, EntityManager>();
 
 	@Override
-	public void register(String persistenceUnit, PersistenceManager persistenceManager) {
-		instances.putIfAbsent(persistenceUnit, persistenceManager);
+	public void register(String persistenceUnit, EntityManager entityManager) {
+		instances.putIfAbsent(persistenceUnit, entityManager);
 	}
 
 	@Override
-	public PersistenceManager get(String persistenceUnit) {
-		PersistenceManager persistenceManager = instances.get(persistenceUnit);
-		if (persistenceManager == null) {
+	public EntityManager get(String persistenceUnit) {
+		EntityManager entityManager = instances.get(persistenceUnit);
+		if (entityManager == null) {
 			throw new PersistenceManagerDoesNotExistException("Persistence manager matching persistence unit %s not found", persistenceUnit);
 		}
-		return persistenceManager;
+		return entityManager;
 	}
 
 	@Override
 	public void clear() {
-		for (PersistenceManager persistenceManager : instances.values()) {
-			persistenceManager.destroy();
+		for (EntityManager entityManager : instances.values()) {
+			entityManager.close();
 		}
 		instances.clear();
 	}
