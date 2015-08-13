@@ -41,43 +41,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 
-public class JpaImplIT {
-    @ClassRule
-    public static SetupPersistenceManager setupPersistenceManager = new SetupPersistenceManager("test");
-
-    @Rule
-    public SetupTransaction setupTransaction = SetupTransaction.rollback(setupPersistenceManager.getPersistenceManager());
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    public static final String JDBC_URL = "jdbc:hsqldb:mem";
-    private UpdatableInjectionContext injectionContext = new InjectionContextImpl();
-    private HibernateModule hibernateModule = null;
-    private HsqlDbModule hsqlDbModule = null;
-    HibernateConfig hibernateConfig = null;
-    Beverage bevvie1 = new Beverage("Beer", true);
-    Beverage bevvie2 = new Beverage("Lemonade", false);
-
-
-    private JpaImpl jpa;
+public class JpaImplIT extends JpaTestSetup {
 
     @Before
     public void before() {
-        String jdbcUrl = JDBC_URL;
-        injectionContext.inject(jdbcUrl).as(String.class);
-        hsqlDbModule = new HsqlDbModule();
-        hsqlDbModule.configure(injectionContext);
-        DataSource dataSource = injectionContext.get(DataSource.class);
-        hibernateConfig = new HibernateConfig(dataSource)
-                .withEntity(Beverage.class)
-                .withProperty(Environment.HBM2DDL_AUTO, "create-drop");
-        injectionContext.inject(hibernateConfig).as(HibernateConfig.class);
-        hibernateModule = new HibernateModule();
-        hibernateModule.start(injectionContext);
-
-        EntityManagerFactory entityManagerFactory = injectionContext.get(EntityManagerFactory.class);
-        jpa = new JpaImpl(entityManagerFactory);
+        super.before();
     }
 
     @Test
@@ -191,25 +159,6 @@ public class JpaImplIT {
             }
         });
         shouldReturnPersistedObjects();
-    }
-
-    private void shouldReturnPersistedObjects() {
-        final String id1 = bevvie1.getId();
-        final String id2 = bevvie1.getId();
-        Beverage queriedBevvie1 = jpa.run(new ResultAction<Beverage>() {
-            @Override
-            public Beverage run(EntityManager em) {
-                return em.find(Beverage.class, id1);
-            }
-        });
-        Beverage queriedBevvie2 = jpa.run(new ResultAction<Beverage>() {
-            @Override
-            public Beverage run(EntityManager em) {
-                return em.find(Beverage.class, id2);
-            }
-        });
-        assertThat(queriedBevvie1.getId(), is(id1));
-        assertThat(queriedBevvie2.getId(), is(id2));
     }
 
     @Test

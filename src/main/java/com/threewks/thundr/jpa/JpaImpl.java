@@ -6,15 +6,18 @@ import com.threewks.thundr.jpa.exception.JpaException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceUnitUtil;
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class JpaImpl implements Jpa {
     private EntityManagerFactory entityManagerFactory;
+    private PersistenceUnitUtil persistenceUnitUtil;
     private ThreadLocal<Deque<EntityManager>> threadLocal = new ThreadLocal<>();
 
     public JpaImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
+        persistenceUnitUtil = entityManagerFactory.getPersistenceUnitUtil();
     }
 
     @Override
@@ -114,5 +117,9 @@ public class JpaImpl implements Jpa {
                 em.getTransaction().commit();
             }
         }
+    }
+
+    public PersistenceUnitUtil getPersistenceUnitUtil() {
+        return persistenceUnitUtil;
     }
 }
