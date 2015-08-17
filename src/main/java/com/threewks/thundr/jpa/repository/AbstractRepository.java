@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class JpaRepository<K, E> implements CrudRepository<K, E> {
+public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
 
     protected Jpa jpa;
     protected Class<E> entityType;
 
-    public JpaRepository(Class<E> entityType, Jpa jpa) {
+    public AbstractRepository(Class<E> entityType, Jpa jpa) {
         this.entityType = entityType;
         this.jpa = jpa;
 

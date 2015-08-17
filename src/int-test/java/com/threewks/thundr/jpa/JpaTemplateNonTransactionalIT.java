@@ -18,18 +18,6 @@
 package com.threewks.thundr.jpa;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-
-import com.threewks.thundr.jpa.jee.JpaTemplate;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import com.threewks.thundr.jpa.model.Beverage;
-import com.threewks.thundr.jpa.rule.SetupPersistenceManager;
 
 public class JpaTemplateNonTransactionalIT {
 /*	@ClassRule

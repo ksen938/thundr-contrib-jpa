@@ -1,105 +1,39 @@
 package com.threewks.thundr.jpa;
 
-import com.atomicleopard.thundr.jdbc.HsqlDbModule;
-import com.atomicleopard.thundr.jdbc.MySqlModule;
-import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.hibernate.HibernateConfig;
-import com.threewks.thundr.jpa.hibernate.HibernateModule;
-import com.threewks.thundr.jpa.model.Beverage;
-import com.threewks.thundr.jpa.model.LongKeyBeverage;
-import com.threewks.thundr.jpa.model.StringKeyBeverage;
-import com.threewks.thundr.jpa.repository.JpaRepository;
+import com.threewks.thundr.jpa.model.LongBeverage;
+import com.threewks.thundr.jpa.repository.CrudRepository;
+import com.threewks.thundr.jpa.repository.LongRepository;
 import org.hamcrest.core.Is;
-import org.hibernate.cfg.Environment;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
-import javax.sql.DataSource;
-
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by kaushiksen on 13/08/2015.
+ * Created by kaushiksen on 17/08/2015.
  */
-public abstract class AbstractJpaTest <K, T extends Beverage> {
+public class LongJpaIT extends AbstractJpaIT {
 
-    public AbstractJpaTest(T bevvie1, T bevvie2) {
-        before();
-        this.bevvie1 = bevvie1;
-        this.bevvie2 = bevvie2;
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    public static final String HSQL_JDBC_URL = "jdbc:hsqldb:mem";
-    public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/beverage";
-    protected UpdatableInjectionContext injectionContext = new InjectionContextImpl();
-    protected HibernateModule hibernateModule = null;
-    protected HsqlDbModule hsqlDbModule = null;
-    protected MySqlModule mySqlModule = null;
-    protected HibernateConfig hibernateConfig = null;
-    protected Beverage<K> bevvie1;
-    protected Beverage<K> bevvie2;
-    protected JpaImpl jpa;
-    protected JpaRepository<K, T> jpaRepository;
+    protected LongBeverage bevvie1;
+    protected LongBeverage bevvie2;
+    protected CrudRepository<Long, LongBeverage> jpaRepository;
 
     @Before
-    protected void before() {
-        configureMysql();
-        hibernateModule = new HibernateModule();
-        hibernateModule.start(injectionContext);
-
-        EntityManagerFactory entityManagerFactory = injectionContext.get(EntityManagerFactory.class);
-        jpa = new JpaImpl(entityManagerFactory);
-        jpaRepository = setupJpaRepository(jpa);
+    public void before() {
+        super.before();
+        bevvie1 = new LongBeverage("Beer", true);
+        bevvie2 = new LongBeverage("Lemonade", false);
+        jpaRepository = new LongRepository<LongBeverage>(LongBeverage.class, jpa);
         deleteTestData();
         createBeverages();
-    }
-
-    protected abstract JpaRepository<K,T> setupJpaRepository(Jpa jpa);
-
-    private void configureHsql() {
-        String jdbcUrl = HSQL_JDBC_URL;
-        injectionContext.inject(jdbcUrl).as(String.class);
-        hsqlDbModule = new HsqlDbModule();
-        hsqlDbModule.initialise(injectionContext);
-        DataSource dataSource = injectionContext.get(DataSource.class);
-        hibernateConfig = new HibernateConfig(dataSource)
-                .withEntity(StringKeyBeverage.class)
-                .withEntity(LongKeyBeverage.class)
-                .withProperty(Environment.HBM2DDL_AUTO, "create-drop")
-                .withProperty(Environment.AUTOCOMMIT, "false");
-        injectionContext.inject(hibernateConfig).as(HibernateConfig.class);
-    }
-
-    private void configureMysql() {
-        String jdbcUrl = MYSQL_JDBC_URL;
-        injectionContext.inject(jdbcUrl).as(String.class);
-        mySqlModule = new MySqlModule();
-        mySqlModule.initialise(injectionContext);
-        DataSource dataSource = injectionContext.get(DataSource.class);
-        hibernateConfig = new HibernateConfig(dataSource)
-                .withEntity(StringKeyBeverage.class)
-                .withEntity(LongKeyBeverage.class)
-                .withProperty(Environment.HBM2DDL_AUTO, "create-drop")
-                .withProperty(Environment.AUTOCOMMIT, "false")
-                .withProperty(Environment.USER, "root")
-                .withProperty(Environment.PASS, "");
-        injectionContext.inject(hibernateConfig).as(HibernateConfig.class);
     }
 
     protected void deleteTestData() {
@@ -110,53 +44,45 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
                 em.remove(bevvie2);
             }
         });
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                assertTrue(em.createQuery("select b from StringBeverage b", StringKeyBeverage.class).getResultList().isEmpty());
-            }
-        });
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                assertTrue(em.createQuery("select b from LongBeverage b", LongKeyBeverage.class).getResultList().isEmpty());
-            }
-        });
     }
 
     protected void shouldReturnPersistedObjects() {
-        final Beverage finalBev1 = bevvie1;
-        final Beverage finalBev2 = bevvie2;
-        Beverage queriedBevvie1 = jpa.run(new ResultAction<Beverage>() {
+        final LongBeverage finalBev1 = bevvie1;
+        final LongBeverage finalBev2 = bevvie2;
+        LongBeverage queriedBevvie1 = jpa.run(new ResultAction<LongBeverage>() {
             @Override
-            public Beverage run(EntityManager em) {
-                return em.find(Beverage.class, finalBev1.getId());
+            public LongBeverage run(EntityManager em) {
+                return em.find(LongBeverage.class, finalBev1.getId());
             }
         });
-        Beverage queriedBevvie2 = jpa.run(new ResultAction<Beverage>() {
+        LongBeverage queriedBevvie2 = jpa.run(new ResultAction<LongBeverage>() {
             @Override
-            public Beverage run(EntityManager em) {
-                return em.find(Beverage.class, finalBev2.getId());
+            public LongBeverage run(EntityManager em) {
+                return em.find(LongBeverage.class, finalBev2.getId());
             }
         });
-        Assert.assertThat(queriedBevvie1.getId(), is(bevvie1.getId()));
-        Assert.assertThat(queriedBevvie2.getId(), is(bevvie2.getId()));
+        assertTrue(queriedBevvie1.getId().equals(bevvie1.getId()));
+        assertTrue(queriedBevvie2.getId().equals(bevvie2.getId()));
     }
 
     @Test
     public void shouldCreateAndReadSingleEntity() {
-        Beverage localBev;
-        localBev = jpaRepository.read(bevvie1.getId());
+        LongBeverage localBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return jpaRepository.read(bevvie1.getId());
+            }
+        });
         assertThat(localBev.getName(), Is.is(bevvie1.getName()));
         assertThat(localBev.isAlcoholic(), Is.is(bevvie1.isAlcoholic()));
     }
 
     @Test
     public void shouldUpdateSingleEntity() {
-        Beverage updatedBev = jpa.run(Propagation.Required, new ResultAction<Beverage>() {
+        LongBeverage updatedBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
             @Override
-            public Beverage run(EntityManager em) {
-                Beverage localBev = jpaRepository.read(bevvie1.getId());
+            public LongBeverage run(EntityManager em) {
+                LongBeverage localBev = jpaRepository.read(bevvie1.getId());
                 localBev.setName("Water");
                 localBev.setAlcoholic(false);
                 return jpaRepository.update(localBev);
@@ -165,44 +91,44 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
         checkUpdated(updatedBev);
     }
 
-    protected void checkUpdated(Beverage beverage) {
+    protected void checkUpdated(LongBeverage beverage) {
         assertThat(beverage.getName(), Is.is("Water"));
         assertThat(beverage.isAlcoholic(), Is.is(false));
     }
 
     @Test
     public void shouldUpdateMultipleEntities() {
-        final Beverage[] beverages = jpa.run(Propagation.Required, new ResultAction<Beverage[]>() {
+        final LongBeverage[] beverages = jpa.run(Propagation.Required, new ResultAction<LongBeverage[]>() {
             @Override
-            public Beverage[] run(EntityManager em) {
-                Beverage localBev1 = jpaRepository.read(bevvie1.getId());
-                Beverage localBev2 = jpaRepository.read(bevvie2.getId());
+            public LongBeverage[] run(EntityManager em) {
+                LongBeverage localBev1 = jpaRepository.read(bevvie1.getId());
+                LongBeverage localBev2 = jpaRepository.read(bevvie2.getId());
                 localBev1.setName("Water");
                 localBev1.setAlcoholic(false);
                 localBev2.setName("Water");
                 localBev2.setAlcoholic(false);
-                Beverage[] beverages = new Beverage[2];
+                LongBeverage[] beverages = new LongBeverage[2];
                 beverages[0] = localBev1;
                 beverages[1] = localBev2;
                 return beverages;
             }
         });
-        List<Beverage> beverages1 = jpa.run(Propagation.Required, new ResultAction<List<Beverage>>() {
+        List<LongBeverage> beverages1 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
             @Override
-            public List<Beverage> run(EntityManager em) {
+            public List<LongBeverage> run(EntityManager em) {
                 return jpaRepository.update(beverages);
             }
         });
-        List<Beverage> beverages2 = jpa.run(Propagation.Required, new ResultAction<List<Beverage>>() {
+        List<LongBeverage> beverages2 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
             @Override
-            public List<Beverage> run(EntityManager em) {
+            public List<LongBeverage> run(EntityManager em) {
                 return jpaRepository.update(Arrays.asList(beverages));
             }
         });
-        for (Beverage beverage: beverages1) {
+        for (LongBeverage beverage : beverages1) {
             checkUpdated(beverage);
         }
-        for (Beverage beverage: beverages2) {
+        for (LongBeverage beverage : beverages2) {
             checkUpdated(beverage);
         }
     }
@@ -242,16 +168,16 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
     }
 
     protected void testDeleted() {
-        Beverage deletedBev = jpa.run(Propagation.Required, new ResultAction<Beverage>() {
+        LongBeverage deletedBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
             @Override
-            public Beverage run(EntityManager em) {
+            public LongBeverage run(EntityManager em) {
                 return jpaRepository.read(bevvie1.getId());
             }
         });
 
-        Beverage remainingBev = jpa.run(Propagation.Required, new ResultAction<Beverage>() {
+        LongBeverage remainingBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
             @Override
-            public Beverage run(EntityManager em) {
+            public LongBeverage run(EntityManager em) {
                 return jpaRepository.read(bevvie2.getId());
             }
         });
@@ -263,23 +189,23 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
     @Test
     public void shouldReadMultipleEntities() {
 
-        List<Beverage> beverageList1 = jpa.run(Propagation.Required, new ResultAction<List<Beverage>>() {
+        List<LongBeverage> beverageList1 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
             @Override
-            public List<Beverage> run(EntityManager em) {
+            public List<LongBeverage> run(EntityManager em) {
                 return jpaRepository.read(bevvie1.getId(), bevvie2.getId());
             }
         });
 
-        List<String> beverageListKeys = new ArrayList<>();
+        List<Long> beverageListKeys = new ArrayList<>();
 
         beverageListKeys.add(bevvie1.getId());
         beverageListKeys.add(bevvie2.getId());
 
-        final List<String> finalBeverageListKeys = beverageListKeys;
+        final List<Long> finalBeverageListKeys = beverageListKeys;
 
-        List<Beverage> beverageList2 = jpa.run(Propagation.Required, new ResultAction<List<Beverage>>() {
+        List<LongBeverage> beverageList2 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
             @Override
-            public List<Beverage> run(EntityManager em) {
+            public List<LongBeverage> run(EntityManager em) {
                 return jpaRepository.read(finalBeverageListKeys);
             }
         });
@@ -288,9 +214,9 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
         containsBeverages(beverageList2);
     }
 
-    protected void containsBeverages(List<Beverage> beverages) {
-        Map<String,Beverage> map = new HashMap<>();
-        for (Beverage beverage: beverages) {
+    protected void containsBeverages(List<LongBeverage> beverages) {
+        Map<Long, LongBeverage> map = new HashMap<>();
+        for (LongBeverage beverage : beverages) {
             map.put(beverage.getId(), beverage);
         }
         assertTrue(map.containsKey(bevvie1.getId()));
@@ -312,7 +238,7 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
     public void shouldCreateMultipleEntities() {
         deleteTestData(); //called to delete records created by before()
 
-        final List<Beverage> beverages = new ArrayList<>();
+        final List<LongBeverage> beverages = new ArrayList<>();
         beverages.add(bevvie1);
         beverages.add(bevvie2);
 
@@ -406,7 +332,7 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
     @Test
     public void shouldCreateNewTransactionOnRequiresNewPropagation() {
         deleteTestData();
-        bevvie1.getId()
+
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
         emLocal.getTransaction().begin();
@@ -509,4 +435,5 @@ public abstract class AbstractJpaTest <K, T extends Beverage> {
             }
         });
     }
+
 }
