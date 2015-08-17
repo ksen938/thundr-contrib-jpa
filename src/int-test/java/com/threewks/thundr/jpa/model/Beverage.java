@@ -28,9 +28,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "beverage")
-@NamedQueries({ @NamedQuery(name = "Beverage.findAllByName", query = "select b from Beverage b where b.name = ?"),
-		@NamedQuery(name = "Beverage.findAllAlcoholicBeverages", query = "select b from Beverage b where b.alcoholic = true"),
-		@NamedQuery(name = "Beverage.findAllByType", query = "select b from Beverage b where b.alcoholic = :alcoholic") })
 public class Beverage {
 
 	@Id

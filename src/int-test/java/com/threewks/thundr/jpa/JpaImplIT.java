@@ -17,31 +17,17 @@
  */
 package com.threewks.thundr.jpa;
 
-import com.atomicleopard.thundr.jdbc.HsqlDbModule;
-import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.hibernate.HibernateConfig;
-import com.threewks.thundr.jpa.hibernate.HibernateModule;
-import com.threewks.thundr.jpa.model.Beverage;
-import com.threewks.thundr.jpa.rule.SetupPersistenceManager;
-import com.threewks.thundr.jpa.rule.SetupTransaction;
-import org.hibernate.cfg.Environment;
 import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
-import javax.sql.DataSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 
-public class JpaImplIT extends JpaTestSetup {
+public class JpaImplIT extends JpaBaseTest {
 
     @Before
     public void before() {
@@ -50,6 +36,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldPersistWithDefaultPropagation() {
+        deleteTestData();
+
         jpa.run(new Action() {
             @Override
             public void run(EntityManager em) {
@@ -62,6 +50,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldPersistWithMandatoryPropagation() {
+        deleteTestData();
+
         jpa.getExistingEntityManager();
         jpa.createNewEntityManager().getTransaction().begin();
         jpa.run(Propagation.Mandatory, new Action() {
@@ -77,6 +67,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldNotCreateTransactionOrPersistForNeverPropagation() {
+        deleteTestData();
+
         thrown.expect(NullPointerException.class);
 
         jpa.run(Propagation.Never, new Action() {
@@ -92,6 +84,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldPersistOnRequiredPropagation() {
+        deleteTestData();
+
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
         emLocal.getTransaction().begin();
@@ -106,6 +100,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldCreateNewTransactionOnRequiresNewPropagation() {
+        deleteTestData();
+
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
         emLocal.getTransaction().begin();
@@ -119,6 +115,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldPersistOnRequiresNewPropagation() {
+        deleteTestData();
+
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
         emLocal.getTransaction().begin();
@@ -133,6 +131,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldPersistUnderExistingTransactionForSupportsPropagation() {
+        deleteTestData();
+
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
         emLocal.getTransaction().begin();
@@ -149,6 +149,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldNotCreateTransactionUnderSupportsPropagation() {
+        deleteTestData();
+
         thrown.expect(NullPointerException.class);
         jpa.run(Propagation.Supports, new Action() {
             @Override
@@ -163,6 +165,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldRollbackOnFailureWithDefaultPropagation() {
+        deleteTestData();
+
         thrown.expect(RollbackException.class);
         jpa.run(new Action() {
             @Override
@@ -175,6 +179,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldRollbackOnFailureWithRequiredPropagation() {
+        deleteTestData();
+
         thrown.expect(RollbackException.class);
         jpa.run(Propagation.Required, new Action() {
             @Override
@@ -187,6 +193,8 @@ public class JpaImplIT extends JpaTestSetup {
 
     @Test
     public void shouldRollbackOnFailureWithRequiresNewPropagation() {
+        deleteTestData();
+
         thrown.expect(RollbackException.class);
         jpa.run(Propagation.RequiresNew, new Action() {
             @Override

@@ -38,7 +38,7 @@ import com.threewks.thundr.jpa.rule.SetupPersistenceManager;
 import com.threewks.thundr.jpa.rule.SetupTransaction;
 
 public class JpaTemplateIT {
-	@ClassRule
+	/*@ClassRule
 	public static SetupPersistenceManager setupPersistenceManager = new SetupPersistenceManager("test");
 
 	@Rule
@@ -238,5 +238,5 @@ public class JpaTemplateIT {
 	private void addSampleData() {
 		template.persist(new Beverage("Coffee", false));
 		template.persist(new Beverage("Beer", true));
-	}
+	}*/
 }

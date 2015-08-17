@@ -17,9 +17,15 @@
  */
 package com.threewks.thundr.jpa;
 
+import javax.persistence.EntityManager;
+
 public interface Jpa {
+	public void begin(Propagation propagation);
 	public void run(Action action);
 	public void run(Propagation propagation, Action action);
 	public <R> R run(ResultAction<R> action);
 	public <R> R run(Propagation propagation, ResultAction<R> action);
+	public void commit();
+	public void rollback();
+	public void dispose();
 }
