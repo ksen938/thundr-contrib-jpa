@@ -17,15 +17,32 @@
  */
 package com.threewks.thundr.jpa;
 
-import javax.persistence.EntityManager;
-import java.util.concurrent.Callable;
+import com.threewks.thundr.jpa.model.Beverage;
+import com.threewks.thundr.jpa.model.LongKeyBeverage;
+import com.threewks.thundr.jpa.model.StringKeyBeverage;
+import com.threewks.thundr.jpa.repository.JpaRepository;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-public interface Jpa {
-	public void run(Action action);
-	public void run(Propagation propagation, Action action);
-	//public void run(Propagation propagation, Runnable runnable);
-	//public <R> R run(Propagation propagation, Callable<R> runnable);
-	public <R> R run(ResultAction<R> action);
-	public <R> R run(Propagation propagation, ResultAction<R> action);
+import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public abstract class AbstractJpaImplIT<K, T extends Beverage> extends AbstractJpaTest<K, T> {
+
+    public AbstractJpaImplIT(T bevvie1, T bevvie2) {
+        super(bevvie1, bevvie2);
+    }
+
+    @Before
+    public void before() {
+        super.before();
+    }
+
 
 }

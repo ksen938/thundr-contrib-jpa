@@ -26,44 +26,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "beverage")
-public class Beverage {
+public abstract class Beverage<T> {
 
-	@Id
-	@Column(name = "id")
-	private String id = UUID.randomUUID().toString();
+	T t = null;
+
+	public T getId() {
+		return t;
+	}
 
 	@Column(name = "name", nullable = false)
-	private String name;
+	public String name = "";
 
 	@Column(name = "alcoholic")
-	private boolean alcoholic = false;
-
-	public Beverage() {
-
-	}
-
-	public Beverage(String name) {
-		this.name = name;
-	}
-
-	public Beverage(String name, boolean alcoholic) {
-		this(name);
-		this.alcoholic = alcoholic;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	public boolean alcoholic = false;
 
 	public boolean isAlcoholic() {
 		return alcoholic;
@@ -73,8 +48,11 @@ public class Beverage {
 		this.alcoholic = alcoholic;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 }

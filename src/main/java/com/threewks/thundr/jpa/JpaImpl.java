@@ -72,7 +72,7 @@ public class JpaImpl implements Jpa {
     public EntityManager getExistingEntityManager() {
         Deque<EntityManager> current = threadLocal.get();
         if (current == null) {
-            current = new LinkedList<EntityManager>();
+            current = new LinkedList<>();
             threadLocal.set(current);
         }
         return current.peek();
@@ -82,15 +82,6 @@ public class JpaImpl implements Jpa {
         EntityManager em = entityManagerFactory.createEntityManager();
         Deque<EntityManager> current = threadLocal.get();
         current.push(em);
-        return em;
-    }
-
-    public EntityManager getOrCreateEntityManager(Propagation propagation) {
-        EntityManager em = getExistingEntityManager();
-        boolean needsNew = em == null || (Propagation.RequiresNew == propagation && em.getTransaction().isActive());
-        if (needsNew) {
-            em = createNewEntityManager();
-        }
         return em;
     }
 
@@ -117,7 +108,6 @@ public class JpaImpl implements Jpa {
         em.close();
     }
 
-
     protected void disposeOfTransaction(EntityManager em, Propagation propagation) {
         EntityTransaction transaction = em.getTransaction();
 
@@ -126,36 +116,5 @@ public class JpaImpl implements Jpa {
                 em.getTransaction().commit();
             }
         }
-    }
-
-    public PersistenceUnitUtil getPersistenceUnitUtil() {
-        return persistenceUnitUtil;
-    }
-
-    @Override
-    public void begin(Propagation propagation) {
-        EntityManager em = getOrCreateEntityManager(propagation);
-        EntityTransaction et = em.getTransaction();
-
-        if (!et.isActive()) {
-            em.getTransaction().begin();
-        }
-    }
-
-    @Override
-    public void commit() {
-        EntityTransaction et = getExistingEntityManager().getTransaction();
-        et.commit();
-    }
-
-    @Override
-    public void rollback() {
-        EntityTransaction et = getExistingEntityManager().getTransaction();
-        et.rollback();
-    }
-
-    @Override
-    public void dispose() {
-        disposeOfEntityManager(getExistingEntityManager());
     }
 }
