@@ -160,7 +160,7 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
         Metamodel metamodel = em.getMetamodel();
         EntityType<E> entityType_ = metamodel.entity(entityType);
         if (!entityType_.hasSingleIdAttribute()) {
-            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which is not supported.", entityType);
+            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which cannot be returned as a single attribute name.", entityType);
         }
         for (SingularAttribute<?, ?> attrib : entityType_.getSingularAttributes()) {
             if (attrib.isId()) {
