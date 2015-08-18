@@ -1,17 +1,16 @@
 package com.threewks.thundr.jpa;
 
-import com.threewks.thundr.jpa.model.CompoundKeyEntity;
-import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
+import com.threewks.thundr.injection.InjectionContextImpl;
+import com.threewks.thundr.jpa.model.*;
 import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
-import com.threewks.thundr.jpa.repository.LongRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -20,10 +19,22 @@ import static org.junit.Assert.*;
 /**
  * Created by kaushiksen on 18/08/2015.
  */
-public class CompoundKeyEntityIT extends AbstractJpaIT{
-    protected CompoundKeyEntity compoundKeyEntity1;
+public abstract class RepositoryTestSuite<T> extends AbstractJpaIT{
+    private final Class<T> entityType;
+    public InjectionContextImpl injectionContext = new InjectionContextImpl();
+
+    @Rule
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class, StringBeverage.class, CompoundKeyEntity.class, EmbeddedIdCompoundKeyEntity.class);
+
+   protected CompoundKeyEntity compoundKeyEntity1;
     protected CompoundKeyEntity compoundKeyEntity2;
     protected CrudRepository<CompoundKeyEntityId, CompoundKeyEntity> jpaRepository;
+
+    public RepositoryTestSuite(Class<T> entityType){
+        this.entityType = entityType;
+    }
+    protected abstract T createEntity1();
+    protected abstract T createEntity2();
 
     @Before
     public void before() {
@@ -216,7 +227,7 @@ public class CompoundKeyEntityIT extends AbstractJpaIT{
         List<CompoundKeyEntity> CkEntityList1 = jpa.run(Propagation.Required, new ResultAction<List<CompoundKeyEntity>>() {
             @Override
             public List<CompoundKeyEntity> run(EntityManager em) {
-                return jpaRepository.read(jpaRepository.getKey(compoundKeyEntity1), jpaRepository.getKey(compoundKeyEntity2));
+                return jpaRepository.read(compoundKeyEntity1.getId(), compoundKeyEntity2.getId());
             }
         });
 
@@ -422,12 +433,14 @@ public class CompoundKeyEntityIT extends AbstractJpaIT{
     public void shouldRollbackOnFailureWithDefaultPropagation() {
         deleteTestData();
 
-        thrown.expect(RollbackException.class);
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("expected");
+
         jpa.run(new Action() {
             @Override
             public void run(EntityManager em) {
                 em.persist(compoundKeyEntity1);
-                throw new RuntimeException();
+                throw new RuntimeException("expected");
             }
         });
     }
@@ -436,7 +449,9 @@ public class CompoundKeyEntityIT extends AbstractJpaIT{
     public void shouldRollbackOnFailureWithRequiredPropagation() {
         deleteTestData();
 
-        thrown.expect(RollbackException.class);
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("expected");
+
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
@@ -450,7 +465,9 @@ public class CompoundKeyEntityIT extends AbstractJpaIT{
     public void shouldRollbackOnFailureWithRequiresNewPropagation() {
         deleteTestData();
 
-        thrown.expect(RollbackException.class);
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("expected");
+        
         jpa.run(Propagation.RequiresNew, new Action() {
             @Override
             public void run(EntityManager em) {

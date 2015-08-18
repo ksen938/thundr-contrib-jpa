@@ -9,17 +9,15 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "compound_key_entity")
+@IdClass(value = CompoundKeyEntityId.class)
 public class CompoundKeyEntity implements Serializable {
 
-    /*@Id
+    @Id
     @Column(name = "pk_1")
     private Long pk1 = Math.round(Math.random() * 1000);
     @Id
     @Column(name = "pk_2")
-    private Long pk2 = Math.round(Math.random() * 1000);*/
-
-    @EmbeddedId
-    private CompoundKeyEntityId id = new CompoundKeyEntityId();
+    private Long pk2 = Math.round(Math.random() * 1000);
 
     @Column(name = "name")
     private String name;
@@ -39,11 +37,23 @@ public class CompoundKeyEntity implements Serializable {
         this.name = name;
     }
 
-    public CompoundKeyEntityId getId() {
-        return id;
+    public Long getPk1() {
+        return pk1;
     }
 
-    public void setId(CompoundKeyEntityId id) {
-        this.id = id;
+    public void setPk1(Long pk1) {
+        this.pk1 = pk1;
+    }
+
+    public Long getPk2() {
+        return pk2;
+    }
+
+    public void setPk2(Long pk2) {
+        this.pk2 = pk2;
+    }
+
+    public CompoundKeyEntityId getId() {
+        return new CompoundKeyEntityId(pk1,pk2);
     }
 }

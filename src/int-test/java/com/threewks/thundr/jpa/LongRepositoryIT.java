@@ -1,12 +1,19 @@
 package com.threewks.thundr.jpa;
 
+import com.threewks.thundr.injection.InjectionContextImpl;
+import com.threewks.thundr.jpa.model.CompoundKeyEntity;
+import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.LongBeverage;
+import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.LongRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
@@ -20,15 +27,26 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by kaushiksen on 17/08/2015.
  */
-public class LongJpaIT extends AbstractJpaIT {
+public class LongRepositoryIT {
+    public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
-    protected LongBeverage bevvie1;
-    protected LongBeverage bevvie2;
-    protected CrudRepository<Long, LongBeverage> jpaRepository;
+    public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class);
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Rule
+    public RuleChain chain= RuleChain.outerRule(configureHsql).around(configureHibernate);
+
+    private LongBeverage bevvie1;
+    private LongBeverage bevvie2;
+    private CrudRepository<Long, LongBeverage> jpaRepository;
+    private Jpa jpa;
 
     @Before
     public void before() {
-        super.before();
+        jpa = injectionContext.get(Jpa.class);
         bevvie1 = new LongBeverage("Beer", true);
         bevvie2 = new LongBeverage("Lemonade", false);
         jpaRepository = new LongRepository<LongBeverage>(LongBeverage.class, jpa);
@@ -292,178 +310,4 @@ public class LongJpaIT extends AbstractJpaIT {
 
         deleteTestData();
     }
-
-    //JPA IT
-
-    @Test
-    public void shouldPersistWithDefaultPropagation() {
-        deleteTestData();
-
-        jpa.run(new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-        shouldReturnPersistedObjects();
-    }
-
-    @Test
-    public void shouldPersistWithMandatoryPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        jpa.createNewEntityManager().getTransaction().begin();
-        jpa.run(Propagation.Mandatory, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-        jpa.getExistingEntityManager().getTransaction().commit();
-        shouldReturnPersistedObjects();
-    }
-
-    @Test
-    public void shouldNotCreateTransactionOrPersistForNeverPropagation() {
-        deleteTestData();
-
-        thrown.expect(NullPointerException.class);
-
-        jpa.run(Propagation.Never, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                assertFalse(em.getTransaction().isActive());
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-        shouldReturnPersistedObjects();
-    }
-
-    @Test
-    public void shouldPersistOnRequiredPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        final EntityManager emLocal = jpa.createNewEntityManager();
-        emLocal.getTransaction().begin();
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-    }
-
-    @Test
-    public void shouldCreateNewTransactionOnRequiresNewPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        final EntityManager emLocal = jpa.createNewEntityManager();
-        emLocal.getTransaction().begin();
-        jpa.run(Propagation.RequiresNew, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                assertFalse(emLocal.getTransaction().equals(em.getTransaction()));
-            }
-        });
-    }
-
-    @Test
-    public void shouldPersistOnRequiresNewPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        final EntityManager emLocal = jpa.createNewEntityManager();
-        emLocal.getTransaction().begin();
-        jpa.run(Propagation.RequiresNew, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-    }
-
-    @Test
-    public void shouldPersistUnderExistingTransactionForSupportsPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        final EntityManager emLocal = jpa.createNewEntityManager();
-        emLocal.getTransaction().begin();
-        jpa.run(Propagation.Supports, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-        emLocal.getTransaction().commit();
-        shouldReturnPersistedObjects();
-    }
-
-    @Test
-    public void shouldNotCreateTransactionUnderSupportsPropagation() {
-        deleteTestData();
-
-        thrown.expect(NullPointerException.class);
-        jpa.run(Propagation.Supports, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                assertFalse(em.getTransaction().isActive());
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-        shouldReturnPersistedObjects();
-    }
-
-    @Test
-    public void shouldRollbackOnFailureWithDefaultPropagation() {
-        deleteTestData();
-
-        thrown.expect(RollbackException.class);
-        jpa.run(new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                throw new RuntimeException();
-            }
-        });
-    }
-
-    @Test
-    public void shouldRollbackOnFailureWithRequiredPropagation() {
-        deleteTestData();
-
-        thrown.expect(RollbackException.class);
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                throw new RuntimeException();
-            }
-        });
-    }
-
-    @Test
-    public void shouldRollbackOnFailureWithRequiresNewPropagation() {
-        deleteTestData();
-
-        thrown.expect(RollbackException.class);
-        jpa.run(Propagation.RequiresNew, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                throw new RuntimeException();
-            }
-        });
-    }
-
 }

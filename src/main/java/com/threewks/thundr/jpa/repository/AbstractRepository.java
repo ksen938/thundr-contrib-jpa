@@ -113,14 +113,18 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
         return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
-                String idField = getIdentifierField(em);
-                CriteriaBuilder cb = em.getCriteriaBuilder();
-                CriteriaQuery<E> cq = cb.createQuery(entityType);
-                Root<E> entityRoot = cq.from(entityType);
-                cq.select(entityRoot).where(entityRoot.get(idField).in(keys));
+                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), em.getMetamodel(), keys);
                 return em.createQuery(cq).getResultList();
             }
         });
+    }
+
+    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List<K> keys) {
+        String idField = getIdentifierField(metamodel);
+        CriteriaQuery<E> cq = cb.createQuery(entityType);
+        Root<E> entityRoot = cq.from(entityType);
+        cq.select(entityRoot).where(entityRoot.get(idField).in(keys));
+        return cq;
     }
 
 
@@ -156,8 +160,7 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
         }
     }
 
-    private String getIdentifierField(EntityManager em) {
-        Metamodel metamodel = em.getMetamodel();
+    private String getIdentifierField(Metamodel metamodel) {
         EntityType<E> entityType_ = metamodel.entity(entityType);
         if (!entityType_.hasSingleIdAttribute()) {
             throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which cannot be returned as a single attribute name.", entityType);

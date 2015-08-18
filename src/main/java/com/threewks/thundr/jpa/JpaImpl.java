@@ -2,6 +2,8 @@ package com.threewks.thundr.jpa;
 
 
 import com.threewks.thundr.jpa.exception.JpaException;
+import com.threewks.thundr.logger.Logger;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,14 +12,13 @@ import javax.persistence.PersistenceUnitUtil;
 import java.util.Deque;
 import java.util.LinkedList;
 
+// TODO - Shutdown hooks when module.stop is called
 public class JpaImpl implements Jpa {
     private EntityManagerFactory entityManagerFactory;
-    private PersistenceUnitUtil persistenceUnitUtil;
     private ThreadLocal<Deque<EntityManager>> threadLocal = new ThreadLocal<>();
 
     public JpaImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
-        persistenceUnitUtil = entityManagerFactory.getPersistenceUnitUtil();
     }
 
     @Override
@@ -45,21 +46,30 @@ public class JpaImpl implements Jpa {
     public <R> R run(Propagation propagation, ResultAction<R> action) {
         validateInternalState();
         EntityManager em = getExistingEntityManager();
-        boolean needsNew = em == null || (Propagation.RequiresNew == propagation && em.getTransaction().isActive());
-        if (needsNew) {
+        boolean ownsEntityManager = em == null || (Propagation.RequiresNew == propagation && em.getTransaction().isActive());
+        if (ownsEntityManager) {
             em = createNewEntityManager();
         }
-        EntityTransaction transaction = configureTransaction(em, propagation);
+        EntityTransaction transaction = em.getTransaction();
+        boolean ownsTransaction = participateInTransactionState(transaction, propagation);
         try {
-            return action.run(em);
+            R result = action.run(em);
+            commitOrRollback(transaction, ownsTransaction);
+            return result;
         } catch (RuntimeException e) {
-            transaction.setRollbackOnly();
+            ensureRollback(transaction, ownsTransaction);
             throw e;
         } finally {
-            if (needsNew) {
-                disposeOfTransaction(em, propagation);
+            if (ownsEntityManager) {
                 disposeOfEntityManager(em);
             }
+        }
+    }
+
+    protected void ensureRollback(EntityTransaction transaction, boolean ownsTransaction) {
+        transaction.setRollbackOnly();
+        if(ownsTransaction) {
+            transaction.rollback();
         }
     }
 
@@ -85,8 +95,7 @@ public class JpaImpl implements Jpa {
         return em;
     }
 
-    public EntityTransaction configureTransaction(EntityManager em, Propagation propagation) {
-        EntityTransaction transaction = em.getTransaction();
+    public boolean participateInTransactionState(EntityTransaction transaction, Propagation propagation) {
         if (transaction.isActive()) {
             if (Propagation.Never == propagation) {
                 throw new JpaException("Transaction already underway");
@@ -97,23 +106,28 @@ public class JpaImpl implements Jpa {
             }
             if (Propagation.Required == propagation || Propagation.RequiresNew == propagation) {
                 transaction.begin();
+                return true;
             }
         }
-        return transaction;
+        return false;
     }
 
     private void disposeOfEntityManager(EntityManager em) {
-        Deque<EntityManager> current = threadLocal.get();
-        current.pop();
-        em.close();
+        try {
+            Deque<EntityManager> current = threadLocal.get();
+            current.pop();
+            em.close();
+        }catch(Exception e){
+            Logger.error("Failed to close EntityManager: %s\n%s", e.getMessage(), ExceptionUtils.getStackTrace(e));
+        }
     }
 
-    protected void disposeOfTransaction(EntityManager em, Propagation propagation) {
-        EntityTransaction transaction = em.getTransaction();
-
-        if (transaction.isActive()) {
-            if (Propagation.RequiresNew == propagation || Propagation.Required == propagation || Propagation.Mandatory == propagation) {
-                em.getTransaction().commit();
+    protected void commitOrRollback(EntityTransaction transaction, boolean ownsTransaction) {
+        if(ownsTransaction) {
+            if (transaction.getRollbackOnly()) {
+                transaction.rollback();
+            } else {
+                transaction.commit();
             }
         }
     }

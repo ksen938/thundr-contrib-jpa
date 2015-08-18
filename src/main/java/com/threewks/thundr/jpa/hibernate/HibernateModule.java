@@ -3,6 +3,8 @@ package com.threewks.thundr.jpa.hibernate;
 import com.threewks.thundr.injection.BaseModule;
 import com.threewks.thundr.injection.InjectionContext;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
+import com.threewks.thundr.jpa.Jpa;
+import com.threewks.thundr.jpa.JpaImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -48,6 +50,7 @@ public class HibernateModule extends BaseModule {
 		entityManagerFactories.put(unit.getName(), entityManagerFactory);
 		injectionContext.inject(sessionFactory).named(unit.getName()).as(SessionFactory.class);
 		injectionContext.inject(entityManagerFactory).named(unit.getName()).as(EntityManagerFactory.class);
+		injectionContext.inject(JpaImpl.class).as(Jpa.class);
 	}
 
 	protected EntityManagerFactory createEntityManagerFactory(HibernateConfig unit, Configuration configuration, StandardServiceRegistry serviceRegistry) {
@@ -55,18 +58,18 @@ public class HibernateModule extends BaseModule {
                     serviceRegistry, unit.getName());
 	}
 
-	protected Configuration createHibernateConfiguration(HibernateConfig unit) {
+	protected Configuration createHibernateConfiguration(HibernateConfig config) {
 		Configuration configuration = new Configuration();
-		for (Class<?> entityClass : unit.getEntityClasses()) {
+		for (Class<?> entityClass : config.getEntityClasses()) {
 			configuration.addAnnotatedClass(entityClass);
 		}
-		for (Class<? extends AttributeConverter<?, ?>> converter : unit.getAttributeConvertors()) {
+		for (Class<? extends AttributeConverter<?, ?>> converter : config.getAttributeConvertors()) {
 			configuration.addAttributeConverter(converter);
 		}
 		Properties cfgProperties = configuration.getProperties();
-		cfgProperties.put(Environment.DATASOURCE, unit.getDataSource());
+		cfgProperties.put(Environment.DATASOURCE, config.getDataSource());
 
-		cfgProperties.putAll(unit.getProperties());
+		cfgProperties.putAll(config.getProperties());
 		return configuration;
 	}
 

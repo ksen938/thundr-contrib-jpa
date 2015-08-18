@@ -7,6 +7,7 @@ import com.threewks.thundr.injection.UpdatableInjectionContext;
 import com.threewks.thundr.jpa.hibernate.HibernateConfig;
 import com.threewks.thundr.jpa.hibernate.HibernateModule;
 import com.threewks.thundr.jpa.model.CompoundKeyEntity;
+import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
@@ -74,6 +75,7 @@ public abstract class AbstractJpaIT {
                 .withEntity(StringBeverage.class)
                 .withEntity(LongBeverage.class)
                 .withEntity(CompoundKeyEntity.class)
+                .withEntity(EmbeddedIdCompoundKeyEntity.class) //TODO - improve error message when this is left out
                 .withProperty(Environment.HBM2DDL_AUTO, "create-drop")
                 .withProperty(Environment.AUTOCOMMIT, "false")
                 .withProperty(Environment.SHOW_SQL, "true")
