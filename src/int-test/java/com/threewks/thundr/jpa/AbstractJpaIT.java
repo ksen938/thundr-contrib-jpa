@@ -6,6 +6,7 @@ import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 import com.threewks.thundr.jpa.hibernate.HibernateConfig;
 import com.threewks.thundr.jpa.hibernate.HibernateModule;
+import com.threewks.thundr.jpa.model.CompoundKeyEntity;
 import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
@@ -17,8 +18,6 @@ import org.junit.rules.ExpectedException;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
-import static org.hamcrest.CoreMatchers.nullValue;
 
 /**
  * Created by kaushiksen on 13/08/2015.
@@ -58,8 +57,10 @@ public abstract class AbstractJpaIT {
         hibernateConfig = new HibernateConfig(dataSource)
                 .withEntity(StringBeverage.class)
                 .withEntity(LongBeverage.class)
+                .withEntity(CompoundKeyEntity.class)
                 .withProperty(Environment.HBM2DDL_AUTO, "create-drop")
-                .withProperty(Environment.AUTOCOMMIT, "false");
+                .withProperty(Environment.AUTOCOMMIT, "false")
+                .withProperty(Environment.SHOW_SQL, "true");
         injectionContext.inject(hibernateConfig).as(HibernateConfig.class);
     }
 
@@ -72,8 +73,10 @@ public abstract class AbstractJpaIT {
         hibernateConfig = new HibernateConfig(dataSource)
                 .withEntity(StringBeverage.class)
                 .withEntity(LongBeverage.class)
+                .withEntity(CompoundKeyEntity.class)
                 .withProperty(Environment.HBM2DDL_AUTO, "create-drop")
                 .withProperty(Environment.AUTOCOMMIT, "false")
+                .withProperty(Environment.SHOW_SQL, "true")
                 .withProperty(Environment.USER, "root")
                 .withProperty(Environment.PASS, "");
         injectionContext.inject(hibernateConfig).as(HibernateConfig.class);

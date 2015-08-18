@@ -25,10 +25,10 @@ public class LongBeverage {
     private Long id = Math.round(Math.random() * 1000);
 
     @Column(name = "name", nullable = false)
-    public String name = "";
+    private String name = "";
 
     @Column(name = "alcoholic")
-    public boolean alcoholic = false;
+    private boolean alcoholic = false;
 
     public boolean isAlcoholic() {
         return alcoholic;
@@ -53,4 +53,5 @@ public class LongBeverage {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.threewks.thundr.jpa;
 
+import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.StringRepository;
@@ -152,21 +153,21 @@ public class StringJpaIT extends AbstractJpaIT {
                 jpaRepository.delete(bevvie1);
             }
         });
-        testDeleted();
+        testOneDeleted();
     }
 
     @Test
-    public void shouldDeleteSingleEntityByKey() {
+    public void shouldDeleteMultipleEntitiesByKey() {
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
-                jpaRepository.deleteByKey(bevvie1.getId());
+                jpaRepository.delete(bevvie1.getId(), bevvie2.getId());
             }
         });
-        testDeleted();
+        testAllDeleted();
     }
 
-    protected void testDeleted() {
+    protected void testOneDeleted() {
         StringBeverage deletedBev = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
             @Override
             public StringBeverage run(EntityManager em) {
@@ -183,6 +184,25 @@ public class StringJpaIT extends AbstractJpaIT {
 
         assertThat(deletedBev, Is.is(nullValue()));
         assertThat(remainingBev.getId(), Is.is(bevvie2.getId()));
+    }
+
+    protected void testAllDeleted() {
+        StringBeverage deletedBev1 = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return jpaRepository.read(bevvie1.getId());
+            }
+        });
+
+        StringBeverage deletedBev2 = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return jpaRepository.read(bevvie2.getId());
+            }
+        });
+
+        assertThat(deletedBev1, Is.is(nullValue()));
+        assertThat(deletedBev2, Is.is(nullValue()));
     }
 
     @Test

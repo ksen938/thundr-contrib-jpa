@@ -6,13 +6,12 @@ import com.threewks.thundr.jpa.Propagation;
 import com.threewks.thundr.jpa.ResultAction;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceUnitUtil;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 import javax.persistence.metamodel.SingularAttribute;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
 
@@ -124,6 +123,7 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
         });
     }
 
+
     @Override
     public void delete(final E entity) {
         jpa.run(Propagation.Supports, new Action() {
@@ -144,11 +144,23 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
         });
     }
 
+    @Override
+    public void delete(K... keys) {
+        for (final K key : keys) {
+            jpa.run(Propagation.Supports, new Action() {
+                @Override
+                public void run(EntityManager em) {
+                    em.remove(em.getReference(entityType, key));
+                }
+            });
+        }
+    }
+
     private String getIdentifierField(EntityManager em) {
         Metamodel metamodel = em.getMetamodel();
         EntityType<E> entityType_ = metamodel.entity(entityType);
         if (!entityType_.hasSingleIdAttribute()) {
-            throw new RepositoryException("Class %s has multiple ID fields", entityType);
+            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which is not supported.", entityType);
         }
         for (SingularAttribute<?, ?> attrib : entityType_.getSingularAttributes()) {
             if (attrib.isId()) {
@@ -156,5 +168,16 @@ public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
             }
         }
         return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public K getKey(final E entity) {
+        return jpa.run(Propagation.Supports, new ResultAction<K>() {
+            @Override
+            public K run(EntityManager em) {
+                PersistenceUnitUtil util = em.getEntityManagerFactory().getPersistenceUnitUtil();
+                return (K) util.getIdentifier(entity);
+            }
+        });
     }
 }
