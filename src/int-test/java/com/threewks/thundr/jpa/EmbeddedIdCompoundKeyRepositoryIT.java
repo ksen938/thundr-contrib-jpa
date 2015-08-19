@@ -4,8 +4,10 @@ import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
 import com.threewks.thundr.jpa.repository.EmbeddedIdCompoundKeyRepository;
-import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
+import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHsql;
+import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,6 +26,7 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
+    public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
     public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, EmbeddedIdCompoundKeyEntity.class);
 
     @Rule
@@ -42,7 +45,7 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
                 = injectionContext.get(Jpa.class);
         compoundKeyEntity1 = new EmbeddedIdCompoundKeyEntity("Entity1");
         compoundKeyEntity2 = new EmbeddedIdCompoundKeyEntity("Entity2");
-        jpaRepository = new EmbeddedIdCompoundKeyRepository<>(EmbeddedIdCompoundKeyEntity.class, jpa);
+        jpaRepository = new EmbeddedIdCompoundKeyRepository<>(EmbeddedIdCompoundKeyEntity.class, CompoundKeyEntityId.class, jpa);
         deleteTestData();
         createCkEntitys();
     }
@@ -55,25 +58,6 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
                 em.remove(compoundKeyEntity2);
             }
         });
-    }
-
-    protected void shouldReturnPersistedObjects() {
-        final EmbeddedIdCompoundKeyEntity finalBev1 = compoundKeyEntity1;
-        final EmbeddedIdCompoundKeyEntity finalBev2 = compoundKeyEntity2;
-        EmbeddedIdCompoundKeyEntity queriedBevvie1 = jpa.run(new ResultAction<EmbeddedIdCompoundKeyEntity>() {
-            @Override
-            public EmbeddedIdCompoundKeyEntity run(EntityManager em) {
-                return em.find(EmbeddedIdCompoundKeyEntity.class, finalBev1.getId());
-            }
-        });
-        EmbeddedIdCompoundKeyEntity queriedBevvie2 = jpa.run(new ResultAction<EmbeddedIdCompoundKeyEntity>() {
-            @Override
-            public EmbeddedIdCompoundKeyEntity run(EntityManager em) {
-                return em.find(EmbeddedIdCompoundKeyEntity.class, finalBev2.getId());
-            }
-        });
-        assertTrue(queriedBevvie1.getId().equals(compoundKeyEntity1.getId()));
-        assertTrue(queriedBevvie2.getId().equals(compoundKeyEntity2.getId()));
     }
 
     @Test
@@ -228,14 +212,14 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
         List<EmbeddedIdCompoundKeyEntity> CkEntityList1 = jpa.run(Propagation.Required, new ResultAction<List<EmbeddedIdCompoundKeyEntity>>() {
             @Override
             public List<EmbeddedIdCompoundKeyEntity> run(EntityManager em) {
-                return jpaRepository.read(jpaRepository.getKey(compoundKeyEntity1), jpaRepository.getKey(compoundKeyEntity2));
+                return jpaRepository.read(compoundKeyEntity1.getId(), compoundKeyEntity2.getId());
             }
         });
 
         List<CompoundKeyEntityId> CkEntityListKeys = new ArrayList<>();
 
-        CkEntityListKeys.add(jpaRepository.getKey(compoundKeyEntity1));
-        CkEntityListKeys.add(jpaRepository.getKey(compoundKeyEntity2));
+        CkEntityListKeys.add(compoundKeyEntity1.getId());
+        CkEntityListKeys.add(compoundKeyEntity2.getId());
 
         final List<CompoundKeyEntityId> finalCkEntityListKeys = CkEntityListKeys;
 

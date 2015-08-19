@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Created by kaushiksen on 17/08/2015.
- */
 @Entity
 @Table(name = "LongBeverage")
 public class LongBeverage {
@@ -22,7 +19,7 @@ public class LongBeverage {
 
     @Id
     @Column(name = "id")
-    private Long id = Math.round(Math.random() * 1000);
+    public Long id = Math.round(Math.random() * 1000);
 
     @Column(name = "name", nullable = false)
     private String name = "";

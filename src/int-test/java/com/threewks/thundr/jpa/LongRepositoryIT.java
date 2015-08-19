@@ -4,6 +4,9 @@ import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.LongRepository;
+import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHsql;
+import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,6 +30,7 @@ public class LongRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
+    public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
     public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class);
 
     @Rule
@@ -60,25 +64,6 @@ public class LongRepositoryIT {
         });
     }
 
-    protected void shouldReturnPersistedObjects() {
-        final LongBeverage finalBev1 = bevvie1;
-        final LongBeverage finalBev2 = bevvie2;
-        LongBeverage queriedBevvie1 = jpa.run(new ResultAction<LongBeverage>() {
-            @Override
-            public LongBeverage run(EntityManager em) {
-                return em.find(LongBeverage.class, finalBev1.getId());
-            }
-        });
-        LongBeverage queriedBevvie2 = jpa.run(new ResultAction<LongBeverage>() {
-            @Override
-            public LongBeverage run(EntityManager em) {
-                return em.find(LongBeverage.class, finalBev2.getId());
-            }
-        });
-        assertTrue(queriedBevvie1.getId().equals(bevvie1.getId()));
-        assertTrue(queriedBevvie2.getId().equals(bevvie2.getId()));
-    }
-
     @Test
     public void shouldCreateAndReadSingleEntity() {
         LongBeverage localBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
@@ -105,9 +90,31 @@ public class LongRepositoryIT {
         checkUpdated(updatedBev);
     }
 
-    protected void checkUpdated(LongBeverage beverage) {
-        assertThat(beverage.getName(), Is.is("Water"));
-        assertThat(beverage.isAlcoholic(), Is.is(false));
+    protected void checkUpdated(final LongBeverage beverage) {
+
+        LongBeverage updatedBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                LongBeverage result = em.find(LongBeverage.class, beverage.getId());
+                em.refresh(result);
+                return result;
+            }
+        });
+        assertThat(updatedBev.getName(), Is.is("Water"));
+        assertThat(updatedBev.isAlcoholic(), Is.is(false));
+    }
+
+    @Test
+    public void shouldUpdateSingleEntityThroughRead() {
+        final LongBeverage readBev = jpaRepository.read(bevvie1.getId());
+        jpa.run(Propagation.Required, new Action() {
+            @Override
+            public void run(EntityManager em) {
+                readBev.setName("Water");
+                readBev.setAlcoholic(false);
+            }
+        });
+        checkUpdated(readBev);
     }
 
     @Test

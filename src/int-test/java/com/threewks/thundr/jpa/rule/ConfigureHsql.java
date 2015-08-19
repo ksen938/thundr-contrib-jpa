@@ -1,4 +1,4 @@
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.rule;
 
 import com.atomicleopard.thundr.jdbc.HsqlDbModule;
 import com.threewks.thundr.injection.UpdatableInjectionContext;

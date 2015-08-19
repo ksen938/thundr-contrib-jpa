@@ -24,7 +24,7 @@ public class StringBeverage {
 
     @Id
     @Column(name = "id")
-    private String id = UUID.randomUUID().toString();
+    public String id = UUID.randomUUID().toString();
 
     @Column(name = "name", nullable = false)
     public String name = "";

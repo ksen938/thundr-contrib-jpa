@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class EmbeddedIdCompoundKeyEntity implements Serializable {
 
     @EmbeddedId
-    private CompoundKeyEntityId id = new CompoundKeyEntityId();
+    public CompoundKeyEntityId id = new CompoundKeyEntityId();
 
     @Column(name = "name")
     private String name;

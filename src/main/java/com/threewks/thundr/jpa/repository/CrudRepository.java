@@ -21,6 +21,4 @@ public interface CrudRepository<K, E> {
     public void delete(E entity);
     public void delete(K...keys);
     public void deleteByKey(K key);
-
-    public K getKey(E entity);
 }

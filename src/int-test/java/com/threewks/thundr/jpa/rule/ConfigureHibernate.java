@@ -1,4 +1,4 @@
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.rule;
 
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 import com.threewks.thundr.jpa.hibernate.HibernateConfig;
@@ -7,6 +7,7 @@ import org.hibernate.cfg.Environment;
 import org.junit.rules.ExternalResource;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * Created by kaushiksen on 18/08/2015.

@@ -1,10 +1,12 @@
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.StringRepository;
+import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHsql;
+import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +16,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -30,6 +31,7 @@ public class StringRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
+    public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
     public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, StringBeverage.class);
 
     @Rule
@@ -37,6 +39,8 @@ public class StringRepositoryIT {
 
     @Rule
     public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
+
+
     protected StringBeverage bevvie1;
     protected StringBeverage bevvie2;
     protected CrudRepository<String, StringBeverage> jpaRepository;

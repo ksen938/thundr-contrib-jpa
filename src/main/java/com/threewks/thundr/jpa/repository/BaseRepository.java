@@ -1,31 +1,38 @@
 package com.threewks.thundr.jpa.repository;
 
-import com.threewks.thundr.jpa.*;
+import com.threewks.thundr.exception.BaseException;
+import com.threewks.thundr.jpa.Action;
+import com.threewks.thundr.jpa.Jpa;
+import com.threewks.thundr.jpa.Propagation;
+import com.threewks.thundr.jpa.ResultAction;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnitUtil;
 import javax.persistence.criteria.*;
+import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import javax.persistence.metamodel.SingularAttribute;
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     protected Jpa jpa;
     protected Class<E> type;
+    protected Class<K> keyType;
     protected EntityType<E> entityType;
+    private final Predicate[] predicateArray = new Predicate[0];
 
     public BaseRepository(Class<E> entityType, Jpa jpa) {
         this.type = entityType;
         this.jpa = jpa;
         this.entityType = jpa.getMetamodel().entity(type);
-
-
     }
 
     public BaseRepository(Class<E> entityType, Class<K> keyType, Jpa jpa) {
-        this(entityType, jpa);
+        this.type = entityType;
+        this.jpa = jpa;
+        this.entityType = jpa.getMetamodel().entity(type);
+        this.keyType = keyType;
     }
 
 
@@ -114,26 +121,6 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
     }
 
     @Override
-    public List<E> read(final List<K> keys) {
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
-            @Override
-            public List<E> run(EntityManager em) {
-                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), keys);
-                return em.createQuery(cq).getResultList();
-            }
-        });
-    }
-
-    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, List<K> keys) {
-        String idField = getIdentifierField();
-        CriteriaQuery<E> cq = cb.createQuery(type);
-        Root<E> entityRoot = cq.from(type);
-        cq.select(entityRoot).where(entityRoot.get(idField).in(keys));
-        return cq;
-    }
-
-
-    @Override
     public void delete(final E entity) {
         jpa.run(Propagation.Supports, new Action() {
             @Override
@@ -165,26 +152,80 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         }
     }
 
-    private String getIdentifierField() {
-        if (!entityType.hasSingleIdAttribute()) {
-            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which cannot be returned as a single attribute name.", this.entityType);
-        }
-        for (SingularAttribute<?, ?> attrib : entityType.getSingularAttributes()) {
-            if (attrib.isId()) {
-                return attrib.getName();
-            }
-        }
-        return null;
-    }
-
-    @SuppressWarnings("unchecked")
-    public K getKey(final E entity) {
-        return jpa.run(Propagation.Supports, new ResultAction<K>() {
+    @Override
+    public List<E> read(final List<K> keys) {
+        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
             @Override
-            public K run(EntityManager em) {
-                PersistenceUnitUtil util = em.getEntityManagerFactory().getPersistenceUnitUtil();
-                return (K) util.getIdentifier(entity);
+            public List<E> run(EntityManager em) {
+                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), keys);
+                return em.createQuery(cq).getResultList();
             }
         });
+    }
+
+    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, List<K> keys) {
+        CriteriaQuery<E> cq = cb.createQuery(type);
+        Root<E> fromClause = cq.from(entityType);
+        boolean isSimpleQuery = entityType.hasSingleIdAttribute();
+        return isSimpleQuery ? buildSimpleQuery(cb, cq, fromClause, keys) : buildComplexQuery(cb, cq, fromClause, keys);
+    }
+
+    protected CriteriaQuery<E> buildSimpleQuery(CriteriaBuilder cb, CriteriaQuery<E> cq, Root<E> fromClause, List<K> keys) {
+        SingularAttribute<? super E, K> idField = entityType.getId(keyType);
+        cq.select(fromClause).where(fromClause.get(idField).in(keys));
+        return cq;
+    }
+
+    protected CriteriaQuery<E> buildComplexQuery(CriteriaBuilder cb, CriteriaQuery<E> cq, Root<E> fromClause, List<K> keys) {
+        Map<Object, Map<Path, Object>> keyValues = setupMapFromKeysToPathsAndValues(keys);
+        Map<SingularAttribute<? super E, ?>, Path> attrsAndPaths = mapAttributesToPaths(fromClause);
+        fillOutMapFromKeysToPathsAndValues(keys, keyValues, attrsAndPaths);
+        List<Predicate> andPredicates = buildAndPredicates(cb, keyValues);
+        cq.select(fromClause).where(cb.or(andPredicates.toArray(predicateArray)));
+        return cq;
+    }
+
+    private Map<Object, Map<Path, Object>> setupMapFromKeysToPathsAndValues(List<K> keys) {
+        Map<Object, Map<Path, Object>> keyValues = new LinkedHashMap<>();
+        for (Object key : keys) {
+            keyValues.put(key, new HashMap<Path, Object>());
+        }
+        return keyValues;
+    }
+
+    private Map<SingularAttribute<? super E, ?>, Path> mapAttributesToPaths(Root<E> fromClause) {
+        Map<SingularAttribute<? super E, ?>, Path> attrsAndPaths = new LinkedHashMap<>();
+        for (SingularAttribute<? super E, ?> attr : entityType.getIdClassAttributes()) {
+            attrsAndPaths.put(attr, fromClause.get(attr));
+        }
+        return attrsAndPaths;
+    }
+
+    private void fillOutMapFromKeysToPathsAndValues(List<K> keys, Map<Object, Map<Path, Object>> keyValues, Map<SingularAttribute<? super E, ?>, Path> attrsAndPaths) {
+        try {
+            for (Map.Entry<SingularAttribute<? super E, ?>, Path> keyField : attrsAndPaths.entrySet()) {
+                SingularAttribute<? super E, ?> attr = keyField.getKey();
+                Path path = keyField.getValue();
+                Field f = (Field) attr.getJavaMember();
+                for (Object key : keys) {
+                    Object value = f.get(key);
+                    keyValues.get(key).put(path, value);
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new BaseException(e);
+        }
+    }
+
+    private List<Predicate> buildAndPredicates(CriteriaBuilder cb, Map<Object, Map<Path, Object>> keyValues) {
+        List<Predicate> andPredicates = new ArrayList<>();
+        for (Map<Path, Object> pkFields : keyValues.values()) {
+            List<Predicate> terms = new ArrayList<>(pkFields.size());
+            for (Map.Entry<Path, Object> pkField : pkFields.entrySet()) {
+                terms.add(cb.equal(pkField.getKey(), pkField.getValue()));
+            }
+            andPredicates.add(cb.and(terms.toArray(predicateArray)));
+        }
+        return andPredicates;
     }
 }
