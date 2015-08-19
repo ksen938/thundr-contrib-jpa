@@ -1,10 +1,7 @@
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.jpa.model.CompoundKeyEntity;
-import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.LongBeverage;
-import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.LongRepository;
 import org.hamcrest.core.Is;
@@ -16,7 +13,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -49,7 +45,7 @@ public class LongRepositoryIT {
         jpa = injectionContext.get(Jpa.class);
         bevvie1 = new LongBeverage("Beer", true);
         bevvie2 = new LongBeverage("Lemonade", false);
-        jpaRepository = new LongRepository<LongBeverage>(LongBeverage.class, jpa);
+        jpaRepository = new LongRepository<>(LongBeverage.class, jpa);
         deleteTestData();
         createBeverages();
     }

@@ -2,15 +2,7 @@ package com.threewks.thundr.jpa;
 
 import com.atomicleopard.thundr.jdbc.HsqlDbModule;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.hibernate.HibernateConfig;
-import com.threewks.thundr.jpa.hibernate.HibernateModule;
-import com.threewks.thundr.jpa.model.CompoundKeyEntity;
-import com.threewks.thundr.jpa.model.LongBeverage;
-import com.threewks.thundr.jpa.model.StringBeverage;
-import org.hibernate.cfg.Environment;
 import org.junit.rules.ExternalResource;
-
-import javax.sql.DataSource;
 
 /**
  * Created by kaushiksen on 18/08/2015.

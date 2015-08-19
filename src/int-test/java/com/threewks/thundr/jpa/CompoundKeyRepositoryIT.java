@@ -1,7 +1,7 @@
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.jpa.model.CompoundKeyEntity;
+import com.threewks.thundr.jpa.model.IdClassCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
 import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
@@ -29,7 +29,7 @@ public class CompoundKeyRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
-    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, CompoundKeyEntity.class);
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, IdClassCompoundKeyEntity.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -38,21 +38,21 @@ public class CompoundKeyRepositoryIT {
     public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
 
     private Jpa jpa;
-    protected CompoundKeyEntity compoundKeyEntity1;
-    protected CompoundKeyEntity compoundKeyEntity2;
-    protected CrudRepository<CompoundKeyEntityId, CompoundKeyEntity> jpaRepository;
+    protected IdClassCompoundKeyEntity compoundKeyEntity1;
+    protected IdClassCompoundKeyEntity compoundKeyEntity2;
+    protected CrudRepository<CompoundKeyEntityId, IdClassCompoundKeyEntity> jpaRepository;
 
     @Before
     @SuppressWarnings(value = "unchecked")
     public void before() {
         jpa = injectionContext.get(Jpa.class);
-        compoundKeyEntity1 = new CompoundKeyEntity("Entity1");
-        compoundKeyEntity2 = new CompoundKeyEntity("Entity2");
-        jpaRepository = new CompoundKeyRepository(CompoundKeyEntity.class, jpa) {
+        compoundKeyEntity1 = new IdClassCompoundKeyEntity("Entity1");
+        compoundKeyEntity2 = new IdClassCompoundKeyEntity("Entity2");
+        jpaRepository = new CompoundKeyRepository(IdClassCompoundKeyEntity.class, jpa) {
             @Override
-            protected CriteriaQuery<CompoundKeyEntity> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List keys) {
-                CriteriaQuery<CompoundKeyEntity> cq = cb.createQuery(entityType);
-                Root<CompoundKeyEntity> entityRoot = cq.from(entityType);
+            protected CriteriaQuery<IdClassCompoundKeyEntity> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List keys) {
+                CriteriaQuery<IdClassCompoundKeyEntity> cq = cb.createQuery(entityType);
+                Root<IdClassCompoundKeyEntity> entityRoot = cq.from(entityType);
 
                 Path pk1Path = entityRoot.get("pk1");
                 Path pk2Path = entityRoot.get("pk2");
@@ -83,18 +83,18 @@ public class CompoundKeyRepositoryIT {
     }
 
     protected void shouldReturnPersistedObjects() {
-        final CompoundKeyEntity finalBev1 = compoundKeyEntity1;
-        final CompoundKeyEntity finalBev2 = compoundKeyEntity2;
-        CompoundKeyEntity queriedBevvie1 = jpa.run(new ResultAction<CompoundKeyEntity>() {
+        final IdClassCompoundKeyEntity finalBev1 = compoundKeyEntity1;
+        final IdClassCompoundKeyEntity finalBev2 = compoundKeyEntity2;
+        IdClassCompoundKeyEntity queriedBevvie1 = jpa.run(new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
-                return em.find(CompoundKeyEntity.class, finalBev1.getId());
+            public IdClassCompoundKeyEntity run(EntityManager em) {
+                return em.find(IdClassCompoundKeyEntity.class, finalBev1.getId());
             }
         });
-        CompoundKeyEntity queriedBevvie2 = jpa.run(new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity queriedBevvie2 = jpa.run(new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
-                return em.find(CompoundKeyEntity.class, finalBev2.getId());
+            public IdClassCompoundKeyEntity run(EntityManager em) {
+                return em.find(IdClassCompoundKeyEntity.class, finalBev2.getId());
             }
         });
         assertTrue(queriedBevvie1.getId().equals(compoundKeyEntity1.getId()));
@@ -103,9 +103,9 @@ public class CompoundKeyRepositoryIT {
 
     @Test
     public void shouldCreateAndReadSingleEntity() {
-        CompoundKeyEntity localCkEntity = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity localCkEntity = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
+            public IdClassCompoundKeyEntity run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity1.getId());
             }
         });
@@ -114,10 +114,10 @@ public class CompoundKeyRepositoryIT {
 
     @Test
     public void shouldUpdateSingleEntity() {
-        CompoundKeyEntity updatedCkEntity = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity updatedCkEntity = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
-                CompoundKeyEntity localCkEntity = jpaRepository.read(compoundKeyEntity1.getId());
+            public IdClassCompoundKeyEntity run(EntityManager em) {
+                IdClassCompoundKeyEntity localCkEntity = jpaRepository.read(compoundKeyEntity1.getId());
                 localCkEntity.setName("Water");
                 return jpaRepository.update(localCkEntity);
             }
@@ -125,41 +125,41 @@ public class CompoundKeyRepositoryIT {
         checkUpdated(updatedCkEntity);
     }
 
-    protected void checkUpdated(CompoundKeyEntity CkEntity) {
+    protected void checkUpdated(IdClassCompoundKeyEntity CkEntity) {
         assertThat(CkEntity.getName(), Is.is("Water"));
     }
 
     @Test
     public void shouldUpdateMultipleEntities() {
-        final CompoundKeyEntity[] CkEntitys = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity[]>() {
+        final IdClassCompoundKeyEntity[] CkEntitys = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity[]>() {
             @Override
-            public CompoundKeyEntity[] run(EntityManager em) {
-                CompoundKeyEntity localCkEntity1 = jpaRepository.read(compoundKeyEntity1.getId());
-                CompoundKeyEntity localCkEntity2 = jpaRepository.read(compoundKeyEntity2.getId());
+            public IdClassCompoundKeyEntity[] run(EntityManager em) {
+                IdClassCompoundKeyEntity localCkEntity1 = jpaRepository.read(compoundKeyEntity1.getId());
+                IdClassCompoundKeyEntity localCkEntity2 = jpaRepository.read(compoundKeyEntity2.getId());
                 localCkEntity1.setName("Water");
                 localCkEntity2.setName("Water");
-                CompoundKeyEntity[] CkEntitys = new CompoundKeyEntity[2];
+                IdClassCompoundKeyEntity[] CkEntitys = new IdClassCompoundKeyEntity[2];
                 CkEntitys[0] = localCkEntity1;
                 CkEntitys[1] = localCkEntity2;
                 return CkEntitys;
             }
         });
-        List<CompoundKeyEntity> CkEntitys1 = jpa.run(Propagation.Required, new ResultAction<List<CompoundKeyEntity>>() {
+        List<IdClassCompoundKeyEntity> CkEntitys1 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
             @Override
-            public List<CompoundKeyEntity> run(EntityManager em) {
+            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
                 return jpaRepository.update(CkEntitys);
             }
         });
-        List<CompoundKeyEntity> CkEntitys2 = jpa.run(Propagation.Required, new ResultAction<List<CompoundKeyEntity>>() {
+        List<IdClassCompoundKeyEntity> CkEntitys2 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
             @Override
-            public List<CompoundKeyEntity> run(EntityManager em) {
+            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
                 return jpaRepository.update(Arrays.asList(CkEntitys));
             }
         });
-        for (CompoundKeyEntity CkEntity : CkEntitys1) {
+        for (IdClassCompoundKeyEntity CkEntity : CkEntitys1) {
             checkUpdated(CkEntity);
         }
-        for (CompoundKeyEntity CkEntity : CkEntitys2) {
+        for (IdClassCompoundKeyEntity CkEntity : CkEntitys2) {
             checkUpdated(CkEntity);
         }
     }
@@ -210,16 +210,16 @@ public class CompoundKeyRepositoryIT {
     }
 
     protected void testOneDeleted() {
-        CompoundKeyEntity deletedBev = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity deletedBev = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
+            public IdClassCompoundKeyEntity run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity1.getId());
             }
         });
 
-        CompoundKeyEntity remainingBev = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity remainingBev = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
+            public IdClassCompoundKeyEntity run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity2.getId());
             }
         });
@@ -229,16 +229,16 @@ public class CompoundKeyRepositoryIT {
     }
 
     protected void testAllDeleted() {
-        CompoundKeyEntity deletedBev1 = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity deletedBev1 = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
+            public IdClassCompoundKeyEntity run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity1.getId());
             }
         });
 
-        CompoundKeyEntity deletedBev2 = jpa.run(Propagation.Required, new ResultAction<CompoundKeyEntity>() {
+        IdClassCompoundKeyEntity deletedBev2 = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
             @Override
-            public CompoundKeyEntity run(EntityManager em) {
+            public IdClassCompoundKeyEntity run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity2.getId());
             }
         });
@@ -250,9 +250,9 @@ public class CompoundKeyRepositoryIT {
     @Test
     public void shouldReadMultipleEntities() {
 
-        List<CompoundKeyEntity> CkEntityList1 = jpa.run(Propagation.Required, new ResultAction<List<CompoundKeyEntity>>() {
+        List<IdClassCompoundKeyEntity> CkEntityList1 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
             @Override
-            public List<CompoundKeyEntity> run(EntityManager em) {
+            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
                 return jpaRepository.read(compoundKeyEntity1.getId(), compoundKeyEntity2.getId());
             }
         });
@@ -264,9 +264,9 @@ public class CompoundKeyRepositoryIT {
 
         final List<CompoundKeyEntityId> finalCkEntityListKeys = CkEntityListKeys;
 
-        List<CompoundKeyEntity> CkEntityList2 = jpa.run(Propagation.Required, new ResultAction<List<CompoundKeyEntity>>() {
+        List<IdClassCompoundKeyEntity> CkEntityList2 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
             @Override
-            public List<CompoundKeyEntity> run(EntityManager em) {
+            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
                 return jpaRepository.read(finalCkEntityListKeys);
             }
         });
@@ -275,9 +275,9 @@ public class CompoundKeyRepositoryIT {
         containsCkEntitys(CkEntityList2);
     }
 
-    protected void containsCkEntitys(List<CompoundKeyEntity> CkEntitys) {
-        Map<CompoundKeyEntityId, CompoundKeyEntity> map = new HashMap<>();
-        for (CompoundKeyEntity CkEntity : CkEntitys) {
+    protected void containsCkEntitys(List<IdClassCompoundKeyEntity> CkEntitys) {
+        Map<CompoundKeyEntityId, IdClassCompoundKeyEntity> map = new HashMap<>();
+        for (IdClassCompoundKeyEntity CkEntity : CkEntitys) {
             map.put(CkEntity.getId(), CkEntity);
         }
         assertTrue(map.containsKey(compoundKeyEntity1.getId()));
@@ -299,7 +299,7 @@ public class CompoundKeyRepositoryIT {
     public void shouldCreateMultipleEntities() {
         deleteTestData(); //called to delete records created by before()
 
-        final List<CompoundKeyEntity> CkEntitys = new ArrayList<>();
+        final List<IdClassCompoundKeyEntity> CkEntitys = new ArrayList<>();
         CkEntitys.add(compoundKeyEntity1);
         CkEntitys.add(compoundKeyEntity2);
 

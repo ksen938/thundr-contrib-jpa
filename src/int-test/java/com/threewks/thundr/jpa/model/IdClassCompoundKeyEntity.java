@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "compound_key_entity")
 @IdClass(value = CompoundKeyEntityId.class)
-public class CompoundKeyEntity implements Serializable {
+public class IdClassCompoundKeyEntity implements Serializable {
 
     @Id
     @Column(name = "pk_1")
@@ -22,10 +22,10 @@ public class CompoundKeyEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    public CompoundKeyEntity() {
+    public IdClassCompoundKeyEntity() {
     }
 
-    public CompoundKeyEntity(String name) {
+    public IdClassCompoundKeyEntity(String name) {
         this.name = name;
     }
 
