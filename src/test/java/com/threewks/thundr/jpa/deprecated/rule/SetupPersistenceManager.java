@@ -15,43 +15,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.rule;
+package com.threewks.thundr.jpa.deprecated.rule;
+
 
 import com.threewks.thundr.jpa.deprecated.jee.PersistenceManager;
+import com.threewks.thundr.jpa.deprecated.jee.PersistenceManagerImpl;
 import org.junit.rules.ExternalResource;
 
-public class SetupTransaction extends ExternalResource {
-	public static SetupTransaction commit(PersistenceManager persistenceManager) {
-		return new SetupTransaction(persistenceManager, true);
-	}
-
-	public static SetupTransaction rollback(PersistenceManager persistenceManager) {
-		return new SetupTransaction(persistenceManager, false);
-	}
-
+public class SetupPersistenceManager extends ExternalResource {
+	private String persistenceUnit;
 	private PersistenceManager persistenceManager;
-	private boolean commit;
 
-	public SetupTransaction(PersistenceManager persistenceManager, boolean commit) {
-		this.persistenceManager = persistenceManager;
-		this.commit = commit;
+	public SetupPersistenceManager(String persistenceUnit) {
+		this.persistenceUnit = persistenceUnit;
+	}
+
+	public PersistenceManager getPersistenceManager() {
+		return this.persistenceManager;
 	}
 
 	@Override
 	protected void before() throws Throwable {
-		persistenceManager.beginTransaction();
+		this.persistenceManager = new PersistenceManagerImpl(persistenceUnit);
 	}
 
 	@Override
 	protected void after() {
-		try {
-			if (commit) {
-				persistenceManager.commit();
-			} else {
-				persistenceManager.rollback();
-			}
-		} finally {
-			persistenceManager.closeEntityManager();
-		}
+		this.persistenceManager.destroy();
 	}
 }
