@@ -15,32 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
 
-import java.util.Map;
-
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.ServletContext;
 
-import com.threewks.thundr.route.controller.InterceptorRegistry;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.intercept.JpaSession;
-import com.threewks.thundr.jpa.intercept.JpaSessionInterceptor;
+import com.threewks.thundr.jpa.deprecated.intercept.JpaSession;
+import com.threewks.thundr.jpa.deprecated.intercept.JpaSessionInterceptor;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Persistence.class)

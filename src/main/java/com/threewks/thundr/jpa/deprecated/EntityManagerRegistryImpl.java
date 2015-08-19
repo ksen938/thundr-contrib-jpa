@@ -15,12 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.threewks.thundr.jpa.exception.PersistenceManagerDoesNotExistException;
+import com.threewks.thundr.jpa.deprecated.exception.PersistenceManagerDoesNotExistException;
 
 import javax.persistence.EntityManager;
 

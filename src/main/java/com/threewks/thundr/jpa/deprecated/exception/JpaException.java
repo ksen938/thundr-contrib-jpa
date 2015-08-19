@@ -15,22 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.exception;
 
-import javax.persistence.EntityManager;
+import com.threewks.thundr.exception.BaseException;
 
-public interface PersistenceManager {
-	public static final String DefaultName = "default";
+public class JpaException extends BaseException {
+	private static final long serialVersionUID = 1L;
 
-	EntityManager getEntityManager();
+	public JpaException(String format, Object... formatArgs) {
+		super(format, formatArgs);
+	}
 
-	void beginTransaction();
-
-	void rollback();
-
-	void commit();
-
-	void closeEntityManager();
-
-	void destroy();
+	public JpaException(Throwable cause, String format, Object... formatArgs) {
+		super(cause, format, formatArgs);
+	}
 }

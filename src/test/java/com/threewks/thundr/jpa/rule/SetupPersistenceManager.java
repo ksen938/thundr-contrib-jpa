@@ -18,8 +18,8 @@
 package com.threewks.thundr.jpa.rule;
 
 
-import com.threewks.thundr.jpa.jee.PersistenceManager;
-import com.threewks.thundr.jpa.jee.PersistenceManagerImpl;
+import com.threewks.thundr.jpa.deprecated.jee.PersistenceManager;
+import com.threewks.thundr.jpa.deprecated.jee.PersistenceManagerImpl;
 import org.junit.rules.ExternalResource;
 
 public class SetupPersistenceManager extends ExternalResource {

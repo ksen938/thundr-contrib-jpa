@@ -15,17 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
+
 
 import javax.persistence.EntityManager;
 
-public abstract class VoidAction implements JpaAction<Void> {
-
-	@Override
-	public final Void run(EntityManager em) {
-		vrun(em);
-		return null;
-	}
-
-	public abstract void vrun(EntityManager em);
+public interface JpaAction<T> {
+	T run(EntityManager em);
 }

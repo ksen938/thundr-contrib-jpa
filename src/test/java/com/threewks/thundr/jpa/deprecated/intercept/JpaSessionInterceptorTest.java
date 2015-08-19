@@ -15,38 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.intercept;
+package com.threewks.thundr.jpa.deprecated.intercept;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import com.threewks.thundr.jpa.jee.PersistenceManager;
-import com.threewks.thundr.jpa.jee.PersistenceManagerImpl;
-import com.threewks.thundr.jpa.jee.EntityManagerRegistry;
-import com.threewks.thundr.jpa.jee.EntityManagerRegistryImpl;
-import com.threewks.thundr.jpa.exception.PersistenceManagerDoesNotExistException;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Persistence.class)

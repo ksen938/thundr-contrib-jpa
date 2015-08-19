@@ -15,13 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import com.threewks.thundr.jpa.deprecated.EntityManagerRegistry;
+import com.threewks.thundr.jpa.deprecated.EntityManagerRegistryImpl;
 import com.threewks.thundr.route.controller.InterceptorRegistry;
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,9 +31,9 @@ import com.threewks.thundr.configuration.Environment;
 import com.threewks.thundr.injection.InjectionContext;
 import com.threewks.thundr.injection.Module;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.exception.JpaException;
-import com.threewks.thundr.jpa.intercept.JpaSession;
-import com.threewks.thundr.jpa.intercept.JpaSessionInterceptor;
+import com.threewks.thundr.jpa.deprecated.exception.JpaException;
+import com.threewks.thundr.jpa.deprecated.intercept.JpaSession;
+import com.threewks.thundr.jpa.deprecated.intercept.JpaSessionInterceptor;
 import com.threewks.thundr.logger.Logger;
 import com.threewks.thundr.module.DependencyRegistry;
 

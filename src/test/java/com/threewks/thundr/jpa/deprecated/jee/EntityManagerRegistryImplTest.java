@@ -15,18 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import com.threewks.thundr.jpa.exception.PersistenceManagerDoesNotExistException;
+import com.threewks.thundr.jpa.deprecated.exception.PersistenceManagerDoesNotExistException;
 
 public class EntityManagerRegistryImplTest {
 	/*@Rule

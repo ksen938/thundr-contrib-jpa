@@ -3,10 +3,8 @@ package com.threewks.thundr.jpa;
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.CompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
-import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
-import com.threewks.thundr.jpa.repository.LongRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,16 +14,13 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import javax.persistence.criteria.*;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.metamodel.ManagedType;
 import javax.persistence.metamodel.Metamodel;
 import java.util.*;
-import java.util.function.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by kaushiksen on 18/08/2015.

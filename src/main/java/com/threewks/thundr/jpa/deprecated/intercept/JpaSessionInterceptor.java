@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.intercept;
+package com.threewks.thundr.jpa.deprecated.intercept;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,9 +24,8 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.threewks.thundr.jpa.jee.PersistenceManager;
-import com.threewks.thundr.jpa.jee.EntityManagerRegistry;
-import com.threewks.thundr.jpa.exception.JpaException;
+import com.threewks.thundr.jpa.deprecated.EntityManagerRegistry;
+import com.threewks.thundr.jpa.deprecated.exception.JpaException;
 import com.threewks.thundr.logger.Logger;
 import com.threewks.thundr.route.controller.Interceptor;
 

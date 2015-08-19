@@ -15,18 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.exception;
+package com.threewks.thundr.jpa.deprecated.exception;
 
-import com.threewks.thundr.exception.BaseException;
-
-public class JpaException extends BaseException {
+public class PersistenceManagerDoesNotExistException extends JpaException {
 	private static final long serialVersionUID = 1L;
 
-	public JpaException(String format, Object... formatArgs) {
+	public PersistenceManagerDoesNotExistException(String format, Object... formatArgs) {
 		super(format, formatArgs);
-	}
-
-	public JpaException(Throwable cause, String format, Object... formatArgs) {
-		super(cause, format, formatArgs);
 	}
 }

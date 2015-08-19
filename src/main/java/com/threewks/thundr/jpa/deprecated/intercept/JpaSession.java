@@ -15,10 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.intercept;
+package com.threewks.thundr.jpa.deprecated.intercept;
 
 import com.threewks.thundr.jpa.Propagation;
-import com.threewks.thundr.jpa.jee.PersistenceManager;
+import com.threewks.thundr.jpa.deprecated.jee.PersistenceManager;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

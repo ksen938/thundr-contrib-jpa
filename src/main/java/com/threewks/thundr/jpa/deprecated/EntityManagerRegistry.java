@@ -15,12 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.exception;
+package com.threewks.thundr.jpa.deprecated;
 
-public class PersistenceManagerDoesNotExistException extends JpaException {
-	private static final long serialVersionUID = 1L;
+import javax.persistence.EntityManager;
 
-	public PersistenceManagerDoesNotExistException(String format, Object... formatArgs) {
-		super(format, formatArgs);
-	}
+public interface EntityManagerRegistry {
+	void register(String persistenceUnit, EntityManager entityManager);
+
+	EntityManager get(String persistenceUnit);
+
+	void clear();
 }

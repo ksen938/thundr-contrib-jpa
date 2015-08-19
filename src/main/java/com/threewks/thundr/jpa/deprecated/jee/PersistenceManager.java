@@ -15,14 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
 
 import javax.persistence.EntityManager;
 
-public interface EntityManagerRegistry {
-	void register(String persistenceUnit, EntityManager entityManager);
+public interface PersistenceManager {
+	public static final String DefaultName = "default";
 
-	EntityManager get(String persistenceUnit);
+	EntityManager getEntityManager();
 
-	void clear();
+	void beginTransaction();
+
+	void rollback();
+
+	void commit();
+
+	void closeEntityManager();
+
+	void destroy();
 }

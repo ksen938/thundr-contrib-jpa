@@ -1,14 +1,13 @@
 package com.threewks.thundr.jpa;
 
 
-import com.threewks.thundr.jpa.exception.JpaException;
+import com.threewks.thundr.jpa.deprecated.exception.JpaException;
 import com.threewks.thundr.logger.Logger;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUnitUtil;
 import java.util.Deque;
 import java.util.LinkedList;
 

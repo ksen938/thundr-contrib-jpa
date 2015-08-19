@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa.jee;
+package com.threewks.thundr.jpa.deprecated.jee;
 
-import com.threewks.thundr.jpa.exception.JpaException;
+import com.threewks.thundr.jpa.deprecated.exception.JpaException;
 import com.threewks.thundr.logger.Logger;
 
 import javax.persistence.EntityManager;
