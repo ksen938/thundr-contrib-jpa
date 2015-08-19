@@ -31,7 +31,7 @@ import com.threewks.thundr.configuration.Environment;
 import com.threewks.thundr.injection.InjectionContext;
 import com.threewks.thundr.injection.Module;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
-import com.threewks.thundr.jpa.deprecated.exception.JpaException;
+import com.threewks.thundr.jpa.exception.JpaException;
 import com.threewks.thundr.jpa.deprecated.intercept.JpaSession;
 import com.threewks.thundr.jpa.deprecated.intercept.JpaSessionInterceptor;
 import com.threewks.thundr.logger.Logger;

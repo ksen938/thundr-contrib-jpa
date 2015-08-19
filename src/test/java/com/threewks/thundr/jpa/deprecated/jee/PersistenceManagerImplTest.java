@@ -17,7 +17,7 @@
  */
 package com.threewks.thundr.jpa.deprecated.jee;
 
-import com.threewks.thundr.jpa.deprecated.exception.JpaException;
+import com.threewks.thundr.jpa.exception.JpaException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

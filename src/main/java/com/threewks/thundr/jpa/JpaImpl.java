@@ -1,7 +1,7 @@
 package com.threewks.thundr.jpa;
 
 
-import com.threewks.thundr.jpa.deprecated.exception.JpaException;
+import com.threewks.thundr.jpa.exception.JpaException;
 import com.threewks.thundr.logger.Logger;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 

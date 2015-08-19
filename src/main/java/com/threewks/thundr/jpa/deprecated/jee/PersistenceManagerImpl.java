@@ -17,7 +17,7 @@
  */
 package com.threewks.thundr.jpa.deprecated.jee;
 
-import com.threewks.thundr.jpa.deprecated.exception.JpaException;
+import com.threewks.thundr.jpa.exception.JpaException;
 import com.threewks.thundr.logger.Logger;
 
 import javax.persistence.EntityManager;

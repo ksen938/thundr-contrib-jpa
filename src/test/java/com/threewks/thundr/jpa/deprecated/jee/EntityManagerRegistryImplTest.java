@@ -20,8 +20,6 @@ package com.threewks.thundr.jpa.deprecated.jee;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 
-import com.threewks.thundr.jpa.deprecated.exception.PersistenceManagerDoesNotExistException;
-
 public class EntityManagerRegistryImplTest {
 	/*@Rule
 	public ExpectedException thrown = ExpectedException.none();

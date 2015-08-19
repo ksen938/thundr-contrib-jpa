@@ -17,6 +17,8 @@
  */
 package com.threewks.thundr.jpa.deprecated.exception;
 
+import com.threewks.thundr.jpa.exception.JpaException;
+
 public class PersistenceManagerDoesNotExistException extends JpaException {
 	private static final long serialVersionUID = 1L;
 
