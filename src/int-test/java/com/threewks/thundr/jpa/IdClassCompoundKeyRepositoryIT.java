@@ -6,6 +6,7 @@ import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
 import com.threewks.thundr.jpa.repository.BaseRepository;
 import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
@@ -31,13 +32,14 @@ public class IdClassCompoundKeyRepositoryIT {
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
     public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
+    public ConfigureHikari configureHikari = new ConfigureHikari(injectionContext);
     public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, IdClassCompoundKeyEntity.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
 
     private Jpa jpa;
     protected IdClassCompoundKeyEntity compoundKeyEntity1;

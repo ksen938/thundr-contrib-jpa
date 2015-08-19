@@ -2,7 +2,9 @@ package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.LongBeverage;
+import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.junit.Before;
@@ -22,13 +24,14 @@ public class JpaImplIT {
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
     public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
-    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class);
+    public ConfigureHikari configureHikari = new ConfigureHikari(injectionContext);
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class, StringBeverage.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain= RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
 
     private LongBeverage bevvie1;
     private LongBeverage bevvie2;

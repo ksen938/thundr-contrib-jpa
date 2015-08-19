@@ -1,10 +1,12 @@
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
+import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.StringRepository;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
@@ -32,13 +34,14 @@ public class StringRepositoryIT {
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
     public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
-    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, StringBeverage.class);
+    public ConfigureHikari configureHikari = new ConfigureHikari(injectionContext);
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, StringBeverage.class, LongBeverage.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
 
 
     protected StringBeverage bevvie1;
@@ -64,25 +67,6 @@ public class StringRepositoryIT {
                 em.remove(bevvie2);
             }
         });
-    }
-
-    protected void shouldReturnPersistedObjects() {
-        final StringBeverage finalBev1 = bevvie1;
-        final StringBeverage finalBev2 = bevvie2;
-        StringBeverage queriedBevvie1 = jpa.run(new ResultAction<StringBeverage>() {
-            @Override
-            public StringBeverage run(EntityManager em) {
-                return em.find(StringBeverage.class, finalBev1.getId());
-            }
-        });
-        StringBeverage queriedBevvie2 = jpa.run(new ResultAction<StringBeverage>() {
-            @Override
-            public StringBeverage run(EntityManager em) {
-                return em.find(StringBeverage.class, finalBev2.getId());
-            }
-        });
-        assertTrue(queriedBevvie1.getId().equals(bevvie1.getId()));
-        assertTrue(queriedBevvie2.getId().equals(bevvie2.getId()));
     }
 
     @Test

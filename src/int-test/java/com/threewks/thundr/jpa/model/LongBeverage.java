@@ -1,9 +1,8 @@
 package com.threewks.thundr.jpa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "LongBeverage")
@@ -18,14 +17,17 @@ public class LongBeverage {
     }
 
     @Id
-    @Column(name = "id")
-    public Long id = Math.round(Math.random() * 1000);
+    @Column(name = "long_bev_id")
+    private Long id = Math.round(Math.random() * 1000);
 
     @Column(name = "name", nullable = false)
     private String name = "";
 
     @Column(name = "alcoholic")
     private boolean alcoholic = false;
+
+    @OneToMany(mappedBy = "longbeverage", fetch = FetchType.EAGER)
+    private List<StringBeverage> stringBeverages = new ArrayList<>();
 
     public boolean isAlcoholic() {
         return alcoholic;
@@ -51,4 +53,15 @@ public class LongBeverage {
         this.id = id;
     }
 
+    public List<StringBeverage> getStringBeverages() {
+        return stringBeverages;
+    }
+
+    public void setStringBeverages(List<StringBeverage> stringBeverages) {
+        this.stringBeverages = stringBeverages;
+    }
+    public LongBeverage withStringBeverage(StringBeverage bev) {
+        this.stringBeverages.add(bev);
+        return this;
+    }
 }

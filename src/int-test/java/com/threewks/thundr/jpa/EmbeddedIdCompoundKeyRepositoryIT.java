@@ -6,6 +6,7 @@ import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
 import com.threewks.thundr.jpa.repository.EmbeddedIdCompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
@@ -15,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
+import org.junit.rules.TestRule;
 
 import javax.persistence.EntityManager;
 import java.util.*;
@@ -27,13 +29,15 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
     public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
+    public ConfigureHikari configureHikari = new ConfigureHikari(injectionContext);
     public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, EmbeddedIdCompoundKeyEntity.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
+
     protected EmbeddedIdCompoundKeyEntity compoundKeyEntity1;
     protected EmbeddedIdCompoundKeyEntity compoundKeyEntity2;
     protected CrudRepository<CompoundKeyEntityId, EmbeddedIdCompoundKeyEntity> jpaRepository;

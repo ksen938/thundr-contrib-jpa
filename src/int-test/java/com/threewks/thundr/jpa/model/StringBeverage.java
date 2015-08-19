@@ -1,9 +1,9 @@
 package com.threewks.thundr.jpa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 /**
@@ -32,6 +32,10 @@ public class StringBeverage {
     @Column(name = "alcoholic")
     public boolean alcoholic = false;
 
+    @ManyToOne
+    @JoinColumn(name = "long_beverage_id")
+    private LongBeverage longbeverage;
+
     public boolean isAlcoholic() {
         return alcoholic;
     }
@@ -54,5 +58,13 @@ public class StringBeverage {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public LongBeverage getLongBeverage() {
+        return longbeverage;
+    }
+
+    public void setLongBeverage(LongBeverage longBeverage) {
+        this.longbeverage = longBeverage;
     }
 }

@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface CrudRepository<K, E> {
 
-    public void create(E entity);
-    public void create(E...entities);
-    public void create(List<E> entities);
+    void create(E entity);
+    void create(E...entities);
+    void create(List<E> entities);
 
-    public E update(E entity);
-    public List<E> update(E...entities);
-    public List<E> update(List<E> entities);
+    E update(E entity);
+    List<E> update(E...entities);
+    List<E> update(List<E> entities);
 
-    public E read(K key);
-    public List<E> read(K...key);
-    public List<E> read(List<K> key);
+    E read(K key);
+    List<E> read(K...key);
+    List<E> read(List<K> key);
 
-    public Long count();
+    Long count();
 
-    public void delete(E entity);
-    public void delete(K...keys);
-    public void deleteByKey(K key);
+    void delete(E entity);
+    void delete(K...keys);
+    void deleteByKey(K key);
 }

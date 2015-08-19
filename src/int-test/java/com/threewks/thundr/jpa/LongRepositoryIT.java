@@ -2,9 +2,11 @@ package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.LongBeverage;
+import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import com.threewks.thundr.jpa.repository.LongRepository;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
+import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
@@ -18,6 +20,7 @@ import org.junit.rules.RuleChain;
 import javax.persistence.EntityManager;
 import java.util.*;
 
+import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -31,13 +34,14 @@ public class LongRepositoryIT {
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
     public ConfigureMysql configureMysql = new ConfigureMysql(injectionContext);
-    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class);
+    public ConfigureHikari configureHikari = new ConfigureHikari(injectionContext);
+    public ConfigureHibernate configureHibernate = new ConfigureHibernate(injectionContext, LongBeverage.class, StringBeverage.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain= RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
 
     private LongBeverage bevvie1;
     private LongBeverage bevvie2;
