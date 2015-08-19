@@ -17,11 +17,12 @@ import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.metamodel.ManagedType;
 import javax.persistence.metamodel.Metamodel;
 import java.util.*;
+import java.util.function.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
@@ -39,24 +40,37 @@ public class CompoundKeyRepositoryIT {
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain= RuleChain.outerRule(configureHsql).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHibernate);
 
-            private Jpa jpa;
-   protected CompoundKeyEntity compoundKeyEntity1;
+    private Jpa jpa;
+    protected CompoundKeyEntity compoundKeyEntity1;
     protected CompoundKeyEntity compoundKeyEntity2;
     protected CrudRepository<CompoundKeyEntityId, CompoundKeyEntity> jpaRepository;
 
     @Before
+    @SuppressWarnings(value = "unchecked")
     public void before() {
         jpa = injectionContext.get(Jpa.class);
         compoundKeyEntity1 = new CompoundKeyEntity("Entity1");
         compoundKeyEntity2 = new CompoundKeyEntity("Entity2");
-        jpaRepository = new CompoundKeyRepository<>(CompoundKeyEntity.class, jpa){
+        jpaRepository = new CompoundKeyRepository(CompoundKeyEntity.class, jpa) {
             @Override
-            protected CriteriaQuery createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List keys) {
+            protected CriteriaQuery<CompoundKeyEntity> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List keys) {
                 CriteriaQuery<CompoundKeyEntity> cq = cb.createQuery(entityType);
                 Root<CompoundKeyEntity> entityRoot = cq.from(entityType);
-                cq.select(entityRoot).where(entityRoot.get("pk1").in(keys));
+
+                Path pk1Path = entityRoot.get("pk1");
+                Path pk2Path = entityRoot.get("pk2");
+                List<Predicate> andPredicates = new ArrayList<>();
+
+                for (Object key : keys) {
+                    CompoundKeyEntityId id = (CompoundKeyEntityId) key;
+                    Predicate andPredicate = cb.and(cb.equal(pk1Path, id.getPk1()), cb.equal(pk2Path, id.getPk2()));
+                    andPredicates.add(andPredicate);
+                }
+
+                cq.select(entityRoot).where(cb.or(andPredicates.toArray(new Predicate[andPredicates.size()])));
+                return cq;
             }
         };
         deleteTestData();

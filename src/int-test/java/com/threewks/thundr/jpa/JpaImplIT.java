@@ -17,11 +17,9 @@ import javax.persistence.RollbackException;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by kaushiksen on 17/08/2015.
- */
 public class JpaImplIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
@@ -194,8 +192,6 @@ public class JpaImplIT {
     public void shouldNotCreateTransactionUnderSupportsPropagation() {
         deleteTestData();
 
-        thrown.expect(NullPointerException.class);
-        fail("We need to fix this one");
         jpa.run(Propagation.Supports, new Action() {
             @Override
             public void run(EntityManager em) {
@@ -204,7 +200,21 @@ public class JpaImplIT {
                 em.persist(bevvie2);
             }
         });
-        shouldReturnPersistedObjects();
+        LongBeverage nullBev1 = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return em.find(LongBeverage.class, bevvie1.getId());
+            }
+        });
+        LongBeverage nullBev2 = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return em.find(LongBeverage.class, bevvie1.getId());
+            }
+        });
+
+        assertThat(nullBev1, is(nullValue()));
+        assertThat(nullBev1, is(nullValue()));
     }
 
     @Test

@@ -7,7 +7,7 @@ import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
  * Created by kaushiksen on 18/08/2015.
  */
 
-public class CompoundKeyRepository<E> extends AbstractRepository<CompoundKeyEntityId, E> {
+public class CompoundKeyRepository<E> extends BaseRepository<CompoundKeyEntityId, E> {
     public CompoundKeyRepository(Class<E> entityType, Jpa jpa) {
         super(entityType, jpa);
     }

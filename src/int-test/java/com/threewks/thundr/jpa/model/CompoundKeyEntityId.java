@@ -52,4 +52,12 @@ public class CompoundKeyEntityId implements Serializable {
                 .append("pk2", pk2)
                 .toString();
     }
+
+    public Long getPk1() {
+        return pk1;
+    }
+
+    public Long getPk2() {
+        return pk2;
+    }
 }

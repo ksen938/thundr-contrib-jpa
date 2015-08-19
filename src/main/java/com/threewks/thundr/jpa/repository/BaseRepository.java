@@ -13,12 +13,12 @@ import javax.persistence.metamodel.Metamodel;
 import javax.persistence.metamodel.SingularAttribute;
 import java.util.*;
 
-public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
+public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     protected Jpa jpa;
     protected Class<E> entityType;
 
-    public AbstractRepository(Class<E> entityType, Jpa jpa) {
+    public BaseRepository(Class<E> entityType, Jpa jpa) {
         this.entityType = entityType;
         this.jpa = jpa;
 
