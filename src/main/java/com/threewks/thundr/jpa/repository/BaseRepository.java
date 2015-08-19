@@ -1,9 +1,6 @@
 package com.threewks.thundr.jpa.repository;
 
-import com.threewks.thundr.jpa.Action;
-import com.threewks.thundr.jpa.Jpa;
-import com.threewks.thundr.jpa.Propagation;
-import com.threewks.thundr.jpa.ResultAction;
+import com.threewks.thundr.jpa.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceUnitUtil;
@@ -16,13 +13,21 @@ import java.util.*;
 public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     protected Jpa jpa;
-    protected Class<E> entityType;
+    protected Class<E> type;
+    protected EntityType<E> entityType;
 
     public BaseRepository(Class<E> entityType, Jpa jpa) {
-        this.entityType = entityType;
+        this.type = entityType;
         this.jpa = jpa;
+        this.entityType = jpa.getMetamodel().entity(type);
+
 
     }
+
+    public BaseRepository(Class<E> entityType, Class<K> keyType, Jpa jpa) {
+        this(entityType, jpa);
+    }
+
 
     @Override
     public Long count() {
@@ -31,7 +36,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
             public Long run(EntityManager em) {
                 CriteriaBuilder cb = em.getCriteriaBuilder();
                 CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-                cq.select(cb.count(cq.from(entityType)));
+                cq.select(cb.count(cq.from(type)));
                 return em.createQuery(cq).getSingleResult();
             }
         });
@@ -98,7 +103,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         return jpa.run(Propagation.Supports, new ResultAction<E>() {
             @Override
             public E run(EntityManager em) {
-                return em.find(entityType, key);
+                return em.find(type, key);
             }
         });
     }
@@ -113,16 +118,16 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
-                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), em.getMetamodel(), keys);
+                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), keys);
                 return em.createQuery(cq).getResultList();
             }
         });
     }
 
-    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List<K> keys) {
-        String idField = getIdentifierField(metamodel);
-        CriteriaQuery<E> cq = cb.createQuery(entityType);
-        Root<E> entityRoot = cq.from(entityType);
+    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, List<K> keys) {
+        String idField = getIdentifierField();
+        CriteriaQuery<E> cq = cb.createQuery(type);
+        Root<E> entityRoot = cq.from(type);
         cq.select(entityRoot).where(entityRoot.get(idField).in(keys));
         return cq;
     }
@@ -143,7 +148,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         jpa.run(Propagation.Supports, new Action() {
             @Override
             public void run(EntityManager em) {
-                em.remove(em.getReference(entityType, key));
+                em.remove(em.getReference(type, key));
             }
         });
     }
@@ -154,18 +159,17 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
             jpa.run(Propagation.Supports, new Action() {
                 @Override
                 public void run(EntityManager em) {
-                    em.remove(em.getReference(entityType, key));
+                    em.remove(em.getReference(type, key));
                 }
             });
         }
     }
 
-    private String getIdentifierField(Metamodel metamodel) {
-        EntityType<E> entityType_ = metamodel.entity(entityType);
-        if (!entityType_.hasSingleIdAttribute()) {
-            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which cannot be returned as a single attribute name.", entityType);
+    private String getIdentifierField() {
+        if (!entityType.hasSingleIdAttribute()) {
+            throw new RepositoryException("Class %s has multiple ID fields, or has an @IdClass annotation which cannot be returned as a single attribute name.", this.entityType);
         }
-        for (SingularAttribute<?, ?> attrib : entityType_.getSingularAttributes()) {
+        for (SingularAttribute<?, ?> attrib : entityType.getSingularAttributes()) {
             if (attrib.isId()) {
                 return attrib.getName();
             }

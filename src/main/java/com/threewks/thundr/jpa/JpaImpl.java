@@ -8,6 +8,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.metamodel.Metamodel;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -18,6 +19,11 @@ public class JpaImpl implements Jpa {
 
     public JpaImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
+    }
+
+    @Override
+    public Metamodel getMetamodel() {
+        return entityManagerFactory.getMetamodel();
     }
 
     @Override

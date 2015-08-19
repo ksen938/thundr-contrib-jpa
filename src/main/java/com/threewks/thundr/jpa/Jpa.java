@@ -18,6 +18,7 @@
 package com.threewks.thundr.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.metamodel.Metamodel;
 import java.util.concurrent.Callable;
 
 public interface Jpa {
@@ -27,5 +28,6 @@ public interface Jpa {
 	//public <R> R run(Propagation propagation, Callable<R> runnable);
 	public <R> R run(ResultAction<R> action);
 	public <R> R run(Propagation propagation, ResultAction<R> action);
+	public Metamodel getMetamodel();
 
 }

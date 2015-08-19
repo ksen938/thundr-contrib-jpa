@@ -2,7 +2,7 @@ package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.*;
-import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
+import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
@@ -41,7 +41,7 @@ public abstract class RepositoryTestSuite<T> extends AbstractJpaIT{
         super.before();
         compoundKeyEntity1 = new IdClassCompoundKeyEntity("Entity1");
         compoundKeyEntity2 = new IdClassCompoundKeyEntity("Entity2");
-        jpaRepository = new CompoundKeyRepository<>(IdClassCompoundKeyEntity.class, jpa);
+        jpaRepository = new IdClassCompoundKeyRepository<>(IdClassCompoundKeyEntity.class, jpa);
         deleteTestData();
         createCkEntitys();
     }

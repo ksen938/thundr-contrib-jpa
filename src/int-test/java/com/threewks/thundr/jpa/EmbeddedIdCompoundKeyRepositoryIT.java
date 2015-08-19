@@ -3,8 +3,8 @@ package com.threewks.thundr.jpa;
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
-import com.threewks.thundr.jpa.model.LongBeverage;
-import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
+import com.threewks.thundr.jpa.repository.EmbeddedIdCompoundKeyRepository;
+import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
 import com.threewks.thundr.jpa.repository.CrudRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
@@ -15,16 +15,12 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
-/**
- * Created by kaushiksen on 18/08/2015.
- */
-public class EmbeddedIdCompoundKeyEntityIT {
+public class EmbeddedIdCompoundKeyRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
@@ -46,7 +42,7 @@ public class EmbeddedIdCompoundKeyEntityIT {
                 = injectionContext.get(Jpa.class);
         compoundKeyEntity1 = new EmbeddedIdCompoundKeyEntity("Entity1");
         compoundKeyEntity2 = new EmbeddedIdCompoundKeyEntity("Entity2");
-        jpaRepository = new CompoundKeyRepository<>(EmbeddedIdCompoundKeyEntity.class, jpa);
+        jpaRepository = new EmbeddedIdCompoundKeyRepository<>(EmbeddedIdCompoundKeyEntity.class, jpa);
         deleteTestData();
         createCkEntitys();
     }

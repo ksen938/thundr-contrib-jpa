@@ -1,10 +1,11 @@
 package com.threewks.thundr.jpa;
 
+import com.threewks.thundr.exception.BaseException;
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.IdClassCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
-import com.threewks.thundr.jpa.repository.CompoundKeyRepository;
-import com.threewks.thundr.jpa.repository.CrudRepository;
+import com.threewks.thundr.jpa.repository.BaseRepository;
+import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +16,8 @@ import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.Metamodel;
+import javax.persistence.metamodel.SingularAttribute;
+import java.lang.reflect.Field;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -25,7 +27,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by kaushiksen on 18/08/2015.
  */
-public class CompoundKeyRepositoryIT {
+public class IdClassCompoundKeyRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
 
     public ConfigureHsql configureHsql = new ConfigureHsql(injectionContext);
@@ -40,7 +42,7 @@ public class CompoundKeyRepositoryIT {
     private Jpa jpa;
     protected IdClassCompoundKeyEntity compoundKeyEntity1;
     protected IdClassCompoundKeyEntity compoundKeyEntity2;
-    protected CrudRepository<CompoundKeyEntityId, IdClassCompoundKeyEntity> jpaRepository;
+    protected BaseRepository<CompoundKeyEntityId, IdClassCompoundKeyEntity> jpaRepository;
 
     @Before
     @SuppressWarnings(value = "unchecked")
@@ -48,26 +50,7 @@ public class CompoundKeyRepositoryIT {
         jpa = injectionContext.get(Jpa.class);
         compoundKeyEntity1 = new IdClassCompoundKeyEntity("Entity1");
         compoundKeyEntity2 = new IdClassCompoundKeyEntity("Entity2");
-        jpaRepository = new CompoundKeyRepository(IdClassCompoundKeyEntity.class, jpa) {
-            @Override
-            protected CriteriaQuery<IdClassCompoundKeyEntity> createGetByKeyCriteria(CriteriaBuilder cb, Metamodel metamodel, List keys) {
-                CriteriaQuery<IdClassCompoundKeyEntity> cq = cb.createQuery(entityType);
-                Root<IdClassCompoundKeyEntity> entityRoot = cq.from(entityType);
-
-                Path pk1Path = entityRoot.get("pk1");
-                Path pk2Path = entityRoot.get("pk2");
-                List<Predicate> andPredicates = new ArrayList<>();
-
-                for (Object key : keys) {
-                    CompoundKeyEntityId id = (CompoundKeyEntityId) key;
-                    Predicate andPredicate = cb.and(cb.equal(pk1Path, id.getPk1()), cb.equal(pk2Path, id.getPk2()));
-                    andPredicates.add(andPredicate);
-                }
-
-                cq.select(entityRoot).where(cb.or(andPredicates.toArray(new Predicate[andPredicates.size()])));
-                return cq;
-            }
-        };
+        jpaRepository = new IdClassCompoundKeyRepository<>(IdClassCompoundKeyEntity.class, jpa);
         deleteTestData();
         createCkEntitys();
     }
