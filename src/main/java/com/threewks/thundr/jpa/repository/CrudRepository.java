@@ -25,9 +25,9 @@ public interface CrudRepository<K, E> {
     void create(E...entities);
     void create(List<E> entities);
 
-    E update(E entity);
-    List<E> update(E...entities);
-    List<E> update(List<E> entities);
+    void update(E entity);
+    void update(E...entities);
+    void update(List<E> entities);
 
     E read(K key);
     List<E> read(K...key);

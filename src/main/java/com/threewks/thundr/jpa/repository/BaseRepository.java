@@ -94,30 +94,28 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
     }
 
     @Override
-    public E update(final E entity) {
-        return jpa.run(Propagation.Supports, new ResultAction<E>() {
+    public void update(final E entity) {
+        jpa.run(Propagation.Supports, new Action() {
             @Override
-            public E run(EntityManager em) {
-                return em.merge(entity);
+            public void run(EntityManager em) {
+                em.merge(entity);
             }
         });
     }
 
     @Override
-    public List<E> update(final E... entities) {
-        return update(Arrays.asList(entities));
+    public void update(final E... entities) {
+        update(Arrays.asList(entities));
     }
 
     @Override
-    public List<E> update(final List<E> entities) {
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+    public void update(final List<E> entities) {
+        jpa.run(Propagation.Supports, new Action() {
             @Override
-            public List<E> run(EntityManager em) {
-                List<E> returnList = new ArrayList<>();
+            public void run(EntityManager em) {
                 for (E entity : entities) {
-                    returnList.add(em.merge(entity));
+                    em.merge(entity);
                 }
-                return returnList;
             }
         });
     }

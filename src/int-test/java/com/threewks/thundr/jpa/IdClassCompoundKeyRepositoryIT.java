@@ -18,6 +18,7 @@
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
+import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.IdClassCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
 import com.threewks.thundr.jpa.repository.BaseRepository;
@@ -97,53 +98,70 @@ public class IdClassCompoundKeyRepositoryIT {
 
     @Test
     public void shouldUpdateSingleEntity() {
-        IdClassCompoundKeyEntity updatedCkEntity = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity>() {
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public IdClassCompoundKeyEntity run(EntityManager em) {
+            public void run(EntityManager em) {
                 IdClassCompoundKeyEntity localCkEntity = jpaRepository.read(compoundKeyEntity1.getId());
                 localCkEntity.setName("Water");
-                return jpaRepository.update(localCkEntity);
+                jpaRepository.update(localCkEntity);
             }
         });
-        checkUpdated(updatedCkEntity);
+        checkUpdated(compoundKeyEntity1.getId());
     }
 
-    protected void checkUpdated(IdClassCompoundKeyEntity CkEntity) {
-        assertThat(CkEntity.getName(), Is.is("Water"));
+    protected void checkUpdated(final CompoundKeyEntityId key) {
+        jpa.run(Propagation.Required, new Action() {
+            @Override
+            public void run(EntityManager em) {
+                IdClassCompoundKeyEntity CkEntity = jpaRepository.read(key);
+                assertThat(CkEntity.getName(), Is.is("Water"));
+            }
+        });
     }
 
     @Test
-    public void shouldUpdateMultipleEntities() {
-        final IdClassCompoundKeyEntity[] CkEntitys = jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity[]>() {
+    public void shouldUpdateMultipleEntitiesList() {
+        final IdClassCompoundKeyEntity[] CkEntitys = startMultipleUpdate();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public IdClassCompoundKeyEntity[] run(EntityManager em) {
-                IdClassCompoundKeyEntity localCkEntity1 = jpaRepository.read(compoundKeyEntity1.getId());
-                IdClassCompoundKeyEntity localCkEntity2 = jpaRepository.read(compoundKeyEntity2.getId());
-                localCkEntity1.setName("Water");
-                localCkEntity2.setName("Water");
-                IdClassCompoundKeyEntity[] CkEntitys = new IdClassCompoundKeyEntity[2];
-                CkEntitys[0] = localCkEntity1;
-                CkEntitys[1] = localCkEntity2;
-                return CkEntitys;
+            public void run(EntityManager em) {
+                jpaRepository.update(Arrays.asList(CkEntitys));
             }
         });
-        List<IdClassCompoundKeyEntity> CkEntitys1 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
+        checkMultipleUpdate(CkEntitys);
+    }
+
+    @Test
+    public void shouldUpdateMultipleEntitiesArray() {
+        final IdClassCompoundKeyEntity[] CkEntitys = startMultipleUpdate();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
-                return jpaRepository.update(CkEntitys);
+            public void run(EntityManager em) {
+                jpaRepository.update(CkEntitys);
             }
         });
-        List<IdClassCompoundKeyEntity> CkEntitys2 = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
-            @Override
-            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
-                return jpaRepository.update(Arrays.asList(CkEntitys));
-            }
-        });
-        for (IdClassCompoundKeyEntity CkEntity : CkEntitys1) {
-            checkUpdated(CkEntity);
-        }
-        for (IdClassCompoundKeyEntity CkEntity : CkEntitys2) {
-            checkUpdated(CkEntity);
+        checkMultipleUpdate(CkEntitys);
+    }
+
+    protected IdClassCompoundKeyEntity[] startMultipleUpdate() {
+        return jpa.run(Propagation.Required, new ResultAction<IdClassCompoundKeyEntity[]>() {
+                @Override
+                public IdClassCompoundKeyEntity[] run(EntityManager em) {
+                    IdClassCompoundKeyEntity localCkEntity1 = jpaRepository.read(compoundKeyEntity1.getId());
+                    IdClassCompoundKeyEntity localCkEntity2 = jpaRepository.read(compoundKeyEntity2.getId());
+                    localCkEntity1.setName("Water");
+                    localCkEntity2.setName("Water");
+                    IdClassCompoundKeyEntity[] CkEntitys = new IdClassCompoundKeyEntity[2];
+                    CkEntitys[0] = localCkEntity1;
+                    CkEntitys[1] = localCkEntity2;
+                    return CkEntitys;
+                }
+            });
+    }
+
+    protected void checkMultipleUpdate(IdClassCompoundKeyEntity[] ckEntitys) {
+        for (IdClassCompoundKeyEntity CkEntity : ckEntitys) {
+            checkUpdated(CkEntity.getId());
         }
     }
 

@@ -99,66 +99,74 @@ public class LongRepositoryIT {
 
     @Test
     public void shouldUpdateSingleEntity() {
-        LongBeverage updatedBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public LongBeverage run(EntityManager em) {
+            public void run(EntityManager em) {
                 LongBeverage localBev = jpaRepository.read(bevvie1.getId());
                 localBev.setName("Water");
                 localBev.setAlcoholic(false);
-                return jpaRepository.update(localBev);
+                jpaRepository.update(localBev);
             }
         });
-        checkUpdated(updatedBev);
+        checkUpdated(bevvie1.getId());
     }
 
-    protected void checkUpdated(final LongBeverage beverage) {
-
-        LongBeverage updatedBev = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+    protected void checkUpdated(final Long id) {
+        LongBeverage beverage = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
             @Override
             public LongBeverage run(EntityManager em) {
-                LongBeverage result = em.find(LongBeverage.class, beverage.getId());
-                em.refresh(result);
-                return result;
+                return jpaRepository.read(id);
             }
         });
-        assertThat(updatedBev.getName(), Is.is("Water"));
-        assertThat(updatedBev.isAlcoholic(), Is.is(false));
+        assertThat(beverage.getName(), Is.is("Water"));
+        assertThat(beverage.isAlcoholic(), Is.is(false));
     }
 
     @Test
-    public void shouldUpdateMultipleEntities() {
-        final LongBeverage[] beverages = jpa.run(Propagation.Required, new ResultAction<LongBeverage[]>() {
+    public void shouldUpdateMultipleEntitiesArray() {
+        final LongBeverage[] beverages = setupMultipleEntities();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public LongBeverage[] run(EntityManager em) {
-                LongBeverage localBev1 = jpaRepository.read(bevvie1.getId());
-                LongBeverage localBev2 = jpaRepository.read(bevvie2.getId());
-                localBev1.setName("Water");
-                localBev1.setAlcoholic(false);
-                localBev2.setName("Water");
-                localBev2.setAlcoholic(false);
-                LongBeverage[] beverages = new LongBeverage[2];
-                beverages[0] = localBev1;
-                beverages[1] = localBev2;
-                return beverages;
+            public void run(EntityManager em) {
+                jpaRepository.update(beverages);
             }
         });
-        List<LongBeverage> beverages1 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+        checkMultipleUpdates(beverages);
+    }
+
+    @Test
+    public void shouldUpdateMultipleEntitiesList() {
+        final LongBeverage[] beverages = setupMultipleEntities();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public List<LongBeverage> run(EntityManager em) {
-                return jpaRepository.update(beverages);
+            public void run(EntityManager em) {
+                jpaRepository.update(Arrays.asList(beverages));
             }
         });
-        List<LongBeverage> beverages2 = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
-            @Override
-            public List<LongBeverage> run(EntityManager em) {
-                return jpaRepository.update(Arrays.asList(beverages));
-            }
-        });
-        for (LongBeverage beverage : beverages1) {
-            checkUpdated(beverage);
-        }
-        for (LongBeverage beverage : beverages2) {
-            checkUpdated(beverage);
+        checkMultipleUpdates(beverages);
+    }
+
+    protected LongBeverage[] setupMultipleEntities() {
+        return jpa.run(Propagation.Required, new ResultAction<LongBeverage[]>() {
+                @Override
+                public LongBeverage[] run(EntityManager em) {
+                    LongBeverage localBev1 = jpaRepository.read(bevvie1.getId());
+                    LongBeverage localBev2 = jpaRepository.read(bevvie2.getId());
+                    localBev1.setName("Water");
+                    localBev1.setAlcoholic(false);
+                    localBev2.setName("Water");
+                    localBev2.setAlcoholic(false);
+                    LongBeverage[] beverages = new LongBeverage[2];
+                    beverages[0] = localBev1;
+                    beverages[1] = localBev2;
+                    return beverages;
+                }
+            });
+    }
+
+    protected void checkMultipleUpdates(LongBeverage[] beverages) {
+        for (LongBeverage beverage : beverages) {
+            checkUpdated(beverage.getId());
         }
     }
 

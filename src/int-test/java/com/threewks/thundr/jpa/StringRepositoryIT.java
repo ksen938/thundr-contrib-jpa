@@ -100,57 +100,74 @@ public class StringRepositoryIT {
 
     @Test
     public void shouldUpdateSingleEntity() {
-        StringBeverage updatedBev = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public StringBeverage run(EntityManager em) {
+            public void run(EntityManager em) {
                 StringBeverage localBev = jpaRepository.read(bevvie1.getId());
                 localBev.setName("Water");
                 localBev.setAlcoholic(false);
-                return jpaRepository.update(localBev);
+                jpaRepository.update(localBev);
             }
         });
-        checkUpdated(updatedBev);
+        checkUpdated(bevvie1.getId());
     }
 
-    protected void checkUpdated(StringBeverage beverage) {
+    protected void checkUpdated(final String id) {
+        StringBeverage beverage = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return jpaRepository.read(id);
+            }
+        });
         assertThat(beverage.getName(), Is.is("Water"));
         assertThat(beverage.isAlcoholic(), Is.is(false));
     }
 
     @Test
-    public void shouldUpdateMultipleEntities() {
-        final StringBeverage[] beverages = jpa.run(Propagation.Required, new ResultAction<StringBeverage[]>() {
+    public void shouldUpdateMultipleEntitiesArray() {
+        final StringBeverage[] beverages = setupMultipleUpdate();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public StringBeverage[] run(EntityManager em) {
-                StringBeverage localBev1 = jpaRepository.read(bevvie1.getId());
-                StringBeverage localBev2 = jpaRepository.read(bevvie2.getId());
-                localBev1.setName("Water");
-                localBev1.setAlcoholic(false);
-                localBev2.setName("Water");
-                localBev2.setAlcoholic(false);
-                StringBeverage[] beverages = new StringBeverage[2];
-                beverages[0] = localBev1;
-                beverages[1] = localBev2;
-                return beverages;
+            public void run(EntityManager em) {
+                jpaRepository.update(beverages);
             }
         });
-        List<StringBeverage> beverages1 = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
+        checkMultipleUpdate(beverages);
+    }
+
+    @Test
+    public void shouldUpdateMultipleEntitiesList() {
+        final StringBeverage[] beverages = setupMultipleUpdate();
+        jpa.run(Propagation.Required, new Action() {
             @Override
-            public List<StringBeverage> run(EntityManager em) {
-                return jpaRepository.update(beverages);
+            public void run(EntityManager em) {
+                jpaRepository.update(Arrays.asList(beverages));
             }
         });
-        List<StringBeverage> beverages2 = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
-            @Override
-            public List<StringBeverage> run(EntityManager em) {
-                return jpaRepository.update(Arrays.asList(beverages));
-            }
-        });
-        for (StringBeverage beverage : beverages1) {
-            checkUpdated(beverage);
-        }
-        for (StringBeverage beverage : beverages2) {
-            checkUpdated(beverage);
+        checkMultipleUpdate(beverages);
+    }
+
+    protected StringBeverage[] setupMultipleUpdate() {
+        return jpa.run(Propagation.Required, new ResultAction<StringBeverage[]>() {
+                @Override
+                public StringBeverage[] run(EntityManager em) {
+                    StringBeverage localBev1 = jpaRepository.read(bevvie1.getId());
+                    StringBeverage localBev2 = jpaRepository.read(bevvie2.getId());
+                    localBev1.setName("Water");
+                    localBev1.setAlcoholic(false);
+                    localBev2.setName("Water");
+                    localBev2.setAlcoholic(false);
+                    StringBeverage[] beverages = new StringBeverage[2];
+                    beverages[0] = localBev1;
+                    beverages[1] = localBev2;
+                    return beverages;
+                }
+            });
+    }
+
+    protected void checkMultipleUpdate(StringBeverage[] beverages) {
+        for (StringBeverage beverage : beverages) {
+            checkUpdated(beverage.getId());
         }
     }
 
