@@ -1,3 +1,20 @@
+/*
+ * This file is a component of thundr, a software library from 3wks.
+ * Read more: http://www.3wks.com.au/thundr
+ * Copyright (C) 2013 3wks, <thundr@3wks.com.au>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.threewks.thundr.jpa;
 
 import com.threewks.thundr.injection.InjectionContextImpl;
@@ -41,7 +58,7 @@ public class LongRepositoryIT {
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    public RuleChain chain = RuleChain.outerRule(configureMysql).around(configureHikari).around(configureHibernate);
+    public RuleChain chain = RuleChain.outerRule(configureHsql).around(configureHikari).around(configureHibernate);
 
     private LongBeverage bevvie1;
     private LongBeverage bevvie2;
@@ -106,19 +123,6 @@ public class LongRepositoryIT {
         });
         assertThat(updatedBev.getName(), Is.is("Water"));
         assertThat(updatedBev.isAlcoholic(), Is.is(false));
-    }
-
-    @Test
-    public void shouldUpdateSingleEntityThroughRead() {
-        final LongBeverage readBev = jpaRepository.read(bevvie1.getId());
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                readBev.setName("Water");
-                readBev.setAlcoholic(false);
-            }
-        });
-        checkUpdated(readBev);
     }
 
     @Test

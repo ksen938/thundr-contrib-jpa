@@ -169,7 +169,7 @@
 			<plugin> <!-- Java Code Coverage -->
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.0.201210061924</version>
+				<version>0.7.5.201505241946</version>
 				<executions>
 					<execution>
 						<id>jacoco-initialize</id>

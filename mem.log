@@ -1,1109 +1,1793 @@
-/*C395*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C396*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C397*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C398*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C399*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(269,744,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(821,393,'Entity2')
-COMMIT
-DISCONNECT
-/*C400*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=269 AND PK2=744
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=821 AND PK2=393
-COMMIT
-DISCONNECT
-/*C401*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C402*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C403*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C404*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C405*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C406*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C407*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C408*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C409*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(690,500,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(250,919,'Entity2')
-COMMIT
-DISCONNECT
-/*C410*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=690 AND PK2=500
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=250 AND PK2=919
-COMMIT
-DISCONNECT
-/*C411*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(690,500,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(250,919,'Entity2')
-COMMIT
-DISCONNECT
-/*C412*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=690 AND PK2=500
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=250 AND PK2=919
-COMMIT
-DISCONNECT
-/*C413*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(690,500,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(250,919,'Entity2')
-COMMIT
-DISCONNECT
-/*C414*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=690 AND PK2=500
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=250 AND PK2=919
-COMMIT
-DISCONNECT
-/*C415*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C416*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C417*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C418*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C419*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C420*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C421*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(121,243,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(566,497,'Entity2')
-COMMIT
-DISCONNECT
-/*C422*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C423*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C424*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C425*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C426*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C427*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C428*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C429*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(742,513,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(957,474,'Entity2')
-COMMIT
-DISCONNECT
-/*C430*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=742 AND PK2=513
-COMMIT
-DISCONNECT
-/*C431*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C432*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C433*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C434*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C435*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C436*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C437*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C438*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C439*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(657,440,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(766,9,'Entity2')
-COMMIT
-DISCONNECT
-/*C440*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=657 AND PK2=440
-COMMIT
-DISCONNECT
-/*C441*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C442*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C443*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C444*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C445*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C446*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C447*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C448*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C449*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(278,303,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(480,303,'Entity2')
-COMMIT
-DISCONNECT
-/*C450*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=278 AND PK2=303
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(278,303,'Water')
-COMMIT
-DISCONNECT
-/*C451*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C452*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C453*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C454*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C455*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C456*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C457*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(427,418,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(668,529,'Entity2')
-COMMIT
-DISCONNECT
-/*C458*/SET SCHEMA PUBLIC
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=427 AND PK2=418
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(427,418,'Water')
-DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=668 AND PK2=529
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(668,529,'Water')
-COMMIT
-DISCONNECT
-/*C459*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C460*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C461*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C462*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C463*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C464*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C465*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C466*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C467*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(840,607,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(584,583,'Entity2')
-COMMIT
-DISCONNECT
-/*C468*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C469*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C470*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C471*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C472*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C473*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
-DISCONNECT
-/*C474*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C475*/SET SCHEMA PUBLIC
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(208,739,'Entity1')
-INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(62,469,'Entity2')
-COMMIT
-DISCONNECT
-/*C476*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C477*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C478*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C479*/SET SCHEMA PUBLIC
-drop table embedded_id_compound_key_entity if exists
-DISCONNECT
-/*C480*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C481*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
 /*C482*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(903,619,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(730,223,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=903 AND PK2=619
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=730 AND PK2=223
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C487*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C483*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C484*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C486*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(222,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(709,FALSE,'Lemonade')
-COMMIT
+/*C485*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C487*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+/*C491*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C486*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C488*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C489*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C490*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C491*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C492*/SET SCHEMA PUBLIC
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(295,335,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(317,644,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=295 AND PK2=335
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=317 AND PK2=644
+COMMIT
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(295,335,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(317,644,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=295 AND PK2=335
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=317 AND PK2=644
+COMMIT
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(295,335,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(317,644,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=295 AND PK2=335
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=317 AND PK2=644
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C497*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C493*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C494*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(967,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(999,FALSE,'Lemonade')
-COMMIT
+DISCONNECT
+/*C500*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C495*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C496*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C497*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
 /*C498*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C499*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C500*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
 /*C501*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C502*/SET SCHEMA PUBLIC
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(546,26,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(762,170,'Entity2')
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C507*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C503*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C504*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C510*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C505*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C506*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C507*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C508*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C509*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C510*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C511*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C512*/SET SCHEMA PUBLIC
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(730,987,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(941,810,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=730 AND PK2=987
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C517*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C513*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C514*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C515*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C516*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C517*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
 /*C518*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C519*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C520*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C521*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(882,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(738,FALSE,'Lemonade')
-COMMIT
+DISCONNECT
 /*C522*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C523*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C524*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C525*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C526*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(254,254,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(749,129,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=254 AND PK2=254
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
 /*C527*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C528*/SET SCHEMA PUBLIC
+/*C522*/DISCONNECT
+/*C523*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C529*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C530*/SET SCHEMA PUBLIC
+/*C524*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C531*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C525*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C526*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C528*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C530*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C532*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(610,107,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(164,370,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=610 AND PK2=107
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(610,107,'Water')
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+/*C537*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C532*/DISCONNECT
+/*C538*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C533*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C534*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C535*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C536*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C537*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C538*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C539*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C540*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C541*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C535*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C536*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C539*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C540*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C542*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(537,99,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(492,860,'Entity2')
+COMMIT
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=537 AND PK2=99
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(537,99,'Water')
+DELETE FROM EMBEDDED_ID_COMPOUND_KEY_ENTITY WHERE PK1=492 AND PK2=860
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(492,860,'Water')
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C547*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C543*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C544*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C545*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C547*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+/*C551*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C546*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C548*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C549*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C550*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C551*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C552*/SET SCHEMA PUBLIC
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(390,80,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(421,174,'Entity2')
+COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+/*C557*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C552*/DISCONNECT
+/*C558*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C553*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C560*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C554*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C555*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C556*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C557*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C558*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C559*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C560*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C561*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C562*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(731,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(671,FALSE,'Lemonade')
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+drop table embedded_id_compound_key_entity if exists
+create table embedded_id_compound_key_entity (pk1 bigint not null, pk2 bigint not null, name varchar(255), primary key (pk1, pk2))
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(492,813,'Entity1')
+INSERT INTO EMBEDDED_ID_COMPOUND_KEY_ENTITY VALUES(588,372,'Entity2')
 COMMIT
+drop table embedded_id_compound_key_entity if exists
+drop table embedded_id_compound_key_entity if exists
+DISCONNECT
+/*C567*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C563*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C569*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C564*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C565*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C566*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C567*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C568*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C569*/SET SCHEMA PUBLIC
+/*C570*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C571*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C572*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(874,799,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(57,737,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=874 AND PK_2=799
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=57 AND PK_2=737
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C577*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C572*/DISCONNECT
+/*C578*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C573*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C580*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C574*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C575*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C576*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C577*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C578*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(556,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(75,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C579*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=556
-DELETE FROM LONGBEVERAGE WHERE ID=75
-COMMIT
-DISCONNECT
-/*C580*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C581*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C582*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(341,941,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(15,679,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=341 AND PK_2=941
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=15 AND PK_2=679
+COMMIT
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(341,941,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(15,679,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=341 AND PK_2=941
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=15 AND PK_2=679
+COMMIT
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(341,941,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(15,679,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=341 AND PK_2=941
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=15 AND PK_2=679
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C587*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C582*/DISCONNECT
+/*C588*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C583*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C590*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C584*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C585*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C586*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C587*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C588*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(424,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(954,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C589*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=424
-DELETE FROM LONGBEVERAGE WHERE ID=954
-COMMIT
-DISCONNECT
-/*C590*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(424,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(954,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C591*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=424
-DELETE FROM LONGBEVERAGE WHERE ID=954
-COMMIT
 DISCONNECT
 /*C592*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(424,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(954,FALSE,'Lemonade')
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(83,432,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(978,835,'Entity2')
 COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C597*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C592*/DISCONNECT
 /*C593*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=424
-DELETE FROM LONGBEVERAGE WHERE ID=954
-COMMIT
 DISCONNECT
 /*C594*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C595*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C601*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C596*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C597*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
 /*C598*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C599*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C600*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(76,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(473,FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C601*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C602*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(583,575,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(515,343,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=583 AND PK_2=575
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C607*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C602*/DISCONNECT
+/*C608*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C603*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C604*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C605*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C606*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C607*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C608*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(762,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(423,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C609*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=762
-COMMIT
 DISCONNECT
 /*C610*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C611*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C612*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(521,379,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(327,561,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=521 AND PK_2=379
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
 DISCONNECT
 /*C613*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C617*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C614*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C615*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C616*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C617*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C618*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(490,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(169,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C619*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=490
-COMMIT
 DISCONNECT
 /*C620*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C621*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C622*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(424,263,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(196,742,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=424 AND PK_2=263
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(424,263,'Water')
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C627*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C628*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C629*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C622*/DISCONNECT
+/*C630*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C631*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C623*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C624*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C625*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C626*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C627*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C628*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(526,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(961,FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C629*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=526
-INSERT INTO LONGBEVERAGE VALUES(526,FALSE,'Water')
-COMMIT
-DISCONNECT
-/*C630*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C631*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C632*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(12,819,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(604,971,'Entity2')
+COMMIT
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=12 AND PK_2=819
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(12,819,'Water')
+DELETE FROM COMPOUND_KEY_ENTITY WHERE PK_1=604 AND PK_2=971
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(604,971,'Water')
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
 DISCONNECT
 /*C633*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C638*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C634*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C635*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C641*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C636*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C637*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(809,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(692,FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C638*/SET SCHEMA PUBLIC
-DELETE FROM LONGBEVERAGE WHERE ID=809
-INSERT INTO LONGBEVERAGE VALUES(809,FALSE,'Water')
-DELETE FROM LONGBEVERAGE WHERE ID=692
-INSERT INTO LONGBEVERAGE VALUES(692,FALSE,'Water')
-COMMIT
 DISCONNECT
 /*C639*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C640*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C641*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C642*/SET SCHEMA PUBLIC
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(431,458,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(195,647,'Entity2')
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C647*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C642*/DISCONNECT
+/*C648*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C643*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C650*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C644*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C645*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C646*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-DISCONNECT
-/*C647*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C648*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C649*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C650*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C651*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(7,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(746,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C652*/SET SCHEMA PUBLIC
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+drop table compound_key_entity if exists
+create table compound_key_entity (pk_1 bigint not null, pk_2 bigint not null, name varchar(255), primary key (pk_1, pk_2))
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(491,268,'Entity1')
+INSERT INTO COMPOUND_KEY_ENTITY VALUES(504,482,'Entity2')
+COMMIT
+drop table compound_key_entity if exists
+drop table compound_key_entity if exists
+/*C657*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C652*/DISCONNECT
+/*C658*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C653*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C660*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C654*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C655*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C656*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C657*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C658*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C659*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(930,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(570,FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C660*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C661*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C662*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C663*/SET SCHEMA PUBLIC
 drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+/*C663*/SET SCHEMA PUBLIC
+INSERT INTO LONGBEVERAGE VALUES(769,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(519,FALSE,'Lemonade')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C668*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C663*/DISCONNECT
+/*C669*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C664*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
+DISCONNECT
+/*C671*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C665*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C666*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C667*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
-create table LongBeverage (id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C668*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C669*/SET SCHEMA PUBLIC
-INSERT INTO LONGBEVERAGE VALUES(958,TRUE,'Beer')
-INSERT INTO LONGBEVERAGE VALUES(18,FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C670*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C671*/SET SCHEMA PUBLIC
-DISCONNECT
+/*C662*/DISCONNECT
 /*C672*/SET SCHEMA PUBLIC
 drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(872,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(398,FALSE,'Lemonade')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C677*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C672*/DISCONNECT
+/*C678*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C673*/SET SCHEMA PUBLIC
-drop table LongBeverage if exists
 DISCONNECT
 /*C674*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C681*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C675*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C676*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C677*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C678*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('67baeeb2-bca8-476c-b2bb-1dab5520329f',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('c6b7b886-ff1e-4c48-bacd-555c0c9ed746',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C679*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='67baeeb2-bca8-476c-b2bb-1dab5520329f'
-DELETE FROM STRINGBEVERAGE WHERE ID='c6b7b886-ff1e-4c48-bacd-555c0c9ed746'
-COMMIT
 DISCONNECT
 /*C680*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C681*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C682*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
 drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C687*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C688*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C689*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C682*/DISCONNECT
+/*C690*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C683*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C684*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C685*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C686*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C687*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C688*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53',FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C689*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45'
-DELETE FROM STRINGBEVERAGE WHERE ID='d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53'
-COMMIT
-DISCONNECT
-/*C690*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C691*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45'
-DELETE FROM STRINGBEVERAGE WHERE ID='d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53'
-COMMIT
 DISCONNECT
 /*C692*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53',FALSE,'Lemonade')
-COMMIT
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C697*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C692*/DISCONNECT
+/*C698*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C693*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='1d9f5df1-a7d9-48e6-b6ac-6c84a0a24d45'
-DELETE FROM STRINGBEVERAGE WHERE ID='d16d4ebb-7e9e-4ac7-8575-e7fd6a460c53'
-COMMIT
+DISCONNECT
+/*C700*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C694*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C695*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C696*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C697*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C698*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
 /*C699*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C700*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('7c40e373-f96f-4077-8bf4-3046b5ee37a2',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('9edbe6dd-382e-4de1-8097-8314fd3cbc88',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C701*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C702*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(972,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(29,FALSE,'Lemonade')
+COMMIT
+/*C703*/SET SCHEMA PUBLIC
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
 drop table StringBeverage if exists
 DISCONNECT
-/*C703*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
+/*C708*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C704*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C710*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C705*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C706*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C707*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C708*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('f767cf10-bfc6-47dc-9be2-944c53a65cae',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('2be8a5f7-7b13-4d57-84b5-4699d5d6587b',FALSE,'Lemonade')
-COMMIT
-DISCONNECT
+/*C702*/DISCONNECT
 /*C709*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='f767cf10-bfc6-47dc-9be2-944c53a65cae'
-COMMIT
-DISCONNECT
-/*C710*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C711*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C712*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
 drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C717*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C712*/DISCONNECT
+/*C718*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C713*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C714*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C721*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C715*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C716*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
-DISCONNECT
-/*C717*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C718*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('823b8c99-9429-4f6f-8ef1-5a5a7b9aca36',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('f5dcbba1-673a-4b86-82fb-4f4f1c2b6bea',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C719*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='823b8c99-9429-4f6f-8ef1-5a5a7b9aca36'
-INSERT INTO STRINGBEVERAGE VALUES('823b8c99-9429-4f6f-8ef1-5a5a7b9aca36',FALSE,'Water')
-COMMIT
 DISCONNECT
 /*C720*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-DISCONNECT
-/*C721*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C722*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C727*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C722*/DISCONNECT
+/*C728*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C723*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C730*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C724*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C725*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C726*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('e41af174-3830-4a5f-8b26-ec72d2aba1a9',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('eeb70397-1fbc-4edc-b941-b5093153118b',FALSE,'Lemonade')
-COMMIT
-DISCONNECT
-/*C727*/SET SCHEMA PUBLIC
-DELETE FROM STRINGBEVERAGE WHERE ID='e41af174-3830-4a5f-8b26-ec72d2aba1a9'
-INSERT INTO STRINGBEVERAGE VALUES('e41af174-3830-4a5f-8b26-ec72d2aba1a9',FALSE,'Water')
-DELETE FROM STRINGBEVERAGE WHERE ID='eeb70397-1fbc-4edc-b941-b5093153118b'
-INSERT INTO STRINGBEVERAGE VALUES('eeb70397-1fbc-4edc-b941-b5093153118b',FALSE,'Water')
-COMMIT
-DISCONNECT
-/*C728*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C729*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C730*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-DISCONNECT
 /*C731*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
 /*C732*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C733*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
 drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+/*C733*/SET SCHEMA PUBLIC
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+DISCONNECT
+/*C738*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C734*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+DISCONNECT
+/*C740*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C735*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C736*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('02368b2e-d551-430d-ad18-0162112260dd',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('6573fbe9-c665-42c4-a2eb-bc0cf1161a0b',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C737*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C738*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-DISCONNECT
 /*C739*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
 DISCONNECT
-/*C740*/SET SCHEMA PUBLIC
-DISCONNECT
+/*C732*/DISCONNECT
 /*C741*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
 DISCONNECT
 /*C742*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
 drop table StringBeverage if exists
-create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, primary key (id))
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C747*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C742*/DISCONNECT
+/*C748*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C743*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C744*/SET SCHEMA PUBLIC
-INSERT INTO STRINGBEVERAGE VALUES('f03bdb12-20fc-4ca3-90c0-05be76b7d1ad',TRUE,'Beer')
-INSERT INTO STRINGBEVERAGE VALUES('32d31d14-17e9-47d6-8061-2a5257a523ff',FALSE,'Lemonade')
-COMMIT
 DISCONNECT
 /*C745*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C746*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C747*/SET SCHEMA PUBLIC
-drop table StringBeverage if exists
+/*C749*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C748*/SET SCHEMA PUBLIC
+/*C750*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C751*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C752*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
 drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(417,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(504,FALSE,'Lemonade')
+COMMIT
+/*C753*/SET SCHEMA PUBLIC
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C758*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C753*/DISCONNECT
+/*C754*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C755*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C760*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C756*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C757*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C759*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C761*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C752*/DISCONNECT
+/*C762*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+/*C763*/SET SCHEMA PUBLIC
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C768*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C769*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C770*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C771*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C763*/DISCONNECT
+/*C764*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C765*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C766*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C767*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C762*/DISCONNECT
+/*C772*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(623,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(951,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=623
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=951
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C777*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C772*/DISCONNECT
+/*C778*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C773*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C780*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C774*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C775*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C776*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C779*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C781*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C782*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(188,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(615,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=188
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=615
+COMMIT
+INSERT INTO LONGBEVERAGE VALUES(188,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(615,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=188
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=615
+COMMIT
+INSERT INTO LONGBEVERAGE VALUES(188,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(615,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=188
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=615
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C787*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C788*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C782*/DISCONNECT
+/*C789*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C783*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C791*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C784*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C785*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C786*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C790*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C792*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(145,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(120,FALSE,'Lemonade')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C797*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C798*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C799*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C792*/DISCONNECT
+/*C800*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C801*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C793*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C794*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C795*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C796*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C802*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(836,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(108,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=836
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C807*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C808*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C809*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C802*/DISCONNECT
+/*C810*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C811*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C803*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C804*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C805*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C806*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C812*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(506,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(494,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=506
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C817*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C818*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C819*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C820*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C821*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C812*/DISCONNECT
+/*C813*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C814*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C815*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C816*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C822*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(637,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(32,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=637
+INSERT INTO LONGBEVERAGE VALUES(637,FALSE,'Water')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C827*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C828*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C829*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C830*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C822*/DISCONNECT
+/*C823*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C824*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C825*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C826*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C831*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C832*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(46,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(578,FALSE,'Lemonade')
+COMMIT
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=46
+INSERT INTO LONGBEVERAGE VALUES(46,FALSE,'Water')
+DELETE FROM LONGBEVERAGE WHERE LONG_BEV_ID=578
+INSERT INTO LONGBEVERAGE VALUES(578,FALSE,'Water')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C837*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C838*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C839*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C840*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C841*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C832*/DISCONNECT
+/*C833*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C834*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C835*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C836*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C842*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(101,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(127,FALSE,'Lemonade')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C847*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C848*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C849*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C850*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C851*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C842*/DISCONNECT
+/*C843*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C844*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C845*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C846*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C852*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(321,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(919,FALSE,'Lemonade')
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C857*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C858*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C859*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C860*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C861*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C852*/DISCONNECT
+/*C853*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C854*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C855*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C856*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C862*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(974,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(419,FALSE,'Lemonade')
+INSERT INTO STRINGBEVERAGE VALUES('274414ec-f3f6-4d10-ab75-c2435f8c5d31',TRUE,'Scotch',974)
+INSERT INTO STRINGBEVERAGE VALUES('cdf21fa0-7ecc-4e4d-9b5c-711d3537ad2b',FALSE,'Soda',974)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C867*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C868*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C869*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C870*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C871*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C862*/DISCONNECT
+/*C863*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C864*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C865*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C866*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C872*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO LONGBEVERAGE VALUES(872,TRUE,'Beer')
+INSERT INTO LONGBEVERAGE VALUES(147,FALSE,'Lemonade')
+INSERT INTO STRINGBEVERAGE VALUES('7c916f29-ee56-47cc-b0b0-bde9018c3869',TRUE,'Scotch',872)
+INSERT INTO STRINGBEVERAGE VALUES('a6f2aa24-8a8a-4097-9038-ad760985e309',FALSE,'Soda',872)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C877*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C878*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C879*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C880*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C881*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C872*/DISCONNECT
+/*C873*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C874*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C875*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C876*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C882*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('717b9c72-9a97-4218-abc2-81a7fd170bf5',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('9c0b249f-85a9-49b6-b467-d4412c53dde7',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='717b9c72-9a97-4218-abc2-81a7fd170bf5'
+DELETE FROM STRINGBEVERAGE WHERE ID='9c0b249f-85a9-49b6-b467-d4412c53dde7'
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C887*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C888*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C889*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C890*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C882*/DISCONNECT
+/*C891*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C883*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C884*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C885*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C886*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C892*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('2b29607d-ef3c-4868-be49-1ad23d9f5eb4',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('14a41538-3d26-4c69-8a47-20ad9b7b0248',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='2b29607d-ef3c-4868-be49-1ad23d9f5eb4'
+DELETE FROM STRINGBEVERAGE WHERE ID='14a41538-3d26-4c69-8a47-20ad9b7b0248'
+COMMIT
+INSERT INTO STRINGBEVERAGE VALUES('2b29607d-ef3c-4868-be49-1ad23d9f5eb4',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('14a41538-3d26-4c69-8a47-20ad9b7b0248',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='2b29607d-ef3c-4868-be49-1ad23d9f5eb4'
+DELETE FROM STRINGBEVERAGE WHERE ID='14a41538-3d26-4c69-8a47-20ad9b7b0248'
+COMMIT
+INSERT INTO STRINGBEVERAGE VALUES('2b29607d-ef3c-4868-be49-1ad23d9f5eb4',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('14a41538-3d26-4c69-8a47-20ad9b7b0248',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='2b29607d-ef3c-4868-be49-1ad23d9f5eb4'
+DELETE FROM STRINGBEVERAGE WHERE ID='14a41538-3d26-4c69-8a47-20ad9b7b0248'
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C897*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C898*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C899*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C900*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C901*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C892*/DISCONNECT
+/*C893*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C894*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C895*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C896*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C902*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('b66258e7-51a5-41a9-8306-71a892844a91',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('1eee31e3-a979-4771-8d97-f1f9b605d504',FALSE,'Lemonade',NULL)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C907*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C908*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C909*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C910*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C911*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C902*/DISCONNECT
+/*C903*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C904*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C905*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C906*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C912*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('df3adbb2-5361-446c-a0c7-d5838d3b29e0',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('6dbc6c33-95f7-4c08-aabc-c82049541351',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='df3adbb2-5361-446c-a0c7-d5838d3b29e0'
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C917*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C918*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C919*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C920*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C921*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C912*/DISCONNECT
+/*C913*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C914*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C915*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C916*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C922*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('f5c8b3c2-8549-4a99-a103-3615d223e1d6',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('db73b012-6329-4851-acdd-c6e19f030569',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='f5c8b3c2-8549-4a99-a103-3615d223e1d6'
+INSERT INTO STRINGBEVERAGE VALUES('f5c8b3c2-8549-4a99-a103-3615d223e1d6',FALSE,'Water',NULL)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C927*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C928*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C929*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C930*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C922*/DISCONNECT
+/*C931*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C923*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C924*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C925*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C926*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C932*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('d7caf929-305d-4952-9baa-031c6e82a99e',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('742dc539-57a9-4654-9f73-8f6c50032ca0',FALSE,'Lemonade',NULL)
+COMMIT
+DELETE FROM STRINGBEVERAGE WHERE ID='d7caf929-305d-4952-9baa-031c6e82a99e'
+INSERT INTO STRINGBEVERAGE VALUES('d7caf929-305d-4952-9baa-031c6e82a99e',FALSE,'Water',NULL)
+DELETE FROM STRINGBEVERAGE WHERE ID='742dc539-57a9-4654-9f73-8f6c50032ca0'
+INSERT INTO STRINGBEVERAGE VALUES('742dc539-57a9-4654-9f73-8f6c50032ca0',FALSE,'Water',NULL)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C937*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C938*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C932*/DISCONNECT
+/*C939*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C933*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C941*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C934*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C935*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C936*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C940*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C942*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('113ccc2f-4b55-450c-9a0f-73c876fccd2f',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('350ec4ba-ba7e-4b42-b334-22d7c73fcb29',FALSE,'Lemonade',NULL)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C947*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C948*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C942*/DISCONNECT
+/*C949*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C950*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C943*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C944*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C945*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C946*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C951*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C952*/SET SCHEMA PUBLIC
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+create table LongBeverage (long_bev_id bigint not null, alcoholic boolean, name varchar(255) not null, primary key (long_bev_id))
+create table StringBeverage (id varchar(255) not null, alcoholic boolean, name varchar(255) not null, long_beverage_id bigint, primary key (id))
+alter table StringBeverage add constraint FK_cqyshbj93ykxlng6xcwnat8kk foreign key (long_beverage_id) references LongBeverage
+INSERT INTO STRINGBEVERAGE VALUES('3a81ab94-2138-403c-b56b-350f5a61e50c',TRUE,'Beer',NULL)
+INSERT INTO STRINGBEVERAGE VALUES('d09b70e8-f7a8-48cd-83ad-61d2ea49e71e',FALSE,'Lemonade',NULL)
+COMMIT
+alter table StringBeverage drop constraint FK_cqyshbj93ykxlng6xcwnat8kk
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+drop table LongBeverage if exists
+drop table StringBeverage if exists
+/*C957*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C958*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C959*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C960*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C952*/DISCONNECT
+/*C961*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C953*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C954*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C955*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C956*/SET SCHEMA PUBLIC
 DISCONNECT
