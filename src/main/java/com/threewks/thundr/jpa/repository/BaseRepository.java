@@ -25,7 +25,6 @@ import com.threewks.thundr.jpa.ResultAction;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.reflect.Field;
@@ -94,28 +93,67 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
     }
 
     @Override
-    public void update(final E entity) {
-        jpa.run(Propagation.Supports, new Action() {
+    public E update(final E entity) {
+        return jpa.run(Propagation.Supports, new ResultAction<E>() {
             @Override
-            public void run(EntityManager em) {
-                em.merge(entity);
+            public E run(EntityManager em) {
+                return em.merge(entity);
             }
         });
     }
 
     @Override
-    public void update(final E... entities) {
-        update(Arrays.asList(entities));
+    public List<E> update(final E... entities) {
+        return update(Arrays.asList(entities));
     }
 
     @Override
-    public void update(final List<E> entities) {
-        jpa.run(Propagation.Supports, new Action() {
+    public List<E> update(final List<E> entities) {
+        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
             @Override
-            public void run(EntityManager em) {
+            public List<E> run(EntityManager em) {
+                List<E> updatedEntities = new ArrayList<>();
                 for (E entity : entities) {
-                    em.merge(entity);
+                    updatedEntities.add(em.merge(entity));
                 }
+                return updatedEntities;
+            }
+        });
+    }
+
+    @Override
+    public List<E> find(final String key, final Object value, final int limit) {
+        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+            @Override
+            public List<E> run(EntityManager em) {
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery<E> cq = cb.createQuery(type);
+                Root<E> fromClause = cq.from(entityType);
+                cq.select(fromClause).where(cb.equal(fromClause.get(key), value));
+                return em.createQuery(cq).setMaxResults(limit).getResultList();
+            }
+        });
+    }
+
+    @Override
+    public List<E> find(final Map<String, Object> properties, final int limit) {
+        if (properties.size() == 1 ) {
+            Map.Entry<String, Object> entry = properties.entrySet().iterator().next();
+            return find(entry.getKey(), entry.getValue(), limit);
+        }
+
+        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+            @Override
+            public List<E> run(EntityManager em) {
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery<E> cq = cb.createQuery(type);
+                Root<E> fromClause = cq.from(entityType);
+                List<Predicate> andPredicates = new ArrayList<>(properties.size());
+                for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                    andPredicates.add(cb.and(cb.equal(fromClause.get(entry.getKey()), entry.getValue())));
+                }
+                cq.select(fromClause).where(andPredicates.toArray(predicateArray));
+                return em.createQuery(cq).setMaxResults(limit).getResultList();
             }
         });
     }
@@ -172,13 +210,13 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
-                CriteriaQuery<E> cq = createGetByKeyCriteria(em.getCriteriaBuilder(), keys);
+                CriteriaQuery<E> cq = createReadByKeysCriteria(em.getCriteriaBuilder(), keys);
                 return em.createQuery(cq).getResultList();
             }
         });
     }
 
-    protected CriteriaQuery<E> createGetByKeyCriteria(CriteriaBuilder cb, List<K> keys) {
+    protected CriteriaQuery<E> createReadByKeysCriteria(CriteriaBuilder cb, List<K> keys) {
         CriteriaQuery<E> cq = cb.createQuery(type);
         Root<E> fromClause = cq.from(entityType);
         boolean isSimpleQuery = entityType.hasSingleIdAttribute();

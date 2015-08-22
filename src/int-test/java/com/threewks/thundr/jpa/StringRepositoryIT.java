@@ -38,6 +38,8 @@ import javax.persistence.EntityManager;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -63,6 +65,7 @@ public class StringRepositoryIT {
 
     protected StringBeverage bevvie1;
     protected StringBeverage bevvie2;
+    private StringBeverage bevvie3;
     protected CrudRepository<String, StringBeverage> jpaRepository;
     private Jpa jpa;
 
@@ -71,6 +74,7 @@ public class StringRepositoryIT {
         jpa = injectionContext.get(Jpa.class);
         bevvie1 = new StringBeverage("Beer", true);
         bevvie2 = new StringBeverage("Lemonade", false);
+        bevvie3 = new StringBeverage("Juice", false);
         jpaRepository = new StringRepository<StringBeverage>(StringBeverage.class, jpa);
         deleteTestData();
         createBeverages();
@@ -180,7 +184,7 @@ public class StringRepositoryIT {
             }
         });
 
-        assertThat(count, Is.is(2l));
+        assertThat(count, Is.is(3l));
     }
 
     @Test
@@ -287,6 +291,7 @@ public class StringRepositoryIT {
             public void run(EntityManager em) {
                 jpaRepository.create(bevvie1);
                 jpaRepository.create(bevvie2);
+                jpaRepository.create(bevvie3);
             }
         });
     }
@@ -320,4 +325,97 @@ public class StringRepositoryIT {
         deleteTestData();
     }
 
+    @Test
+    public void shouldFindByAttribute(){
+        StringBeverage beverage = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return jpaRepository.find("name", "Beer", 1).iterator().next();
+            }
+        });
+        assertThat(beverage.getName(), is(bevvie1.getName()));
+        assertThat(beverage.getId(), is(bevvie1.getId()));
+        assertThat(beverage.isAlcoholic(), is(bevvie1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldExcludeOnFindByAttribute(){
+        StringBeverage beverage = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 1).iterator().next();
+            }
+        });
+        assertThat(beverage.getName(), not(bevvie1.getName()));
+        assertThat(beverage.getId(), not(bevvie1.getId()));
+        assertThat(beverage.isAlcoholic(), not(bevvie1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldFindMultipleRecordsByAttribute() {
+        List<StringBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
+            @Override
+            public List<StringBeverage> run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 10);
+            }
+        });
+        boolean bev2Found = false;
+        boolean bev3Found = false;
+        for (StringBeverage beverage : beverages) {
+            assertThat(beverage.isAlcoholic(), is(false));
+            if (beverage.getId().equals(bevvie2.getId())) {
+                assertThat(beverage.getName(), is("Lemonade"));
+                bev2Found = true;
+            }
+            else if (beverage.getId().equals(bevvie3.getId())) {
+                assertThat(beverage.getName(), is("Juice"));
+                bev3Found = true;
+            }
+        }
+        assertTrue(bev2Found && bev3Found);
+    }
+
+    @Test
+    public void shouldLimitResultsOnFindByAttribute() {
+        List<StringBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
+            @Override
+            public List<StringBeverage> run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 1);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+    }
+
+    @Test
+    public void shouldFindOnMultipleAttributes(){
+        final Map<String, Object> attrs = new HashMap<>();
+        attrs.put("alcoholic", false);
+        attrs.put("name", "Juice");
+        List<StringBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
+            @Override
+            public List<StringBeverage> run(EntityManager em) {
+                return jpaRepository.find(attrs, 10);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+        assertThat(beverages.get(0).getId(), is(bevvie3.getId()));
+        assertThat(beverages.get(0).getName(), is(bevvie3.getName()));
+        assertThat(beverages.get(0).isAlcoholic(), is(bevvie3.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldFindOnMultipleAttributesWithSingleAttribute() {
+        final Map<String, Object> attrs = new HashMap<>();
+        attrs.put("alcoholic", true);
+        List<StringBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<StringBeverage>>() {
+            @Override
+            public List<StringBeverage> run(EntityManager em) {
+                return jpaRepository.find(attrs, 10);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+        assertThat(beverages.get(0).getId(), is(bevvie1.getId()));
+        assertThat(beverages.get(0).getName(), is(bevvie1.getName()));
+        assertThat(beverages.get(0).isAlcoholic(), is(bevvie1.isAlcoholic()));
+    }
 }

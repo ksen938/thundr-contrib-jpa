@@ -34,10 +34,18 @@ public class EmbeddedIdCompoundKeyEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "alcoholic")
+    private boolean alcoholic;
+
     public EmbeddedIdCompoundKeyEntity() {
     }
 
     public EmbeddedIdCompoundKeyEntity(String name) {
+        this.name = name;
+    }
+
+    public EmbeddedIdCompoundKeyEntity(boolean alcoholic, String name) {
+        this.alcoholic = alcoholic;
         this.name = name;
     }
 
@@ -55,5 +63,13 @@ public class EmbeddedIdCompoundKeyEntity implements Serializable {
 
     public void setId(CompoundKeyEntityId id) {
         this.id = id;
+    }
+
+    public boolean isAlcoholic() {
+        return alcoholic;
+    }
+
+    public void setAlcoholic(boolean alcoholic) {
+        this.alcoholic = alcoholic;
     }
 }

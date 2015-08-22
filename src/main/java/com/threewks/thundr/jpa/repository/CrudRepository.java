@@ -18,6 +18,7 @@
 package com.threewks.thundr.jpa.repository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CrudRepository<K, E> {
 
@@ -25,9 +26,12 @@ public interface CrudRepository<K, E> {
     void create(E...entities);
     void create(List<E> entities);
 
-    void update(E entity);
-    void update(E...entities);
-    void update(List<E> entities);
+    E update(E entity);
+    List<E> update(E...entities);
+    List<E> update(List<E> entities);
+
+    List<E> find(String key, Object value, int limit);
+    List<E> find(Map<String, Object> properties, int limit);
 
     E read(K key);
     List<E> read(K...key);

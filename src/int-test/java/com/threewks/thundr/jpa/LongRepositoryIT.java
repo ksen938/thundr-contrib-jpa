@@ -26,7 +26,6 @@ import com.threewks.thundr.jpa.rule.ConfigureHibernate;
 import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,6 +38,8 @@ import java.util.*;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -62,6 +63,7 @@ public class LongRepositoryIT {
 
     private LongBeverage bevvie1;
     private LongBeverage bevvie2;
+    private LongBeverage bevvie3;
     private CrudRepository<Long, LongBeverage> jpaRepository;
     private Jpa jpa;
 
@@ -70,6 +72,7 @@ public class LongRepositoryIT {
         jpa = injectionContext.get(Jpa.class);
         bevvie1 = new LongBeverage("Beer", true);
         bevvie2 = new LongBeverage("Lemonade", false);
+        bevvie3 = new LongBeverage("Juice", false);
         jpaRepository = new LongRepository<>(LongBeverage.class, jpa);
         deleteTestData();
         createBeverages();
@@ -93,8 +96,8 @@ public class LongRepositoryIT {
                 return jpaRepository.read(bevvie1.getId());
             }
         });
-        assertThat(localBev.getName(), Is.is(bevvie1.getName()));
-        assertThat(localBev.isAlcoholic(), Is.is(bevvie1.isAlcoholic()));
+        assertThat(localBev.getName(), is(bevvie1.getName()));
+        assertThat(localBev.isAlcoholic(), is(bevvie1.isAlcoholic()));
     }
 
     @Test
@@ -118,8 +121,8 @@ public class LongRepositoryIT {
                 return jpaRepository.read(id);
             }
         });
-        assertThat(beverage.getName(), Is.is("Water"));
-        assertThat(beverage.isAlcoholic(), Is.is(false));
+        assertThat(beverage.getName(), is("Water"));
+        assertThat(beverage.isAlcoholic(), is(false));
     }
 
     @Test
@@ -179,7 +182,7 @@ public class LongRepositoryIT {
             }
         });
 
-        assertThat(count, Is.is(2l));
+        assertThat(count, is(3l));
     }
 
     @Test
@@ -230,8 +233,8 @@ public class LongRepositoryIT {
             }
         });
 
-        assertThat(deletedBev, Is.is(nullValue()));
-        assertThat(remainingBev.getId(), Is.is(bevvie2.getId()));
+        assertThat(deletedBev, is(nullValue()));
+        assertThat(remainingBev.getId(), is(bevvie2.getId()));
     }
 
     protected void testAllDeleted() {
@@ -249,8 +252,8 @@ public class LongRepositoryIT {
             }
         });
 
-        assertThat(deletedBev1, Is.is(nullValue()));
-        assertThat(deletedBev2, Is.is(nullValue()));
+        assertThat(deletedBev1, is(nullValue()));
+        assertThat(deletedBev2, is(nullValue()));
     }
 
     @Test
@@ -288,7 +291,7 @@ public class LongRepositoryIT {
         }
         assertTrue(map.containsKey(bevvie1.getId()));
         assertTrue(map.containsKey(bevvie2.getId()));
-        Assert.assertThat(beverages.size(), Is.is(2));
+        Assert.assertThat(beverages.size(), is(2));
     }
 
     protected void createBeverages() {
@@ -297,6 +300,7 @@ public class LongRepositoryIT {
             public void run(EntityManager em) {
                 jpaRepository.create(bevvie1);
                 jpaRepository.create(bevvie2);
+                jpaRepository.create(bevvie3);
             }
         });
     }
@@ -328,5 +332,99 @@ public class LongRepositoryIT {
         containsBeverages(beverages);
 
         deleteTestData();
+    }
+
+    @Test
+    public void shouldFindByAttribute(){
+        LongBeverage beverage = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return jpaRepository.find("name", "Beer", 1).iterator().next();
+            }
+        });
+        assertThat(beverage.getName(), is(bevvie1.getName()));
+        assertThat(beverage.getId(), is(bevvie1.getId()));
+        assertThat(beverage.isAlcoholic(), is(bevvie1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldExcludeOnFindByAttribute(){
+        LongBeverage beverage = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 1).iterator().next();
+            }
+        });
+        assertThat(beverage.getName(), not(bevvie1.getName()));
+        assertThat(beverage.getId(), not(bevvie1.getId()));
+        assertThat(beverage.isAlcoholic(), not(bevvie1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldFindMultipleRecordsByAttribute() {
+        List<LongBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+            @Override
+            public List<LongBeverage> run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 10);
+            }
+        });
+        boolean bev2Found = false;
+        boolean bev3Found = false;
+        for (LongBeverage beverage : beverages) {
+            assertThat(beverage.isAlcoholic(), is(false));
+            if (beverage.getId().equals(bevvie2.getId())) {
+                assertThat(beverage.getName(), is("Lemonade"));
+                bev2Found = true;
+            }
+            else if (beverage.getId().equals(bevvie3.getId())) {
+                assertThat(beverage.getName(), is("Juice"));
+                bev3Found = true;
+            }
+        }
+        assertTrue(bev2Found && bev3Found);
+    }
+
+    @Test
+    public void shouldLimitResultsOnFindByAttribute() {
+        List<LongBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+            @Override
+            public List<LongBeverage> run(EntityManager em) {
+                return jpaRepository.find("alcoholic", false, 1);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+    }
+
+    @Test
+    public void shouldFindOnMultipleAttributes(){
+        final Map<String, Object> attrs = new HashMap<>();
+        attrs.put("alcoholic", false);
+        attrs.put("name", "Juice");
+        List<LongBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+            @Override
+            public List<LongBeverage> run(EntityManager em) {
+                return jpaRepository.find(attrs, 10);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+        assertThat(beverages.get(0).getId(), is(bevvie3.getId()));
+        assertThat(beverages.get(0).getName(), is(bevvie3.getName()));
+        assertThat(beverages.get(0).isAlcoholic(), is(bevvie3.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldFindOnMultipleAttributesWithSingleAttribute() {
+        final Map<String, Object> attrs = new HashMap<>();
+        attrs.put("alcoholic", true);
+        List<LongBeverage> beverages = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+            @Override
+            public List<LongBeverage> run(EntityManager em) {
+                return jpaRepository.find(attrs, 10);
+            }
+        });
+        assertThat(beverages.size(), is(1));
+        assertThat(beverages.get(0).getId(), is(bevvie1.getId()));
+        assertThat(beverages.get(0).getName(), is(bevvie1.getName()));
+        assertThat(beverages.get(0).isAlcoholic(), is(bevvie1.isAlcoholic()));
     }
 }

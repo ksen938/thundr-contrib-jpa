@@ -39,10 +39,18 @@ public class IdClassCompoundKeyEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "alcoholic")
+    private boolean alcoholic;
+
     public IdClassCompoundKeyEntity() {
     }
 
     public IdClassCompoundKeyEntity(String name) {
+        this.name = name;
+    }
+
+    public IdClassCompoundKeyEntity(boolean alcoholic, String name) {
+        this.alcoholic = alcoholic;
         this.name = name;
     }
 
@@ -72,5 +80,13 @@ public class IdClassCompoundKeyEntity implements Serializable {
 
     public CompoundKeyEntityId getId() {
         return new CompoundKeyEntityId(pk1,pk2);
+    }
+
+    public boolean isAlcoholic() {
+        return alcoholic;
+    }
+
+    public void setAlcoholic(boolean alcoholic) {
+        this.alcoholic = alcoholic;
     }
 }
