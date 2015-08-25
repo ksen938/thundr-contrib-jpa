@@ -17,11 +17,29 @@
  */
 package com.threewks.thundr.jpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.metamodel.Metamodel;
-
+/**
+ * Defines lower-level transaction controls that allows a caller to manipulate the JPA EntityManager more directly.
+ * These methods do not auto-close or cleanup automatically, and
+ */
 public interface JpaUnsafe extends Jpa{
+
+	/**
+	 * Creates a thread-safe EntityManager (if one does not exist) and starts a JPA transaction.
+	 * A user MUST explicitly call finishTransaction() to avoid the risk of memory leaks.
+	 *
+	 * @param propagation
+	 */
 	public void startTransaction(Propagation propagation);
+
+	/**
+	 * Commits the current active transaction. Rolls back only if an error is encountered through commit.
+	 * Cleans up the EntityManager.
+	 */
 	public void finishTransaction();
+
+	/**
+	 * Forces a rollback of any current active transaction.
+	 * Cleans up the EntityManager.
+	 */
 	public void rollbackTransaction();
 }

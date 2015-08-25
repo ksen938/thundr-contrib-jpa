@@ -21,13 +21,51 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Metamodel;
 import java.util.concurrent.Callable;
 
+/**
+ * Defines a set of standardised closures  that enable the user to execute transactions against a JPA provider (eg. Hibernate).
+ *
+ * Note that this is a 'safe' abstraction of JPA that largely handles low-level transaction management.
+ * There is a {@link JpaUnsafe} class that enables development of customised transaction handlers
+ * (eg. {@link com.threewks.thundr.jpa.intercept.Transactional}
+ */
 public interface Jpa {
+
+	/**
+	 * Executes the specified action without a return value. Propagation is set to default of 'Required'.
+	 * @param action
+	 */
 	public void run(Action action);
+
+	/**
+	 * Executes the specified action without a return value. Propagation options are {@link Propagation}
+	 * @param propagation
+	 * @param action
+	 */
 	public void run(Propagation propagation, Action action);
+
 	//public void run(Propagation propagation, Runnable runnable);
 	//public <R> R run(Propagation propagation, Callable<R> runnable);
-	public <R> R run(ResultAction<R> action);
-	public <R> R run(Propagation propagation, ResultAction<R> action);
-	public Metamodel getMetamodel();
 
+	/**
+	 * Executes the specified action with a return value. Propagation is set to default of 'Required'.
+	 * @param action
+	 * @param <R>
+	 * @return The return type specified
+	 */
+	public <R> R run(ResultAction<R> action);
+
+	/**
+	 * Executes the specified action with a return value. Propagation options are {@link Propagation}.
+	 * @param action
+	 * @param <R>
+	 * @return The return type specified
+	 */
+	public <R> R run(Propagation propagation, ResultAction<R> action);
+
+	/**
+	 * Provides a metamodel that enables the development of custom queries using JPQL or the Criteria API
+	 *
+	 * @return metamodel containing all the entities managed by this entity manager
+	 */
+	public Metamodel getMetamodel();
 }

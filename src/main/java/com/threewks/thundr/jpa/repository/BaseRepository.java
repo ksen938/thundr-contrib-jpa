@@ -223,12 +223,21 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
         return isSimpleQuery ? buildSimpleQuery(cb, cq, fromClause, keys) : buildComplexQuery(cb, cq, fromClause, keys);
     }
 
+    /*
+     * If the entity has a single @Id value (eg. Long) or an @EmbeddedId value (eg. a compound key), then this can be
+     * passed straight to JPA as an 'in' clause.
+     */
     protected CriteriaQuery<E> buildSimpleQuery(CriteriaBuilder cb, CriteriaQuery<E> cq, Root<E> fromClause, List<K> keys) {
         SingularAttribute<? super E, K> idField = entityType.getId(keyType);
         cq.select(fromClause).where(fromClause.get(idField).in(keys));
         return cq;
     }
 
+    /**
+     * If the entity has an @IdClass annotation then JPA does not support the 'in' syntax, so we have to build a set of
+     * SQL 'AND' predicates (one for each key) and chain them together with 'OR' predicates to get the same net result
+     * as buildSimpleQuery()
+     */
     protected CriteriaQuery<E> buildComplexQuery(CriteriaBuilder cb, CriteriaQuery<E> cq, Root<E> fromClause, List<K> keys) {
         Map<Object, Map<Path, Object>> keyValues = setupMapFromKeysToPathsAndValues(keys);
         Map<SingularAttribute<? super E, ?>, Path> attrsAndPaths = mapAttributesToPaths(fromClause);

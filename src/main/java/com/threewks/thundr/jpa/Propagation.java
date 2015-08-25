@@ -17,11 +17,35 @@
  */
 package com.threewks.thundr.jpa;
 
+/**
+ * JPA transactional propagation values. The behaviours driven by these are as per the JPA spec (Spring doco below).
+ * @see <a href = "http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html">Spring Documentation for Transaction Propagations</a>
+ */
 public enum Propagation {
+    /**
+     * Supports a current transaction, throw an exception if none exists.
+     */
     Mandatory,
+
+    /**
+     * Execute non-transactionally, throw an exception if a transaction exists.
+     */
     Never,
+
     //NotSupported,
+
+    /**
+     * Support a current transaction, create a new one if none exists.
+     */
     Required,
+
+    /**
+     * Create a new transaction, and suspend the current transaction if one exists.
+     */
     RequiresNew,
+
+    /**
+     * Support a current transaction, execute non-transactionally if none exists.
+     */
     Supports
 }
