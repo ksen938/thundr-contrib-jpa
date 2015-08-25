@@ -17,11 +17,11 @@
  */
 package com.threewks.thundr.jpa;
 
-public enum Propagation {
-    Mandatory,
-    Never,
-    //NotSupported,
-    Required,
-    RequiresNew,
-    Supports
+import javax.persistence.EntityManager;
+import javax.persistence.metamodel.Metamodel;
+
+public interface JpaUnsafe extends Jpa{
+	public void startTransaction(Propagation propagation);
+	public void finishTransaction();
+	public void rollbackTransaction();
 }

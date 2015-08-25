@@ -15,13 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.threewks.thundr.jpa;
+package com.threewks.thundr.jpa.intercept;
 
-public enum Propagation {
-    Mandatory,
-    Never,
-    //NotSupported,
-    Required,
-    RequiresNew,
-    Supports
+import com.threewks.thundr.jpa.Propagation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(value = ElementType.METHOD)
+@Retention(value = RetentionPolicy.RUNTIME)
+public @interface Transactional {
+    Propagation value() default Propagation.Required;
 }

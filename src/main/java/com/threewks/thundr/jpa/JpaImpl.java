@@ -30,7 +30,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 // TODO - Shutdown hooks when module.stop is called
-public class JpaImpl implements Jpa {
+public class JpaImpl implements Jpa, JpaUnsafe {
     private EntityManagerFactory entityManagerFactory;
     private ThreadLocal<Deque<EntityManager>> threadLocal = new ThreadLocal<>();
 
@@ -88,15 +88,60 @@ public class JpaImpl implements Jpa {
         }
     }
 
+    @Override
+    public void startTransaction(Propagation propagation) {
+        validateInternalState();
+        EntityManager em = getExistingEntityManager();
+        boolean ownsEntityManager = em == null || (Propagation.RequiresNew == propagation && em.getTransaction().isActive());
+        if (ownsEntityManager) {
+            em = createNewEntityManager();
+        }
+        EntityTransaction transaction = em.getTransaction();
+        participateInTransactionState(transaction, propagation);
+    }
+
+    @Override
+    public void finishTransaction() {
+        EntityManager em = getExistingEntityManager();
+        if (em == null || !em.getTransaction().isActive()) {
+            Logger.warn("Unable to finish transaction. There is no open transaction (ignoring)");
+            return;
+        }
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            commitOrRollback(transaction, true);
+        } catch (RuntimeException e) {
+            ensureRollback(transaction, true);
+            throw e;
+        } finally {
+            disposeOfEntityManager(em);
+        }
+    }
+
+    @Override
+    public void rollbackTransaction() {
+        EntityManager em = getExistingEntityManager();
+        if (em == null || !em.getTransaction().isActive()) {
+            Logger.warn("Unable to rollback transaction. There is no open transaction (ignoring)");
+            return;
+        }
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            ensureRollback(transaction, true);
+        } finally {
+            disposeOfEntityManager(em);
+        }
+    }
+
     protected void ensureRollback(EntityTransaction transaction, boolean ownsTransaction) {
         transaction.setRollbackOnly();
-        if(ownsTransaction) {
+        if (ownsTransaction) {
             transaction.rollback();
         }
     }
 
     private void validateInternalState() {
-        if(!entityManagerFactory.isOpen()){
+        if (!entityManagerFactory.isOpen()) {
             throw new JpaException("%s is not open - cannot perform any JPA actions", EntityManagerFactory.class.getSimpleName());
         }
     }
@@ -139,13 +184,13 @@ public class JpaImpl implements Jpa {
             Deque<EntityManager> current = threadLocal.get();
             current.pop();
             em.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             Logger.error("Failed to close EntityManager: %s\n%s", e.getMessage(), ExceptionUtils.getStackTrace(e));
         }
     }
 
     protected void commitOrRollback(EntityTransaction transaction, boolean ownsTransaction) {
-        if(ownsTransaction) {
+        if (ownsTransaction) {
             if (transaction.getRollbackOnly()) {
                 transaction.rollback();
             } else {

@@ -54,7 +54,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public Long count() {
-        return jpa.run(Propagation.Supports, new ResultAction<Long>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<Long>() {
             @Override
             public Long run(EntityManager em) {
                 CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -67,7 +67,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public void create(final E entity) {
-        jpa.run(Propagation.Supports, new Action() {
+        jpa.run(Propagation.Mandatory, new Action() {
             @Override
             public void run(EntityManager em) {
                 em.persist(entity);
@@ -77,7 +77,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public void create(final List<E> entities) {
-        jpa.run(Propagation.Supports, new Action() {
+        jpa.run(Propagation.Mandatory, new Action() {
             @Override
             public void run(EntityManager em) {
                 for (E entity : entities) {
@@ -94,7 +94,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public E update(final E entity) {
-        return jpa.run(Propagation.Supports, new ResultAction<E>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<E>() {
             @Override
             public E run(EntityManager em) {
                 return em.merge(entity);
@@ -109,7 +109,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public List<E> update(final List<E> entities) {
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
                 List<E> updatedEntities = new ArrayList<>();
@@ -175,7 +175,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public void delete(final E entity) {
-        jpa.run(Propagation.Supports, new Action() {
+        jpa.run(Propagation.Mandatory, new Action() {
             @Override
             public void run(EntityManager em) {
                 em.remove(entity);
@@ -185,7 +185,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public void deleteByKey(final K key) {
-        jpa.run(Propagation.Supports, new Action() {
+        jpa.run(Propagation.Mandatory, new Action() {
             @Override
             public void run(EntityManager em) {
                 em.remove(em.getReference(type, key));
@@ -196,7 +196,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
     @Override
     public void delete(K... keys) {
         for (final K key : keys) {
-            jpa.run(Propagation.Supports, new Action() {
+            jpa.run(Propagation.Mandatory, new Action() {
                 @Override
                 public void run(EntityManager em) {
                     em.remove(em.getReference(type, key));

@@ -43,7 +43,7 @@ public class ConfigureHibernate extends ExternalResource {
     protected void before() throws Throwable {
         prepareHibernateConfig();
         hibernateModule = new HibernateModule();
-        hibernateModule.start(injectionContext);
+        hibernateModule.configure(injectionContext);
     }
 
     protected void prepareHibernateConfig() {

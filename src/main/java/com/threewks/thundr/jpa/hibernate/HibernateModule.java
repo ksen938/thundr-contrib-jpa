@@ -22,6 +22,10 @@ import com.threewks.thundr.injection.InjectionContext;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 import com.threewks.thundr.jpa.Jpa;
 import com.threewks.thundr.jpa.JpaImpl;
+import com.threewks.thundr.jpa.JpaUnsafe;
+import com.threewks.thundr.jpa.intercept.Transactional;
+import com.threewks.thundr.jpa.intercept.TransactionalInterceptor;
+import com.threewks.thundr.route.controller.InterceptorRegistry;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -46,8 +50,7 @@ public class HibernateModule extends BaseModule {
 	private WeakHashMap<String, EntityManagerFactory> entityManagerFactories = new WeakHashMap<>();
 
 	@Override
-	public void start(UpdatableInjectionContext injectionContext) {
-		super.start(injectionContext);
+	public void configure(UpdatableInjectionContext injectionContext) {
 		HibernateConfig unit = injectionContext.get(HibernateConfig.class);
 		createAndInjectSessionFactoryAndEntityManagerFactoryForPersistenceUnit(injectionContext, unit);
 	}
@@ -67,7 +70,9 @@ public class HibernateModule extends BaseModule {
 		entityManagerFactories.put(unit.getName(), entityManagerFactory);
 		injectionContext.inject(sessionFactory).named(unit.getName()).as(SessionFactory.class);
 		injectionContext.inject(entityManagerFactory).named(unit.getName()).as(EntityManagerFactory.class);
-		injectionContext.inject(JpaImpl.class).as(Jpa.class);
+		JpaImpl jpa = new JpaImpl(entityManagerFactory);
+		injectionContext.inject(jpa).as(Jpa.class);
+		injectionContext.inject(jpa).as(JpaUnsafe.class);
 	}
 
 	protected EntityManagerFactory createEntityManagerFactory(HibernateConfig unit, Configuration configuration, StandardServiceRegistry serviceRegistry) {
@@ -88,6 +93,16 @@ public class HibernateModule extends BaseModule {
 
 		cfgProperties.putAll(config.getProperties());
 		return configuration;
+	}
+
+	@Override
+	public void start(UpdatableInjectionContext injectionContext) {
+		super.start(injectionContext);
+
+		InterceptorRegistry interceptorRegistry = injectionContext.get(InterceptorRegistry.class);
+		if (interceptorRegistry != null) {
+			interceptorRegistry.registerInterceptor(Transactional.class, new TransactionalInterceptor(injectionContext.get(JpaUnsafe.class)));
+		}
 	}
 
 	@Override

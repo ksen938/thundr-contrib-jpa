@@ -342,6 +342,7 @@ public class LongRepositoryIT {
                 return jpaRepository.find("name", "Beer", 1).iterator().next();
             }
         });
+        List<LongBeverage> longBeverages = jpaRepository.find("name", "Beer", 1);
         assertThat(beverage.getName(), is(bevvie1.getName()));
         assertThat(beverage.getId(), is(bevvie1.getId()));
         assertThat(beverage.isAlcoholic(), is(bevvie1.isAlcoholic()));
