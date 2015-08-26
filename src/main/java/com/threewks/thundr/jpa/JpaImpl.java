@@ -184,6 +184,7 @@ public class JpaImpl implements Jpa, JpaUnsafe {
             Deque<EntityManager> current = threadLocal.get();
             current.pop();
             em.close();
+            threadLocal.remove();
         } catch (Exception e) {
             Logger.error("Failed to close EntityManager: %s\n%s", e.getMessage(), ExceptionUtils.getStackTrace(e));
         }

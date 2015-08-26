@@ -74,7 +74,6 @@ public class LongRepositoryIT {
         bevvie2 = new LongBeverage("Lemonade", false);
         bevvie3 = new LongBeverage("Juice", false);
         jpaRepository = new LongRepository<>(LongBeverage.class, jpa);
-        deleteTestData();
         createBeverages();
     }
 
@@ -82,8 +81,7 @@ public class LongRepositoryIT {
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
-                em.remove(bevvie1);
-                em.remove(bevvie2);
+                jpaRepository.delete(bevvie1.getId(), bevvie2.getId(), bevvie3.getId());
             }
         });
     }
@@ -306,10 +304,12 @@ public class LongRepositoryIT {
     }
 
     @Test
-    public void shouldCreateMultipleEntities() {
+    public void shouldCreateMultipleEntitiesFromList() {
         deleteTestData(); //called to delete records created by before()
 
         final List<LongBeverage> beverages = new ArrayList<>();
+        bevvie1.setId(null);
+        bevvie2.setId(null);
         beverages.add(bevvie1);
         beverages.add(bevvie2);
 
@@ -321,17 +321,24 @@ public class LongRepositoryIT {
         });
 
         containsBeverages(beverages);
+    }
+
+    @Test
+    public void shouldCreateMultipleEntitiesFromVarargs() {
         deleteTestData();
 
+        bevvie1.setId(null);
+        bevvie2.setId(null);
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
                 jpaRepository.create(bevvie1, bevvie2);
             }
         });
+        List<LongBeverage> beverages = new ArrayList<>();
+        beverages.add(bevvie1);
+        beverages.add(bevvie2);
         containsBeverages(beverages);
-
-        deleteTestData();
     }
 
     @Test

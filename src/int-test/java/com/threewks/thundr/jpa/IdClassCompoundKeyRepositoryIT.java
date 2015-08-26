@@ -20,6 +20,7 @@ package com.threewks.thundr.jpa;
 import com.threewks.thundr.injection.InjectionContextImpl;
 import com.threewks.thundr.jpa.model.IdClassCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
+import com.threewks.thundr.jpa.model.LongBeverage;
 import com.threewks.thundr.jpa.model.StringBeverage;
 import com.threewks.thundr.jpa.repository.BaseRepository;
 import com.threewks.thundr.jpa.repository.IdClassCompoundKeyRepository;
@@ -28,10 +29,7 @@ import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
@@ -79,12 +77,22 @@ public class IdClassCompoundKeyRepositoryIT {
         createCkEntitys();
     }
 
+    @After
+    public void after() {
+        deleteTestData();
+    }
+
     protected void deleteTestData() {
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
-                em.remove(compoundKeyEntity1);
-                em.remove(compoundKeyEntity2);
+                IdClassCompoundKeyEntity toBeDeleted1 = em.merge(compoundKeyEntity1);
+                IdClassCompoundKeyEntity toBeDeleted2 = em.merge(compoundKeyEntity2);
+                IdClassCompoundKeyEntity toBeDeleted3 = em.merge(compoundKeyEntity3);
+
+                em.remove(toBeDeleted1);
+                em.remove(toBeDeleted2);
+                em.remove(toBeDeleted3);
             }
         });
     }

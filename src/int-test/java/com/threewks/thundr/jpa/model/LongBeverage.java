@@ -35,7 +35,9 @@ public class LongBeverage {
 
     @Id
     @Column(name = "long_bev_id")
-    private Long id = Math.round(Math.random() * 1000);
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+//    private Long id = Math.round(Math.random() * 1000);
 
     @Column(name = "name", nullable = false)
     private String name = "";

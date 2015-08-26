@@ -25,7 +25,7 @@ import org.junit.rules.ExternalResource;
  * Created by kaushiksen on 18/08/2015.
  */
 public class ConfigureHsql extends ExternalResource {
-    public static final String HSQL_JDBC_URL = "jdbc:hsqldb:mem";
+    public static final String HSQL_JDBC_URL = "jdbc:hsqldb:mem:testdb";
     protected UpdatableInjectionContext injectionContext;
     protected HsqlDbModule hsqlDbModule = new HsqlDbModule();
 

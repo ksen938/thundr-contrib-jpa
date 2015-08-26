@@ -27,10 +27,7 @@ import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
 import org.hamcrest.core.Is;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
@@ -78,6 +75,11 @@ public class StringRepositoryIT {
         jpaRepository = new StringRepository<StringBeverage>(StringBeverage.class, jpa);
         deleteTestData();
         createBeverages();
+    }
+
+    @After
+    public void after() {
+        deleteTestData();
     }
 
     protected void deleteTestData() {

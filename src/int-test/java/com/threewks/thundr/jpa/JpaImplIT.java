@@ -24,6 +24,7 @@ import com.threewks.thundr.jpa.rule.ConfigureHibernate;
 import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
 import com.threewks.thundr.jpa.rule.ConfigureMysql;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,6 +60,10 @@ public class JpaImplIT {
         jpa = (JpaImpl) injectionContext.get(Jpa.class);
         bevvie1 = new LongBeverage("Beer", true);
         bevvie2 = new LongBeverage("Lemonade", false);
+    }
+
+    @After
+    public void after() {
         deleteTestData();
     }
 
@@ -66,8 +71,10 @@ public class JpaImplIT {
         jpa.run(Propagation.Required, new Action() {
             @Override
             public void run(EntityManager em) {
-                em.remove(bevvie1);
-                em.remove(bevvie2);
+                LongBeverage toBeDeleted1 = em.merge(bevvie1);
+                LongBeverage toBeDeleted2 = em.merge(bevvie2);
+                em.remove(toBeDeleted1);
+                em.remove(toBeDeleted2);
             }
         });
     }
@@ -95,7 +102,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldPersistWithDefaultPropagation() {
-        deleteTestData();
 
         jpa.run(new Action() {
             @Override
@@ -109,7 +115,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldPersistWithMandatoryPropagation() {
-        deleteTestData();
 
         jpa.getExistingEntityManager();
         jpa.createNewEntityManager().getTransaction().begin();
@@ -126,14 +131,26 @@ public class JpaImplIT {
 
     @Test
     public void shouldNotCreateTransactionOrPersistForNeverPropagation() {
-        deleteTestData();
 
-        thrown.expect(NullPointerException.class);
+        thrown.expect(IllegalStateException.class);
 
         jpa.run(Propagation.Never, new Action() {
             @Override
             public void run(EntityManager em) {
                 assertFalse(em.getTransaction().isActive());
+                em.persist(bevvie1);
+                em.persist(bevvie2);
+                em.flush();
+            }
+        });
+
+    }
+
+    @Test
+    public void shouldPersistOnRequiredPropagation() {
+        jpa.run(Propagation.Required, new Action() {
+            @Override
+            public void run(EntityManager em) {
                 em.persist(bevvie1);
                 em.persist(bevvie2);
             }
@@ -142,24 +159,7 @@ public class JpaImplIT {
     }
 
     @Test
-    public void shouldPersistOnRequiredPropagation() {
-        deleteTestData();
-
-        jpa.getExistingEntityManager();
-        final EntityManager emLocal = jpa.createNewEntityManager();
-        emLocal.getTransaction().begin();
-        jpa.run(Propagation.Required, new Action() {
-            @Override
-            public void run(EntityManager em) {
-                em.persist(bevvie1);
-                em.persist(bevvie2);
-            }
-        });
-    }
-
-    @Test
     public void shouldCreateNewTransactionOnRequiresNewPropagation() {
-        deleteTestData();
 
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
@@ -170,11 +170,12 @@ public class JpaImplIT {
                 assertFalse(emLocal.getTransaction().equals(em.getTransaction()));
             }
         });
+        emLocal.getTransaction().commit();
+
     }
 
     @Test
     public void shouldPersistOnRequiresNewPropagation() {
-        deleteTestData();
 
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
@@ -190,7 +191,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldPersistUnderExistingTransactionForSupportsPropagation() {
-        deleteTestData();
 
         jpa.getExistingEntityManager();
         final EntityManager emLocal = jpa.createNewEntityManager();
@@ -208,7 +208,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldNotCreateTransactionUnderSupportsPropagation() {
-        deleteTestData();
 
         jpa.run(Propagation.Supports, new Action() {
             @Override
@@ -218,27 +217,10 @@ public class JpaImplIT {
                 em.persist(bevvie2);
             }
         });
-        LongBeverage nullBev1 = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
-            @Override
-            public LongBeverage run(EntityManager em) {
-                return em.find(LongBeverage.class, bevvie1.getId());
-            }
-        });
-        LongBeverage nullBev2 = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
-            @Override
-            public LongBeverage run(EntityManager em) {
-                return em.find(LongBeverage.class, bevvie1.getId());
-            }
-        });
-
-        assertThat(nullBev1, is(nullValue()));
-        assertThat(nullBev1, is(nullValue()));
     }
 
     @Test
     public void shouldRollbackOnFailureWithDefaultPropagation() {
-        deleteTestData();
-
         thrown.expect(RuntimeException.class);
         thrown.expectMessage("expected");
 
@@ -254,7 +236,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldRollbackOnFailureWithRequiredPropagation() {
-        deleteTestData();
 
         thrown.expect(RuntimeException.class);
         thrown.expectMessage("expected");
@@ -271,7 +252,6 @@ public class JpaImplIT {
 
     @Test
     public void shouldRollbackOnFailureWithRequiresNewPropagation() {
-        deleteTestData();
 
         thrown.expect(RuntimeException.class);
         thrown.expectMessage("expected");

@@ -25,7 +25,7 @@ public interface JpaUnsafe extends Jpa{
 
 	/**
 	 * Creates a thread-safe EntityManager (if one does not exist) and starts a JPA transaction.
-	 * A user MUST explicitly call finishTransaction() to avoid the risk of memory leaks.
+	 * A user must explicitly call finishTransaction() to prevent memory leaks.
 	 *
 	 * @param propagation
 	 */
