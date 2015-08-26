@@ -37,6 +37,8 @@ public interface CrudRepository<K, E> {
     List<E> read(K...key);
     List<E> read(List<K> key);
 
+    List<E> list(int limit);
+
     Long count();
 
     void delete(E entity);

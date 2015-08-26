@@ -17,13 +17,12 @@
  */
 package com.threewks.thundr.jpa;
 
+import com.atomicleopard.expressive.Expressive;
 import com.threewks.thundr.injection.InjectionContextImpl;
-import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.model.CompoundKeyEntityId;
-import com.threewks.thundr.jpa.model.LongBeverage;
-import com.threewks.thundr.jpa.model.StringBeverage;
-import com.threewks.thundr.jpa.repository.EmbeddedIdCompoundKeyRepository;
+import com.threewks.thundr.jpa.model.EmbeddedIdCompoundKeyEntity;
 import com.threewks.thundr.jpa.repository.CrudRepository;
+import com.threewks.thundr.jpa.repository.EmbeddedIdCompoundKeyRepository;
 import com.threewks.thundr.jpa.rule.ConfigureHibernate;
 import com.threewks.thundr.jpa.rule.ConfigureHikari;
 import com.threewks.thundr.jpa.rule.ConfigureHsql;
@@ -39,7 +38,8 @@ import java.util.*;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class EmbeddedIdCompoundKeyRepositoryIT {
     public InjectionContextImpl injectionContext = new InjectionContextImpl();
@@ -425,6 +425,33 @@ public class EmbeddedIdCompoundKeyRepositoryIT {
         assertThat(beverages.get(0).getId(), is(compoundKeyEntity1.getId()));
         assertThat(beverages.get(0).getName(), is(compoundKeyEntity1.getName()));
         assertThat(beverages.get(0).isAlcoholic(), is(compoundKeyEntity1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldListEntities() {
+        List<EmbeddedIdCompoundKeyEntity> entities = jpa.run(Propagation.Required, new ResultAction<List<EmbeddedIdCompoundKeyEntity>>() {
+            @Override
+            public List<EmbeddedIdCompoundKeyEntity> run(EntityManager em) {
+                return jpaRepository.list(5);
+            }
+        });
+
+        assertThat(entities.size(), is(3));
+
+        Map<CompoundKeyEntityId, EmbeddedIdCompoundKeyEntity> map = new HashMap<>();
+        for (EmbeddedIdCompoundKeyEntity entity: entities) {
+            map.put(entity.getId(), entity);
+        }
+
+        EmbeddedIdCompoundKeyEntity e1 = map.get(compoundKeyEntity1.getId());
+        EmbeddedIdCompoundKeyEntity e2 = map.get(compoundKeyEntity2.getId());
+        EmbeddedIdCompoundKeyEntity e3 = map.get(compoundKeyEntity3.getId());
+        assertThat(e1.getId(), is (compoundKeyEntity1.getId()));
+        assertThat(e1.getName(), is (compoundKeyEntity1.getName()));
+        assertThat(e2.getId(), is (compoundKeyEntity2.getId()));
+        assertThat(e2.getName(), is (compoundKeyEntity2.getName()));
+        assertThat(e3.getId(), is (compoundKeyEntity3.getId()));
+        assertThat(e3.getName(), is (compoundKeyEntity3.getName()));
     }
 
 }

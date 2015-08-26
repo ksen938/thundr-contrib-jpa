@@ -432,4 +432,31 @@ public class IdClassCompoundKeyRepositoryIT {
         assertThat(beverages.get(0).isAlcoholic(), is(compoundKeyEntity1.isAlcoholic()));
     }
 
+    @Test
+    public void shouldListEntities() {
+        List<IdClassCompoundKeyEntity> entities = jpa.run(Propagation.Required, new ResultAction<List<IdClassCompoundKeyEntity>>() {
+            @Override
+            public List<IdClassCompoundKeyEntity> run(EntityManager em) {
+                return jpaRepository.list(5);
+            }
+        });
+
+        assertThat(entities.size(), is(3));
+
+        Map<CompoundKeyEntityId, IdClassCompoundKeyEntity> map = new HashMap<>();
+        for (IdClassCompoundKeyEntity entity: entities) {
+            map.put(entity.getId(), entity);
+        }
+
+        IdClassCompoundKeyEntity e1 = map.get(compoundKeyEntity1.getId());
+        IdClassCompoundKeyEntity e2 = map.get(compoundKeyEntity2.getId());
+        IdClassCompoundKeyEntity e3 = map.get(compoundKeyEntity3.getId());
+
+        assertThat(e1.getId(), is (compoundKeyEntity1.getId()));
+        assertThat(e1.getName(), is (compoundKeyEntity1.getName()));
+        assertThat(e2.getId(), is (compoundKeyEntity2.getId()));
+        assertThat(e2.getName(), is (compoundKeyEntity2.getName()));
+        assertThat(e3.getId(), is (compoundKeyEntity3.getId()));
+        assertThat(e3.getName(), is (compoundKeyEntity3.getName()));
+    }
 }

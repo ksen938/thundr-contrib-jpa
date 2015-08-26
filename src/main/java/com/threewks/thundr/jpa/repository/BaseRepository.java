@@ -123,7 +123,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public List<E> find(final String key, final Object value, final int limit) {
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
                 CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -142,7 +142,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
             return find(entry.getKey(), entry.getValue(), limit);
         }
 
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
                 CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -160,7 +160,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public E read(final K key) {
-        return jpa.run(Propagation.Supports, new ResultAction<E>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<E>() {
             @Override
             public E run(EntityManager em) {
                 return em.find(type, key);
@@ -171,6 +171,19 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
     @Override
     public List<E> read(final K... keys) {
         return read(Arrays.asList(keys));
+    }
+
+    @Override
+    public List<E> list(final int limit) {
+        return jpa.run(Propagation.Mandatory, new ResultAction<List<E>>() {
+            @Override
+            public List<E> run(EntityManager em) {
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery<E> cq = cb.createQuery(type);
+                cq.select(cq.from(type));
+                return em.createQuery(cq).setMaxResults(limit).getResultList();
+            }
+        });
     }
 
     @Override
@@ -207,7 +220,7 @@ public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     @Override
     public List<E> read(final List<K> keys) {
-        return jpa.run(Propagation.Supports, new ResultAction<List<E>>() {
+        return jpa.run(Propagation.Mandatory, new ResultAction<List<E>>() {
             @Override
             public List<E> run(EntityManager em) {
                 CriteriaQuery<E> cq = createReadByKeysCriteria(em.getCriteriaBuilder(), keys);

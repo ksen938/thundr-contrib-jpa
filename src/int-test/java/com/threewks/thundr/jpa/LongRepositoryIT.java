@@ -349,7 +349,7 @@ public class LongRepositoryIT {
                 return jpaRepository.find("name", "Beer", 1).iterator().next();
             }
         });
-        List<LongBeverage> longBeverages = jpaRepository.find("name", "Beer", 1);
+
         assertThat(beverage.getName(), is(bevvie1.getName()));
         assertThat(beverage.getId(), is(bevvie1.getId()));
         assertThat(beverage.isAlcoholic(), is(bevvie1.isAlcoholic()));
@@ -434,5 +434,38 @@ public class LongRepositoryIT {
         assertThat(beverages.get(0).getId(), is(bevvie1.getId()));
         assertThat(beverages.get(0).getName(), is(bevvie1.getName()));
         assertThat(beverages.get(0).isAlcoholic(), is(bevvie1.isAlcoholic()));
+    }
+
+    @Test
+    public void shouldListEntities() {
+        List<LongBeverage> entities = jpa.run(Propagation.Required, new ResultAction<List<LongBeverage>>() {
+            @Override
+            public List<LongBeverage> run(EntityManager em) {
+                return jpaRepository.list(5);
+            }
+        });
+
+        assertThat(entities.size(), is(3));
+
+        Map<Long, LongBeverage> map = new HashMap<>();
+        for (LongBeverage entity: entities) {
+            map.put(entity.getId(), entity);
+        }
+
+        LongBeverage e1 = map.get(bevvie1.getId());
+        LongBeverage e2 = map.get(bevvie2.getId());
+        LongBeverage e3 = map.get(bevvie3.getId());
+
+        assertThat(e1.getId(), is (bevvie1.getId()));
+        assertThat(e1.getName(), is (bevvie1.getName()));
+        assertThat(e1.isAlcoholic(), is (bevvie1.isAlcoholic()));
+
+        assertThat(e2.getId(), is (bevvie2.getId()));
+        assertThat(e2.getName(), is (bevvie2.getName()));
+        assertThat(e2.isAlcoholic(), is (bevvie2.isAlcoholic()));
+
+        assertThat(e3.getId(), is (bevvie3.getId()));
+        assertThat(e3.getName(), is (bevvie3.getName()));
+        assertThat(e3.isAlcoholic(), is (bevvie3.isAlcoholic()));
     }
 }

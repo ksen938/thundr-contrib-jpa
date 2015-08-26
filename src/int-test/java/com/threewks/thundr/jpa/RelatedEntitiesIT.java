@@ -109,15 +109,21 @@ public class RelatedEntitiesIT {
 
     @Test
     public void shouldTraverseOneToManyRelationship() {
-        LongBeverage longBeverage = longBeverageRepo.read(longBevvie1.getId());
+
+        LongBeverage longBeverage = jpa.run(Propagation.Required, new ResultAction<LongBeverage>() {
+            @Override
+            public LongBeverage run(EntityManager em) {
+                return longBeverageRepo.read(longBevvie1.getId());
+            }
+        });
+
         List<StringBeverage> stringBeverages = longBeverage.getStringBeverages();
-        for (StringBeverage stringBeverage: stringBeverages) {
+        for (StringBeverage stringBeverage : stringBeverages) {
             if (stringBeverage.getId().equals(stringBevvie1.getId())) {
                 assertThat(stringBeverage.getId(), is(stringBevvie1.getId()));
                 assertThat(stringBeverage.getName(), is(stringBevvie1.getName()));
                 assertThat(stringBeverage.isAlcoholic(), is(stringBevvie1.isAlcoholic()));
-            }
-            else {
+            } else {
                 assertThat(stringBeverage.getId(), is(stringBevvie2.getId()));
                 assertThat(stringBeverage.getName(), is(stringBevvie2.getName()));
                 assertThat(stringBeverage.isAlcoholic(), is(stringBevvie2.isAlcoholic()));
@@ -127,7 +133,13 @@ public class RelatedEntitiesIT {
 
     @Test
     public void shouldTraverseManyToOneRelationship() {
-        StringBeverage stringBeverage = stringBeverageRepo.read(stringBevvie1.getId());
+        StringBeverage stringBeverage = jpa.run(Propagation.Required, new ResultAction<StringBeverage>() {
+            @Override
+            public StringBeverage run(EntityManager em) {
+                return stringBeverageRepo.read(stringBevvie1.getId());
+            }
+        });
+
         LongBeverage longBeverage = stringBeverage.getLongBeverage();
         assertThat(longBeverage.getId(), is(longBevvie1.getId()));
         assertThat(longBeverage.getName(), is(longBevvie1.getName()));
