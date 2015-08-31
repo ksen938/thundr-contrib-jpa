@@ -19,6 +19,10 @@ package com.threewks.thundr.jpa.repository;
 
 import com.threewks.thundr.jpa.Jpa;
 
+/**
+ * Base repository class for entities that have a String primary key (eg. UUID)
+ * @param <E> Entity type managed by this repository
+ */
 public class StringRepository<E> extends BaseRepository<String, E> {
     public StringRepository(Class<E> entityType, Jpa jpa) {
         super(entityType, String.class, jpa);

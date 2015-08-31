@@ -20,6 +20,11 @@ package com.threewks.thundr.jpa.repository;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Describes a common set of CRUD operations to be implemented by a repository.
+ * @param <K>
+ * @param <E>
+ */
 public interface CrudRepository<K, E> {
 
     void create(E entity);
@@ -30,7 +35,29 @@ public interface CrudRepository<K, E> {
     List<E> update(E...entities);
     List<E> update(List<E> entities);
 
+    /**
+     * Find entities based on a given non-primary key property (eg. find all users where username = '123'). An indexed
+     * field is recommended for larger datasets.
+     *
+     * To find by primary key, use 'read' instead.
+     *
+     * @param key Name of the property
+     * @param value Value of the property
+     * @param limit Maximum number of entities to return
+     * @return
+     */
     List<E> find(String key, Object value, int limit);
+
+    /**
+     * Find entities based on a set of non-PK properties (eg. find all users where username = '123' and date of birth =
+     * '01/01/2000'). Indexed fields are recommended for larger datasets.
+     *
+     * To find by primary key, use 'read' instead.
+     *
+     * @param properties Name/value pairs corresponding to the properties
+     * @param limit Maximum number of entities to return
+     * @return
+     */
     List<E> find(Map<String, Object> properties, int limit);
 
     E read(K key);

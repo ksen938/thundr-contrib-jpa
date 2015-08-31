@@ -19,7 +19,12 @@ package com.threewks.thundr.jpa.repository;
 
 import com.threewks.thundr.jpa.Jpa;
 
-
+/**
+ * Base repository class for an entity that has a compound key defined using the @EmbeddedId annotation.
+ *
+ * @param <K> The key type
+ * @param <E> The type of entity persisted by this repository
+ */
 public class EmbeddedIdCompoundKeyRepository<K,E> extends BaseRepository<K, E> {
     public EmbeddedIdCompoundKeyRepository(Class<E> entityType, Class<K> keyType, Jpa jpa) {
         super(entityType, keyType, jpa);

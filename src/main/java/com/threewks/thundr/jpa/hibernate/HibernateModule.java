@@ -108,6 +108,9 @@ public class HibernateModule extends BaseModule {
 	@Override
 	public void stop(InjectionContext injectionContext) {
 		super.stop(injectionContext);
+
+		injectionContext.get(JpaUnsafe.class).shutdown();
+
 		for (EntityManagerFactory factory : entityManagerFactories.values()) {
 			factory.close();
 		}

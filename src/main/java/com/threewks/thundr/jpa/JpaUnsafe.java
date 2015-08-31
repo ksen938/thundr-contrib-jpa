@@ -18,8 +18,9 @@
 package com.threewks.thundr.jpa;
 
 /**
- * Defines lower-level transaction controls that allows a caller to manipulate the JPA EntityManager more directly.
- * These methods do not auto-close or cleanup automatically, and
+ * Defines lower-level transaction methods that allows a caller to manipulate the JPA EntityManager more directly.
+ * These methods do not auto-close the EntityManager or cleanup automatically, so must be called in order to avoid
+ * the risk of memory leaks or locks.
  */
 public interface JpaUnsafe extends Jpa{
 
@@ -42,4 +43,9 @@ public interface JpaUnsafe extends Jpa{
 	 * Cleans up the EntityManager.
 	 */
 	public void rollbackTransaction();
+
+	/**
+	 * Shutdown hook for JPA module.
+	 */
+	public void shutdown();
 }

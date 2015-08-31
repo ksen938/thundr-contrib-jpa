@@ -19,6 +19,10 @@ package com.threewks.thundr.jpa;
 
 import javax.persistence.EntityManager;
 
+/**
+ * An action, which represents a JPA transaction that returns a result.
+ * @param <R>
+ */
 public interface ResultAction<R> {
     public R run(EntityManager em);
 }

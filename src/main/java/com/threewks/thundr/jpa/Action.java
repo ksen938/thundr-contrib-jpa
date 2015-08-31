@@ -19,6 +19,9 @@ package com.threewks.thundr.jpa;
 
 import javax.persistence.EntityManager;
 
+/**
+ * An action, which represents a JPA transaction that returns no result.
+ */
 public interface Action {
     public void run(EntityManager em);
 }

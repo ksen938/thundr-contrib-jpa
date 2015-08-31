@@ -29,7 +29,6 @@ import javax.persistence.metamodel.Metamodel;
 import java.util.Deque;
 import java.util.LinkedList;
 
-// TODO - Shutdown hooks when module.stop is called
 public class JpaImpl implements Jpa, JpaUnsafe {
     private EntityManagerFactory entityManagerFactory;
     private ThreadLocal<Deque<EntityManager>> threadLocal = new ThreadLocal<>();
@@ -198,5 +197,10 @@ public class JpaImpl implements Jpa, JpaUnsafe {
                 transaction.commit();
             }
         }
+    }
+
+    @Override
+    public void shutdown() {
+        disposeOfEntityManager(getExistingEntityManager());
     }
 }

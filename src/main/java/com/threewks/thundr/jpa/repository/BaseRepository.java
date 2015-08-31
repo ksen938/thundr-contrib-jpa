@@ -30,6 +30,12 @@ import javax.persistence.metamodel.SingularAttribute;
 import java.lang.reflect.Field;
 import java.util.*;
 
+/**
+ * Base repository class containing common implementations for a Crud Repository. These implementations can be used with
+ * Long/String-based primary keys, as well as compound keys using the @EmbeddedId and @IdClass annotations.
+ *
+ * @param <E> Entity type managed by this repository
+ */
 public class BaseRepository<K, E> implements CrudRepository<K, E> {
 
     protected Jpa jpa;

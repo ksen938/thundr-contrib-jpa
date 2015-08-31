@@ -461,7 +461,7 @@ public class LongRepositoryIT {
         assertThat(e1.isAlcoholic(), is (bevvie1.isAlcoholic()));
 
         assertThat(e2.getId(), is (bevvie2.getId()));
-        assertThat(e2.getName(), is (bevvie2.getName()));
+        assertThat(e2.getName(), is(bevvie2.getName()));
         assertThat(e2.isAlcoholic(), is (bevvie2.isAlcoholic()));
 
         assertThat(e3.getId(), is (bevvie3.getId()));

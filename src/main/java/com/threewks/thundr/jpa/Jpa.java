@@ -22,9 +22,11 @@ import javax.persistence.metamodel.Metamodel;
 import java.util.concurrent.Callable;
 
 /**
- * Defines a set of standardised closures  that enable the user to execute transactions against a JPA provider (eg. Hibernate).
+ * Defines a set of calls enabling the user to run a JPA transaction. Calls within each 'run' closure have default
+ * behaviours for transaction management (commit, rollback on failure).
  *
- * Note that this is a 'safe' abstraction of JPA that largely handles low-level transaction management.
+ * This is a 'safe' abstraction of JPA that manages thread-safety of the JPA EntityManager.
+ *
  * There is a {@link JpaUnsafe} class that enables development of customised transaction handlers
  * (eg. {@link com.threewks.thundr.jpa.intercept.Transactional}
  */
@@ -63,7 +65,7 @@ public interface Jpa {
 	public <R> R run(Propagation propagation, ResultAction<R> action);
 
 	/**
-	 * Provides a metamodel that enables the development of custom queries using JPQL or the Criteria API
+	 * Provides The JPA metamodel enabling custom queries using JPQL or the Criteria API
 	 *
 	 * @return metamodel containing all the entities managed by this entity manager
 	 */

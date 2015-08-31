@@ -19,6 +19,12 @@ package com.threewks.thundr.jpa.repository;
 
 import com.threewks.thundr.jpa.Jpa;
 
+/**
+ * Base repository class for an entity that has a compound key defined using the @IdClass annotation.
+ *
+ * @param <K> The key type
+ * @param <E> The type of entity persisted by this repository
+ */
 public class IdClassCompoundKeyRepository<K,E> extends BaseRepository<K, E> {
     public IdClassCompoundKeyRepository(Class<E> entityType, Jpa jpa) {
         super(entityType, jpa);

@@ -19,6 +19,10 @@ package com.threewks.thundr.jpa.repository;
 
 import com.threewks.thundr.jpa.Jpa;
 
+/**
+ * Base repository class for entities that have a Long primary key (eg. auto-incremented sequence)
+ * @param <E> Entity type managed by this repository
+ */
 public class LongRepository<E> extends BaseRepository<Long, E> {
     public LongRepository(Class<E> entityType, Jpa jpa) {
         super(entityType, Long.class, jpa);
