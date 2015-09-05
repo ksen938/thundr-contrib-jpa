@@ -32,6 +32,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TransactionRequiredException;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
@@ -132,7 +133,7 @@ public class JpaImplIT {
     @Test
     public void shouldNotCreateTransactionOrPersistForNeverPropagation() {
 
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(TransactionRequiredException.class);
 
         jpa.run(Propagation.Never, new Action() {
             @Override

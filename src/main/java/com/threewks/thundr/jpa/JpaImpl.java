@@ -133,9 +133,11 @@ public class JpaImpl implements Jpa, JpaUnsafe {
     }
 
     protected void ensureRollback(EntityTransaction transaction, boolean ownsTransaction) {
-        transaction.setRollbackOnly();
-        if (ownsTransaction) {
-            transaction.rollback();
+        if ((transaction != null) && (transaction.isActive())) {
+            transaction.setRollbackOnly();
+            if (ownsTransaction) {
+                transaction.rollback();
+            }
         }
     }
 
